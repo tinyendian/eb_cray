@@ -1,0 +1,35 @@
+easyblock = 'ConfigureMake'
+
+name = 'NCO'
+version = '4.6.8'
+
+homepage = "https://github.com/nco"
+description = """manipulates and analyzes data stored in netCDF-accessible formats, including DAP, HDF4, and HDF5"""
+
+toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+
+source_urls = ['https://github.com/nco/nco/archive']
+sources = ['%(version)s.tar.gz']
+checksums = ['d818a9e4026d5cc5b4372a212ef3385449a757ee00b807ae9b91741bc79a545b']
+
+dependencies = [
+    ('cray-netcdf/4.4.1.1.3', EXTERNAL_MODULE),
+    ('GSL', '2.4'),
+    ('ANTLR', '2.7.7'),
+    ('UDUNITS', '2.2.25'),
+]
+
+# Build runtime-optimised version
+configopts = '--enable-optimize-custom'
+
+# Test currently fails with netCDF file permission errors
+# runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['bin/nc%s' % x for x in ('ap', 'ap2', 'atted', 'bo', 'diff', 'ea', 'ecat', 'es',
+                                       'flint', 'ks', 'pdq', 'ra', 'rcat', 'remap', 'rename', 'wa')] +
+             ['lib/libnco.a', 'lib/libnco.%s' % SHLIB_EXT, 'lib/libnco_c++.a', 'lib/libnco_c++.%s' % SHLIB_EXT],
+    'dirs': ['include'],
+}
+
+moduleclass = 'tools'

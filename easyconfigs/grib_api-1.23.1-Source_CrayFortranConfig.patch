@@ -1,0 +1,16 @@
+--- grib_api-1.23.1-Source/cmake/compiler_flags/Cray_Fortran.cmake	2017-08-08 05:24:00.000000000 -0500
++++ grib_api-1.23.1-Source/cmake/compiler_flags/Cray_Fortran.cmake	2017-09-12 15:18:44.082837607 -0500
+@@ -8,8 +8,8 @@
+ 
+ # -emf activates .mods and uses lower case
+ # -rmoid produces a listing file
+-set( CMAKE_Fortran_FLAGS_RELEASE        "-emf -rmoid -O3 -hfp3 -hscalar3 -hvector3 -DNDEBUG"                    CACHE STRING "Release Fortran flags"                 FORCE )
+-set( CMAKE_Fortran_FLAGS_RELWITHDEBINFO "-emf -rmoid -O2 -hfp1 -Gfast -DNDEBUG"                                 CACHE STRING "Release-with-debug-info Fortran flags" FORCE )
+-set( CMAKE_Fortran_FLAGS_PRODUCTION     "-emf -rmoid -O2 -hfp1 -G2"                                             CACHE STRING "Production Fortran flags"              FORCE )
+-set( CMAKE_Fortran_FLAGS_BIT            "-emf -rmoid -O2 -hfp1 -G2 -hflex_mp=conservative -hadd_paren -DNDEBUG" CACHE STRING "Bit-reproducible Fortran flags"        FORCE )
+-set( CMAKE_Fortran_FLAGS_DEBUG          "-emf -rmoid -O0 -G0"                                                   CACHE STRING "Debug Fortran flags"                   FORCE )
++set( CMAKE_Fortran_FLAGS_RELEASE        "-em -rmoid -O3 -hfp3 -hscalar3 -hvector3 -DNDEBUG"                    CACHE STRING "Release Fortran flags"                 FORCE )
++set( CMAKE_Fortran_FLAGS_RELWITHDEBINFO "-em -rmoid -O2 -hfp1 -Gfast -DNDEBUG"                                 CACHE STRING "Release-with-debug-info Fortran flags" FORCE )
++set( CMAKE_Fortran_FLAGS_PRODUCTION     "-em -rmoid -O2 -hfp1 -G2"                                             CACHE STRING "Production Fortran flags"              FORCE )
++set( CMAKE_Fortran_FLAGS_BIT            "-em -rmoid -O2 -hfp1 -G2 -hflex_mp=conservative -hadd_paren -DNDEBUG" CACHE STRING "Bit-reproducible Fortran flags"        FORCE )
++set( CMAKE_Fortran_FLAGS_DEBUG          "-em -rmoid -O0 -G0"                                                   CACHE STRING "Debug Fortran flags"                   FORCE )
