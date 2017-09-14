@@ -24,6 +24,7 @@
 ##
 """
 EasyBuild support for building and installing NCL, implemented as an easyblock
+
 @author: Stijn De Weirdt (Ghent University)
 @author: Dries Verdegem (Ghent University)
 @author: Kenneth Hoste (Ghent University)
@@ -149,21 +150,28 @@ class EB_NCL(EasyBlock):
 
         cfgtxt="""#ifdef FirstSite
 #endif /* FirstSite */
+
 #ifdef SecondSite
+
 #define YmakeRoot %(installdir)s
+
 #define LibSearch %(libs)s
 #define IncSearch %(includes)s
+
 #define BuildNCL 1
 #define HDFlib
 #define HDFEOSlib
 #define BuildGRIB2 1
 #define BuildESMF 1
+
 #define UdUnitslib -ludunits2
+
 #define BuildRasterHDF 0
 #define BuildHDF4 0
 #define BuildTRIANGLE 0
 #define BuildHDFEOS 0
 #define BuildHDFEOS5 0
+
 #endif /* SecondSite */
 """ % {
        'installdir': self.installdir,
@@ -203,4 +211,4 @@ class EB_NCL(EasyBlock):
         """Set NCARG_ROOT environment variable in module."""
         txt = super(EB_NCL, self).make_module_extra()
         txt += self.module_generator.set_environment('NCARG_ROOT', self.installdir)
-return txt
+        return txt
