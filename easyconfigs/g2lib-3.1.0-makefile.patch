@@ -1,0 +1,18 @@
+--- g2lib-3.1.0/makefile	2017-09-13 22:45:17.146843000 -0500
++++ g2lib-3.1.0/makefile	2017-09-13 22:46:02.551481297 -0500
+@@ -161,6 +161,7 @@
+ 	$(LIB)(gribinfo.o) \
+ 	$(LIB)(mkieee.o) \
+ 	$(LIB)(rdieee.o) \
++        $(LIB)(intmath.o) \
+ 	$(LIB)(simpack.o) \
+ 	$(LIB)(simunpack.o) \
+ 	$(LIB)(cmplxpack.o) \
+@@ -196,7 +197,6 @@
+ 	$(LIB)(params.o) \
+         $(LIB)(params_ecmwf.o) \
+ 	$(LIB)(getidx.o) \
+-        $(LIB)(intmath.o) \
+ 	$(LIB)(gdt2gds.o)
+ 
+ .F.f:
