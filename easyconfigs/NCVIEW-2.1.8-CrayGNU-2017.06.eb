@@ -22,6 +22,10 @@ dependencies = [
     ('libpng', '1.6.32'),
 ]
 
+# Ensure correct dynamic linking of libpng
+configopts = '--with-png_incdir=$EBROOTLIBPNG/include --with-png_libdir=$EBROOTLIBPNG/lib '
+configopts += 'LDFLAGS="-L$EBROOTLIBPNG/lib -Wl,-rpath=$EBROOTLIBPNG/lib"'
+
 # Does not seem to have any tests
 # runtest = 'check'
 
