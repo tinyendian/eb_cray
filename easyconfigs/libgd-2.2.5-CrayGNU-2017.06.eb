@@ -1,0 +1,32 @@
+easyblock = 'ConfigureMake'
+
+name = 'libgd'
+version = '2.2.5'
+
+homepage = 'https://libgd.github.io/'
+description = "GD is an open source code library for the dynamic creation of images by programmers."
+
+toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+
+source_urls = ['https://github.com/libgd/libgd/releases/download/gd-%(version)s/']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['a66111c9b4a04e818e9e2a37d7ae8d4aae0939a100a36b0ffb52c706a09074b5']
+
+dependencies = [
+    ('libpng', '1.6.32'),
+    ('freetype', '2.8'),
+]
+
+# Two tests currently fail
+# runtest = 'check'
+
+sanity_check_paths = {
+    'files': ["lib/libgd.a", "lib/libgd.%s" % SHLIB_EXT] +
+             ["bin/annotate", "bin/bdftogd", "bin/gd2copypal",
+              "bin/gd2togif", "bin/gd2topng", "bin/gdcmpgif",
+              "bin/gdlib-config", "bin/gdparttopng", "bin/gdtopng",
+              "bin/giftogd2", "bin/pngtogd", "bin/pngtogd2", "bin/webpng"],
+    'dirs': ["include"],
+}
+
+moduleclass = 'lib'
