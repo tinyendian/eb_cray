@@ -1,0 +1,44 @@
+easyblock = 'ConfigureMake'
+
+name = 'HDF-EOS5'
+version = '5.1.15'
+
+homepage = "http://hdfeos.org/index.php"
+description = """HDF-EOS (Hierarchical Data Format - Earth Observing
+System) is a self-describing file format for transfer of various types
+of data between different machines based upon HDF. HDF-EOS is a
+standard format to store data collected from EOS satellites: Terra,
+Aqua and Aura."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+
+source_urls = [
+  'ftp://edhs1.gsfc.nasa.gov/edhs/hdfeos5/previous_releases/',
+  'ftp://edhs1.gsfc.nasa.gov/edhs/hdfeos5/latest_release/'
+]
+sources = [{
+  'filename': 'HDF-EOS%(version)s.tar.Z',
+  'extract_cmd': 'tar xf %s', # Workaround for missing compress executable
+}]
+patches = ['HDF-EOS5-5.1.15-types.patch', 'HDF-EOS5-5.1.15-szip.patch']
+checksums = [
+    '119588067abf139c1c600a4519b880d04a3933049576c88acdc8ff6fc71803dd',  # HDF-EOS5.1.15.tar.Z
+    '9021ab5819fd93908b882d3f82a80be1ad7d17fa3613abef4911af7c6ed54594',  # HDF-EOS5-5.1.15-types.patch
+    'a4fea07f9e0d6ea7b5f0d98d44b7809da6e7ecbc815db9bd69610a9e0ad3243a',  # HDF-EOS5-5.1.15-szip.patch
+]
+
+dependencies = [
+    ('cray-hdf5/1.10.0.3', EXTERNAL_MODULE),
+]
+
+configopts = '--enable-install-include CPPFLAGS="-Df2cFortran -DLINUX64" '
+configopts += 'FCFLAGS="-ffixed-line-length-none -g -O2"'
+
+runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['lib/libGctp.a', 'lib/libhe5_hdfeos.a'],
+    'dirs': ['include'],
+}
+
+moduleclass = 'data'

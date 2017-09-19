@@ -1,0 +1,43 @@
+easyblock = 'ConfigureMake'
+
+name = 'HDF-EOS'
+version = '2.19v1.00'
+
+homepage = "http://hdfeos.org/index.php"
+description = """HDF-EOS (Hierarchical Data Format - Earth Observing
+System) is a self-describing file format for transfer of various types
+of data between different machines based upon HDF. HDF-EOS is a
+standard format to store data collected from EOS satellites: Terra,
+Aqua and Aura."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+
+source_urls = [
+  'ftp://edhs1.gsfc.nasa.gov/edhs/hdfeos5/previous_releases/',
+  'ftp://edhs1.gsfc.nasa.gov/edhs/hdfeos5/latest_release/'
+]
+sources = [{
+  'filename': '%(name)s%(version)s.tar.Z',
+  'extract_cmd': 'tar xf %s', # Workaround for missing compress executable
+}]
+checksums = ['3fffa081466e85d2b9436d984bc44fe97bbb33ad9d8b7055a322095dc4672e31']
+
+dependencies = [
+    ('Szip', '2.1.1'),
+    ('HDF', '4.2.13'),
+]
+
+# HDF library was built with szlib, thus need to use compiler wrapper
+configopts = 'CC=$EBROOTHDF/bin/h4cc LD=cc --with-szlib '
+configopts += '--enable-install-include '
+configopts += 'CPPFLAGS="-Df2cFortran -DLINUX64"'
+
+# Test segfaults
+# runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['lib/libGctp.a', 'lib/libhdfeos.a'],
+    'dirs': ['include'],
+}
+
+moduleclass = 'data'

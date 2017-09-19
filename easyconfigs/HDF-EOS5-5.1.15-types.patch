@@ -1,0 +1,91 @@
+--- hdfeos5/include/HE5_HdfEosDef.h	2017-09-15 04:46:43.639380000 -0500
++++ hdfeos5/include/HE5_HdfEosDef.h	2017-09-15 04:47:19.745983952 -0500
+@@ -788,7 +788,7 @@
+ 
+ hid_t    HE5_GDdefboxregion(hid_t gridID, double cornerlon[], double cornerlat[]);
+ hid_t    HE5_GDdefvrtregion(hid_t gridID, hid_t regionID, char *vertObj, double range[]);
+-herr_t   HE5_GDdeftimeperiod(hid_t gridID, hid_t periodID, double starttime, double stoptime);
++hid_t    HE5_GDdeftimeperiod(hid_t gridID, hid_t periodID, double starttime, double stoptime);
+ herr_t   HE5_GDextractregion(hid_t gridID, hid_t regionID, const char *fieldname, void *buffer);
+ hid_t    HE5_GDdupregion(hid_t oldregionID);
+ herr_t   HE5_GDgetpixels(hid_t gridID, long nLonLat, double lonVal[], double latVal[], long pixRow[], long pixCol[]);
+--- hdfeos5/src/GDapi.c	2017-09-15 04:42:30.117495000 -0500
++++ hdfeos5/src/GDapi.c	2017-09-15 04:47:57.069362367 -0500
+@@ -89,7 +89,7 @@
+ void HE5_GDgetEastAndNorthFiles(char *eastFile, char *northFile);
+ 
+ static herr_t HE5_GDflddiminfo(int gridID, char *fieldname, int *rank,  hsize_t dims[], hsize_t maxdims[]);
+-static herr_t HE5_GDupdatedim(int gridhID,  char *dimname, hsize_t dim);
++static herr_t HE5_GDupdatedim(hid_t gridhID,  char *dimname, hsize_t dim);
+ 
+ /* FORTRAN wrappers */
+ /* ================ */
+@@ -19990,7 +19990,7 @@
+ |  END_PROLOG                                                                 |
+ -----------------------------------------------------------------------------*/
+ static int
+-HE5_GDfldnameinfo(int gridID, const char *fieldname, char *actualname)
++HE5_GDfldnameinfo(hid_t gridID, const char *fieldname, char *actualname)
+ {
+   int         nameFlag       = FAIL;/* Return value of flag            */
+   int         length         = 0;   /* String length                   */
+--- hdfeos5/src/PTapi.c	2017-09-15 04:48:50.351042000 -0500
++++ hdfeos5/src/PTapi.c	2017-09-15 04:49:30.296367144 -0500
+@@ -1896,7 +1896,7 @@
+ |                                                                             |
+ |  END_PROLOG                                                                 |
+ -----------------------------------------------------------------------------*/
+-int   
++hid_t
+ HE5_PTopenlevel(hid_t loc_id, const char *name, void *opdata)
+ {
+   int      i = 0;
+--- hdfeos5/src/SWapi.c	2017-09-15 04:50:03.734712000 -0500
++++ hdfeos5/src/SWapi.c	2017-09-15 04:51:48.772044454 -0500
+@@ -90,7 +90,7 @@
+ static int 
+ HE5_SWfldnameinfo(hid_t swathID, char *fieldname, char *fldactualname);
+ static herr_t
+-HE5_SWupdatedim(int swathID,  char *dimname, hsize_t dim);
++HE5_SWupdatedim(hid_t swathID,  char *dimname, hsize_t dim);
+ static herr_t
+ HE5_SWllmapedidxinfo(hid_t swathID, char *object, long *index0, long *index1);
+ 
+@@ -4087,7 +4087,7 @@
+ |  END_PROLOG                                                                 |
+ -----------------------------------------------------------------------------*/
+ static int
+-HE5_SWfldnameinfo(int swathID, char *fieldname, char *actualname)
++HE5_SWfldnameinfo(hid_t swathID, char *fieldname, char *actualname)
+ {
+   int         nameFlag       = FAIL;/* Return value of flag            */
+   int         length         = 0;   /* String length                   */
+@@ -4284,7 +4284,7 @@
+ |  END_PROLOG                                                                 |
+ -----------------------------------------------------------------------------*/
+ static herr_t
+-HE5_SWfinfo(int swathID, char *fieldtype, char *fieldname, int *rank, hsize_t dims[], hid_t numbertype[], char *dimlist, char *maxdimlist)
++HE5_SWfinfo(hid_t swathID, char *fieldtype, char *fieldname, int *rank, hsize_t dims[], hid_t numbertype[], char *dimlist, char *maxdimlist)
+ {
+   herr_t     status         = FAIL;/* routine return status variable                  */
+   herr_t     statmeta       = FAIL;/* EHgetmetavalue return status                    */
+--- hdfeos5/src/ZAapi.c	2017-09-15 04:52:06.790600000 -0500
++++ hdfeos5/src/ZAapi.c	2017-09-15 04:53:15.526985645 -0500
+@@ -2948,7 +2948,7 @@
+ |  END_PROLOG                                                                 |
+ -----------------------------------------------------------------------------*/
+ static int
+-HE5_ZAfldnameinfo(int zaID, char *fieldname, char *actualname)
++HE5_ZAfldnameinfo(hid_t zaID, char *fieldname, char *actualname)
+ {
+   int         nameFlag       = FAIL;/* Return value of flag            */
+   int         length         = 0;   /* String length                   */
+@@ -3100,7 +3100,7 @@
+ |  END_PROLOG                                                                 |
+ -----------------------------------------------------------------------------*/
+ static herr_t
+-HE5_ZAfldinfo(int zaID, char *datafield, char *za_name, int *rank, hsize_t dims[], hid_t numbertype[], char *dimlist, char *maxdimlist)
++HE5_ZAfldinfo(hid_t zaID, char *datafield, char *za_name, int *rank, hsize_t dims[], hid_t numbertype[], char *dimlist, char *maxdimlist)
+ {
+   herr_t     status         = FAIL;/* routine return status variable                  */
+   herr_t     statmeta       = FAIL;/* EHgetmetavalue return status                    */

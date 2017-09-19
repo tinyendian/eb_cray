@@ -52,7 +52,7 @@ class EB_NCL(EasyBlock):
         - create Makefile.ini using make and run ymake script to create config file
         - patch config file with correct settings, and add missing config entries
         - create config/Site.local file to avoid interactive install
-        - generate Makefile using config/ymkmf sciprt
+        - generate Makefile using config/ymkmf script
         -
         """
 
@@ -87,8 +87,8 @@ class EB_NCL(EasyBlock):
         macrodict = {
                      'CCompiler': os.getenv('CC'),
                      'FCompiler': os.getenv('F90'),
-                     'CcOptions': '-ansi %s' % os.getenv('CFLAGS'),
-                     'FcOptions': os.getenv('FFLAGS'),
+                     'CcOptions': '-ansi %s' % os.getenv('CFLAGS') + ' -DH5Rdereference_vers=1 ',
+                     'FcOptions': os.getenv('FFLAGS') + ' -fno-range-check ',
                      'COptimizeFlag': os.getenv('CFLAGS'),
                      'FOptimizeFlag': os.getenv('FFLAGS'),
                      'ExtraSysLibraries': os.getenv('LDFLAGS'),
@@ -126,7 +126,9 @@ class EB_NCL(EasyBlock):
 
         # order of deps is important
         # HDF needs to go after netCDF, because both have a netcdf.h include file
-        deps = ["HDF5", "JasPer", "netCDF", "HDF", "g2lib", "g2clib", "Szip", "UDUNITS"]
+        # Note: HDF currently not supported - requires netCDF support, which is incompatible with other
+        #       software packages
+        deps = ["HDF5", "JasPer", "netCDF", "HDF-EOS", "HDF-EOS5", "g2lib", "g2clib", "Szip", "UDUNITS"]
 
         libs = ''
         includes = ''
@@ -160,7 +162,8 @@ class EB_NCL(EasyBlock):
 
 #define BuildNCL 1
 #define HDFlib
-#define HDFEOSlib
+#define HDFEOSlib -lGctp -lhdfeos
+#define HDFEOS5lib -lhe5_hdfeos
 #define BuildGRIB2 1
 #define BuildESMF 1
 
@@ -169,8 +172,10 @@ class EB_NCL(EasyBlock):
 #define BuildRasterHDF 0
 #define BuildHDF4 0
 #define BuildTRIANGLE 0
-#define BuildHDFEOS 0
-#define BuildHDFEOS5 0
+#define BuildHDFEOS 1
+#define BuildHDFEOS5 1
+
+#define LexLibrary -lfl
 
 #endif /* SecondSite */
 """ % {
@@ -194,7 +199,11 @@ class EB_NCL(EasyBlock):
     def install_step(self):
         """Build in install dir using build_step."""
 
-        cmd = "make Everything"
+        paracmd = ""
+        if self.cfg['parallel']:
+            paracmd = "-j %s" % self.cfg['parallel']
+
+        cmd = "make Everything " + paracmd
         run_cmd(cmd, log_all=True, simple=True)
 
     def sanity_check_step(self):
@@ -202,8 +211,8 @@ class EB_NCL(EasyBlock):
         Custom sanity check for NCL
         """
         custom_paths = {
-            'files': ['bin/fontc', 'bin/ncl', 'lib/libncl.a', 'lib/libncarg.a'],
-            'dirs': ['include/ncarg', 'lib/ncarg/fontcaps'],
+            'files': ['bin/ncl', 'lib/libncl.a', 'lib/libncarg.a'],
+            'dirs': ['include/ncarg'],
         }
         super(EB_NCL, self).sanity_check_step(custom_paths=custom_paths)
 
