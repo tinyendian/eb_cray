@@ -13,8 +13,8 @@ Aqua and Aura."""
 toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
 
 source_urls = [
-  'ftp://edhs1.gsfc.nasa.gov/edhs/hdfeos5/previous_releases/',
-  'ftp://edhs1.gsfc.nasa.gov/edhs/hdfeos5/latest_release/'
+  'ftp://edhs1.gsfc.nasa.gov/edhs/hdfeos/previous_releases/',
+  'ftp://edhs1.gsfc.nasa.gov/edhs/hdfeos/latest_release/'
 ]
 sources = [{
   'filename': '%(name)s%(version)s.tar.Z',

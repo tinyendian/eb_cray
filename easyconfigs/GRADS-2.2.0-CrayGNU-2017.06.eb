@@ -2,7 +2,9 @@ easyblock = 'ConfigureMake'
 
 name = 'GRADS'
 version = '2.2.0'
-version_short = '2.2'
+
+# Abbreviated version needed for the URL
+version_short = version[0:-2]
 
 homepage = 'http://cola.gmu.edu/grads/'
 description = """The Grid Analysis and Display System (GrADS) is an
@@ -11,7 +13,7 @@ and visualization of earth science data."""
 
 toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
 
-source_urls = ['ftp://cola.gmu.edu/grads/%(version_short)s)/']
+source_urls = ['ftp://cola.gmu.edu/grads/' + version_short + '/']
 sources = ['grads-%(version)s-src.tar.gz']
 patches = ['GRADS-2.2.0-configure-png.patch']
 checksums = [
