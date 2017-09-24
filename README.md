@@ -28,6 +28,7 @@ module load EasyBuild
 ```
 
  4. Install toolchains for Cray, Intel and GNU compilers
+on the ec_cray directory
 ```
 eb --toolchain-name=dummy easyconfigs/CrayIntel-2017.06.eb
 eb --toolchain-name=dummy easyconfigs/CrayCCE-2017.06.eb
