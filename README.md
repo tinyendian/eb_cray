@@ -38,8 +38,8 @@ eb --toolchain-name=dummy easyconfigs/CrayGNU-2017.06.eb
 
 ## Creating an easybuild config
 
- 1. Find a suitable template for configuration
- 2. Modify toolchain in .eb file
+ 1. Find a suitable configuration file (.eb file) and use it as a template
+ 2. Adapt toolchain and other settings in .eb file, as required
 
 ## Building 
 
