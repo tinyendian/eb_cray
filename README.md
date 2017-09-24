@@ -38,4 +38,16 @@ eb --toolchain-name=dummy easyconfigs/CrayGNU-2017.06.eb
 
 ## Creating an easybuild config
 
+ 1. Find a suitable template for configuration
+ 2. Modify toolchain in .eb file
+
+## Building 
+
+```
+eb package-pkgversion-toolchain-toolchainversion.eb --robot
+```
+i.e. 
+```
+eb gnuplot-4.6.0-CrayGNU-1.4.10.eb --robot
+```
 
