@@ -27,4 +27,27 @@ module use $EASYBUILD_PREFIX/modules/all
 module load EasyBuild
 ```
 
+ 4. Install toolchains for Cray, Intel and GNU compilers
+
+In the ec_cray directory
+```
+eb --toolchain-name=dummy easyconfigs/CrayIntel-2017.06.eb
+eb --toolchain-name=dummy easyconfigs/CrayCCE-2017.06.eb
+eb --toolchain-name=dummy easyconfigs/CrayGNU-2017.06.eb
+```
+
+## Creating an easybuild config
+
+ 1. Find a suitable template for configuration
+ 2. Modify toolchain in .eb file
+
+## Building 
+
+```
+eb package-pkgversion-toolchain-toolchainversion.eb --robot
+```
+i.e. 
+```
+eb gnuplot-4.6.0-CrayGNU-1.4.10.eb --robot
+```
 
