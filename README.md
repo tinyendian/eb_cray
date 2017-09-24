@@ -43,6 +43,7 @@ eb --toolchain-name=dummy easyconfigs/CrayGNU-2017.06.eb
 
 ## Building 
 
+In directory easyconfigs, type
 ```
 eb package-pkgversion-toolchain-toolchainversion.eb --robot
 ```
