@@ -46,7 +46,8 @@ eb --toolchain-name=dummy easyconfigs/CrayGNU-2017.06.eb
 ```
 eb package-pkgversion-toolchain-toolchainversion.eb --robot
 ```
-i.e. 
+
+E.g.,  
 ```
 eb gnuplot-4.6.0-CrayGNU-1.4.10.eb --robot
 ```
