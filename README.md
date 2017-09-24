@@ -26,6 +26,14 @@ export EASYBUILD_OPTARCH=broadwell
 module use $EASYBUILD_PREFIX/modules/all
 module load EasyBuild
 ```
+
+ 4. Install toolchains for Cray, Intel and GNU compilers
+```
+eb --toolchain-name=dummy easyconfigs/CrayIntel-2017.06.eb
+eb --toolchain-name=dummy easyconfigs/CrayCCE-2017.06.eb
+eb --toolchain-name=dummy easyconfigs/CrayGNU-2017.06.eb
+```
+
 ## Creating an easybuild config
 
 
