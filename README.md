@@ -53,3 +53,7 @@ E.g.,
 eb gnuplot-4.6.0-CrayGNU-1.4.10.eb --robot
 ```
 
+Note: the build may fail for some toolchains (currently CrayGNU-1.4.10) if module craype-x86-skylake is loaded. To fix the problem just unload this module:
+```
+module unload craype-x86-skylake
+``` 
