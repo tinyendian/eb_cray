@@ -26,5 +26,6 @@ export EASYBUILD_OPTARCH=broadwell
 module use $EASYBUILD_PREFIX/modules/all
 module load EasyBuild
 ```
+## Creating an easybuild config
 
 
