@@ -1,0 +1,30 @@
+easyblock = 'ConfigureMake'
+
+name = 'um2netcdf'
+version = '3.2.0'
+
+homepage = 'http://www.niwa.co.nz'
+description = """um2netcdf converts Unified Model output files in
+fieldsfile format into netCDF format."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['f4fccd275dfe2802851406e777d2dfd0af92765cd09c087263cd17569300bfff']
+
+dependencies = [
+    ('cray-netcdf/4.4.1.1.3', EXTERNAL_MODULE),
+]
+
+# No configure step needed
+skipsteps = ['configure']
+
+prebuildopts = 'cp config/x86_linux_gcc.mk config/x86_linux_cc.mk; cd src;'
+preinstallopts = 'export BINDIR=%(installdir)s/bin; cd src;'
+
+sanity_check_paths = {
+    'files': ["bin/um2netcdf"],
+    'dirs': [],
+}
+
+moduleclass = 'vis'
