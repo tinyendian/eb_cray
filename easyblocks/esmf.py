@@ -22,6 +22,7 @@
 # You should have received a copy of the GNU General Public License
 # along with EasyBuild.  If not, see <http://www.gnu.org/licenses/>.
 ##
+# Note: Adapted to Cray programming environment
 """
 EasyBuild support for building and installing ESMF, implemented as an easyblock
 
@@ -59,45 +60,8 @@ class EB_ESMF(ConfigureMake):
             compiler = comp_family.lower()
         env.setvar('ESMF_COMPILER', compiler)
 
-        # specify MPI communications library
-        comm = None
-        mpi_family = self.toolchain.mpi_family()
-        if mpi_family in [toolchain.MPICH, toolchain.QLOGICMPI]:
-            # MPICH family for MPICH v3.x, which is MPICH2 compatible
-            comm = 'mpich2'
-        else:
-            comm = mpi_family.lower()
-        env.setvar('ESMF_COMM', comm)
-
-        # specify decent LAPACK lib
+        # use Cray's libsci
         env.setvar('ESMF_LAPACK', 'user')
-        env.setvar('ESMF_LAPACK_LIBS', '%s %s' % (os.getenv('LDFLAGS'), os.getenv('LIBLAPACK_MT')))
-
-        # specify netCDF
-        netcdf = get_software_root('netCDF')
-        if netcdf:
-            env.setvar('ESMF_NETCDF', 'user')
-            netcdf_libs = ['-L%s/lib' % netcdf, '-lnetcdf']
-
-            # Fortran
-            netcdff = get_software_root('netCDF-Fortran')
-            if netcdff:
-                netcdf_libs = ["-L%s/lib" % netcdff] + netcdf_libs + ["-lnetcdff"]
-            else:
-                netcdf_libs.append('-lnetcdff')
-
-            # C++
-            netcdfcxx = get_software_root('netCDF-C++')
-            if netcdfcxx:
-                netcdf_libs = ["-L%s/lib" % netcdfcxx] + netcdf_libs + ["-lnetcdf_c++"]
-            else:
-                netcdfcxx = get_software_root('netCDF-C++4')
-                if netcdfcxx:
-                    netcdf_libs = ["-L%s/lib" % netcdfcxx] + netcdf_libs + ["-lnetcdf_c++4"]
-                else:
-                    netcdf_libs.append('-lnetcdf_c++')
-
-            env.setvar('ESMF_NETCDF_LIBS', ' '.join(netcdf_libs))
 
         # 'make info' provides useful debug info
         cmd = "make info"
@@ -105,12 +69,11 @@ class EB_ESMF(ConfigureMake):
 
     def sanity_check_step(self):
         """Custom sanity check for ESMF."""
-        shlib_ext = get_shared_lib_ext()
 
         custom_paths = {
             'files':
                 [os.path.join('bin', x) for x in ['ESMF_Info', 'ESMF_InfoC', 'ESMF_RegridWeightGen', 'ESMF_WebServController']] +
-                [os.path.join('lib', x) for x in ['libesmf.a', 'libesmf.%s' % shlib_ext]],
+                [os.path.join('lib', x) for x in ['libesmf.a']],
             'dirs': ['include', 'mod'],
         }
 
