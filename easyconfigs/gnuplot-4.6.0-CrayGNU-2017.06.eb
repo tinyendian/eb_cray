@@ -18,13 +18,18 @@ version = '4.6.0'
 homepage = 'http://gnuplot.sourceforge.net/'
 description = """gnuplot-4.6.0: Portable interactive, function plotting utility"""
 
-sources = [SOURCE_TAR_GZ]
 source_urls = [('http://sourceforge.net/projects/gnuplot/files', 'download')]
+sources = [SOURCE_TAR_GZ]
+checksums = ['6e60adb5039a3541f407c2ade670004178b376754c424c13f0be24c7960c17be']
+
 toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+
+# Test runs a long time
+# runtest = 'check'
 
 sanity_check_paths = {
     'files': ['bin/gnuplot'],
-    'dirs': []
+    'dirs': ['libexec', 'share']
 }
 
 moduleclass = 'vis'
