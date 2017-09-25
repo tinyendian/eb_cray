@@ -29,7 +29,7 @@ module load EasyBuild
 
  4. Install toolchains for Cray, Intel and GNU compilers
 
-In the ec_cray directory
+In the eb_cray directory
 ```
 eb --toolchain-name=dummy easyconfigs/CrayIntel-2017.06.eb
 eb --toolchain-name=dummy easyconfigs/CrayCCE-2017.06.eb
@@ -43,6 +43,7 @@ eb --toolchain-name=dummy easyconfigs/CrayGNU-2017.06.eb
 
 ## Building 
 
+In directory easyconfigs, type
 ```
 eb package-pkgversion-toolchain-toolchainversion.eb --robot
 ```
@@ -52,3 +53,7 @@ E.g.,
 eb gnuplot-4.6.0-CrayGNU-1.4.10.eb --robot
 ```
 
+Note: the build may fail for some toolchains (currently CrayGNU-1.4.10) if module craype-x86-skylake is loaded. To fix the problem just unload this module:
+```
+module unload craype-x86-skylake
+``` 
