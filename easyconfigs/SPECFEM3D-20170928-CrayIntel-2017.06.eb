@@ -1,0 +1,42 @@
+name = 'SPECFEM3D'
+version = '20170928'
+
+homepage = "https://geodynamics.org/cig/software/specfem3d/"
+description = """SPECFEM3D Cartesian simulates acoustic (fluid), elastic (solid), coupled acoustic/elastic, poroelastic or seismic wave propagation in any type of conforming mesh of hexahedra (structured or not.) It can, for instance, model seismic waves propagating in sedimentary basins or any other regional geological model following earthquakes. It can also be used for non-destructive testing or for ocean acoustics. """
+
+toolchain = {'name': 'CrayIntel', 'version': '2017.06'}
+
+# has a configure commmand but there is no make install
+easyblock = 'MakeCp'
+with_configure = True
+
+# You will need to download the tarball manually using 
+# git clone --recursive https://github.com/geodynamics/specfem3d.git
+# tar cfz SPECFEM3D-20170928.tar.gz specfem3d
+# mv SPECFEM3D-20170928.tar.gz s/SPECFEM3D
+source_urls = [
+  'file://s/SPECFEM3D',
+]
+sources = [{
+  'filename': '%(name)s-%(version)s.tar.gz',
+  'extract_cmd': 'tar xf %s', # Workaround for missing compress executable
+}]
+checksums = ['c711e63af41e0d4b274c4121058c2391']
+
+dependencies = [
+]
+
+configopts = 'FC=ftn CC=cc CXX=CC MPIFC=ftn MPICC=cc MPICXX=CC --with-mpi '
+
+# runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['bin/xmeshfem3D', 'bin/xspecfem3D', ],
+    'dirs' : [],
+}
+
+# file_to_copy must be provided because specfem3d does not have make install
+# there are broken links in utils so cannot add utils/ to the list
+files_to_copy = ['bin', 'lib', 'doc', 'README.md', ]
+
+moduleclass = 'phys'
