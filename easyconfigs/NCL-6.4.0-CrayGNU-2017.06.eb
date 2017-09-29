@@ -36,4 +36,7 @@ dependencies = [
     ('libiconv', '1.15'),
 ]
 
+# NCL build system does not currently support parallel builds
+parallel = 1
+
 moduleclass = 'data'
