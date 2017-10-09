@@ -12,6 +12,8 @@ source_urls = ['https://download.sourceforge.net/libpng']
 sources = [SOURCELOWER_TAR_GZ]
 checksums = ['1a8ae5c8eafad895cc3fce78fbcb6fdef663b8eb8375f04616e6496360093abb']
 
+osdependencies = [('zlib-devel')]
+
 runtest = 'check'
 
 majminver = ''.join(version.split('.')[:2])

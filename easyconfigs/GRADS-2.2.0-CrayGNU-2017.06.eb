@@ -43,9 +43,13 @@ preconfigopts += "cp $EBROOTJASPER/include/jasper/* supplibs/include/; "
 preconfigopts += "cp -r $EBROOTJASPER/lib64/* supplibs/lib/; "
 preconfigopts += "cp $EBROOTUDUNITS/include/* supplibs/include/; "
 preconfigopts += "cp -r $EBROOTUDUNITS/lib/* supplibs/lib/; "
+
+# Static library /usr/lib64/libz.a does not seem to work with GrADS
 preconfigopts += "cp $EBROOTZLIB/include/* supplibs/include/; "
 preconfigopts += "cp -r $EBROOTZLIB/lib/* supplibs/lib/; "
-preconfigopts += "cp -r /usr/lib64/libncurses.a supplibs/lib/; "
+
+preconfigopts += "cp /usr/lib64/libncurses.a supplibs/lib/; "
+preconfigopts += "cp -r /usr/include/freetype2 supplibs/include/; "
 preconfigopts += "export PKG_CONFIG_PATH=$PWD/supplibs/lib/pkgconfig:$PKG_CONFIG_PATH;  "
 
 
@@ -56,15 +60,27 @@ prebuildopts = 'sed -ie "s|supplibs|$(pwd)/supplibs|" Makefile; '
 prebuildopts += 'sed -ie "s|supplibs|$(pwd)/supplibs|" src/Makefile; '
 prebuildopts += 'sed -ie "s|LDFLAGS = |LDFLAGS = -ldl |" src/Makefile; '
 
+# Note: freetype dependency needed by cairo to satisfy build system
+osdependencies = [
+    ('readline-devel'),
+    ('libX11-devel'),
+    ('libxml2-devel'),
+    ('curl'),
+    ('freetype2-devel')
+]
+
+builddependencies = [
+    ('cray-netcdf/4.4.1.1.3', EXTERNAL_MODULE),
+    ('UDUNITS', '1.12.11'),
+    ('JasPer', '2.0.12'),
+    ('zlib', '1.2.11'),
+]
+
 dependencies = [
     ('cray-hdf5/1.10.0.3', EXTERNAL_MODULE),
-    ('cray-netcdf/4.4.1.1.3', EXTERNAL_MODULE),
     ('cairo', '1.14.10'),
-    ('JasPer', '2.0.12'),
-    ('UDUNITS', '1.12.11'),
     ('libpng', '1.6.32'),
     ('libgd', '2.2.5'),
-    ('zlib', '1.2.11'),
 ]
 
 runtest = 'check'

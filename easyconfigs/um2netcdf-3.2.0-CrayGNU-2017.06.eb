@@ -22,6 +22,8 @@ skipsteps = ['configure']
 prebuildopts = 'cp config/x86_linux_gcc.mk config/x86_linux_cc.mk; cd src;'
 preinstallopts = 'export BINDIR=%(installdir)s/bin; cd src;'
 
+osdependencies = [('libxml2-devel')]
+
 sanity_check_paths = {
     'files': ["bin/um2netcdf"],
     'dirs': [],

@@ -17,13 +17,13 @@ checksums = ['7e87878658f2c9951a14fc64114d4958c0e65ac47530b8ac3078b2ce41b66a09']
 osdependencies = [
     ('zlib-devel'),
     ('libX11-devel'),
-    ('fontconfig-devel')
+    ('fontconfig-devel'),
+    ('freetype2-devel')
 ]
 
 dependencies = [
     ('libpng', '1.6.32'),
     ('pixman', '0.34.0'),
-    ('freetype', '2.8'),
 ]
 
 # Runs for a very long time
