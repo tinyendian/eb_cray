@@ -21,7 +21,8 @@ checksums = [
 ]
 
 osdependencies = [
-    ('libX11-devel')
+    ('libX11-devel'),
+    ('freetype2-devel')
 ]
 
 builddependencies = [

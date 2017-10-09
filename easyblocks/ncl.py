@@ -150,6 +150,9 @@ class EB_NCL(EasyBlock):
                 libs += ' -L%s/lib %s ' % (root, libs_map[dep])
                 includes += ' -I%s/include ' % root
 
+        # Help build system find freetype
+        includes += ' -I/usr/include/freetype2 '
+
         cfgtxt="""#ifdef FirstSite
 #endif /* FirstSite */
 
