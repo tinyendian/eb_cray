@@ -24,6 +24,12 @@ checksums = ['6e60adb5039a3541f407c2ade670004178b376754c424c13f0be24c7960c17be']
 
 toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
 
+osdependencies = [
+    ('readline-devel'),
+    ('zlib-devel'),
+    ('lua-devel')
+]
+
 # Test runs a long time
 # runtest = 'check'
 
