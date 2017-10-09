@@ -18,6 +18,15 @@ source_urls = ['https://www.imagemagick.org/download/releases/']
 sources = [SOURCE_TAR_GZ]
 checksums = ['c5b2ebfda3f764af6bc98b247ab66d7e7159e7bebb8a9ee63110dc64fc94565d']
 
+osdependencies = [
+    ('bzip2'),
+    ('libX11-devel'),
+    ('zlib-devel'),
+    ('fontconfig-devel'),
+    ('freetype2-devel'),
+    ('libxml2-devel'),
+]
+
 dependencies = [
     ('cray-fftw/3.3.6.2', EXTERNAL_MODULE),
     ('libpng', '1.6.32'),

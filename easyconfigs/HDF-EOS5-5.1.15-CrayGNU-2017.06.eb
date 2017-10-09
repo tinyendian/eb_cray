@@ -27,7 +27,9 @@ checksums = [
     'a4fea07f9e0d6ea7b5f0d98d44b7809da6e7ecbc815db9bd69610a9e0ad3243a',  # HDF-EOS5-5.1.15-szip.patch
 ]
 
-dependencies = [
+osdependencies = [('zlib-devel')]
+
+builddependencies = [
     ('cray-hdf5/1.10.0.3', EXTERNAL_MODULE),
 ]
 

@@ -22,7 +22,9 @@ sources = [{
 }]
 checksums = ['3fffa081466e85d2b9436d984bc44fe97bbb33ad9d8b7055a322095dc4672e31']
 
-dependencies = [
+osdependencies = [('zlib-devel')]
+
+builddependencies = [
     ('Szip', '2.1.1'),
     ('HDF', '4.2.13'),
 ]

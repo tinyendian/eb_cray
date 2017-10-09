@@ -14,6 +14,8 @@ source_urls = ['https://software.ecmwf.int/wiki/download/attachments/3473437/']
 sources = ['grib_api-%(version)s-Source.tar.gz']
 checksums = ['7b0c40bcc8794ee11385bd6b9c5230a23e2432c88c8203dfdc7ccee054535ad4']
 
+osdependencies = [('cmake')]
+
 # Required by CMake
 separate_build_dir = True
 

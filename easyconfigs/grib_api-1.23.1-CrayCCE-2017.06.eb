@@ -18,6 +18,8 @@ checksums = [
     'd8570b87e7270120fc646c39f9c7de3088592ec620f011233c349fd68d916ba9',  # grib_api-1.23.1-Source_CrayFortranConfig.patch
 ]
 
+osdependencies = [('cmake')]
+
 # Required by CMake
 separate_build_dir = True
 
