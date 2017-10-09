@@ -19,7 +19,7 @@ checksums = [
     '9d6904aa131bf087ea6db3ce4fcb731dcf38e35d021a1dadbac55ae7dbadcd42',  # g2lib-3.1.0-jpeg2000_inmem.patch
 ]
 
-dependencies = [
+builddependencies = [
     ('JasPer', '2.0.12'),
     ('libpng', '1.6.32')
 ]
