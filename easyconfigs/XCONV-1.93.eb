@@ -1,0 +1,28 @@
+easyblock = 'BinariesTarball'
+
+name = 'XCONV'
+version = '1.93'
+
+homepage = "http://cms.ncas.ac.uk/documents/xconv"
+description = """Xconv is a program designed to convert model output
+into a format suitable for use in various plotting packages. Xconv is
+designed to be simple to use with a point and click, windows based interface."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+source_urls = ['http://cms.ncas.ac.uk/documents/xconv/_downloads/']
+sources = ['xconv%(version)s_linux_x86_64.tar.gz']
+checksums = ['82ade82c51336676e451435d9db05f895ede6de9acf95c6b30cd6c780e7c03d7']
+
+# Make binaries available without version number for convenience
+postinstallcmds = [
+    'ln -s %(installdir)s/bin/xconv%(version)s %(installdir)s/bin/xconv',
+    'ln -s %(installdir)s/bin/convsh%(version)s %(installdir)s/bin/convsh',
+]
+
+sanity_check_paths = {
+    'files': ['bin/xconv%(version)s', 'bin/xconv', 'bin/convsh%(version)s', 'bin/convsh'],
+    'dirs': ['bin'],
+}
+
+moduleclass = 'data'

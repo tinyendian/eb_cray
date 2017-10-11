@@ -1,0 +1,31 @@
+easyblock = 'Conda'
+
+name = 'IRIS'
+version = '1.13.0'
+
+homepage = 'http://scitools.org.uk/iris'
+description = """The Iris library implements a data model to create a
+data abstraction layer which isolates analysis and visualisation code
+from data format specifics. The data model we have chosen is the CF
+Data Model. The implementation of this model we have called an Iris
+Cube.
+
+Iris currently supports read/write access to a range of data formats,
+including (CF-)netCDF, GRIB, and PP; fundamental data manipulation
+operations, such as arithmetic, interpolation, and statistics; and a
+range of integrated plotting options."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+requirements = "%(namelower)s=%(version)s numpy>=1.9 biggus>=0.14 scipy>=0.10 cartopy>=0.11.0 PyKE>=1.1.1 netcdf4>=1.2.4 cf_units>=1.0 udunits2>=2.1.24 gdal>=1.9.1 graphviz>=2.18 iris-grib>=0.9 matplotlib>=1.2.0 mock>=1.0.1 nose>=1.1.2 pep8>=1.4.6 pandas>=0.11.0 pyugrid>=0.1.1 shapely>=1.2.14 mo_pack>=0.2.0 setuptools>=0.6c11"
+channels = ['conda-forge']
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python2.7/site-packages/iris']
+}
+
+# Make shapefile module visible
+modextrapaths = {'PYTHONPATH': 'site-packages'}
+
+moduleclass = 'data'
