@@ -9,7 +9,7 @@ homepage = 'http://sourceforge.net/projects/esmf'
 description = """The Earth System Modeling Framework (ESMF) is software for building and coupling weather,
  climate, and related models."""
 
-toolchain = {'name': 'CrayIntel', 'version': '2017.06'}
+toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
 toolchainopts = {'usempi': True}
 
 source_urls = [SOURCEFORGE_SOURCE]
@@ -22,6 +22,6 @@ dependencies = [
     ('cray-libsci/17.09.1', EXTERNAL_MODULE),
 ]
 
-buildopts = 'ESMF_OS=Unicos ESMF_COMPILER=intel ESMF_COMM=mpi ESMF_ABI=64'
+buildopts = 'ESMF_OS=Unicos ESMF_COMPILER=gfortran ESMF_COMM=mpi ESMF_ABI=64'
 
 moduleclass = 'geo'
