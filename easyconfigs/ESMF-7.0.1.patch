@@ -1,0 +1,12 @@
+diff -Naur esmf/src/Infrastructure/Mesh/src/Moab/io/ReadABAQUS.cpp esmf-patched/src/Infrastructure/Mesh/src/Moab/io/ReadABAQUS.cpp
+--- esmf/src/Infrastructure/Mesh/src/Moab/io/ReadABAQUS.cpp	2016-12-10 16:14:22.265815617 +0000
++++ esmf-patched/src/Infrastructure/Mesh/src/Moab/io/ReadABAQUS.cpp	2017-10-20 02:02:36.788171995 +0000
+@@ -105,7 +105,7 @@
+ ReadABAQUS::~ReadABAQUS() 
+ {
+   mdbImpl->release_interface(readMeshIface);
+-  if (NULL != abFile)
++  if (abFile)
+     abFile.close();
+ }
+ 
