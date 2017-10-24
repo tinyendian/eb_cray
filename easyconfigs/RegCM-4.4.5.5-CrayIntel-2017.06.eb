@@ -29,8 +29,8 @@ configopts = 'FC=ftn CC=cc CXX=CC MPIFC=ftn --disable-shared --enable-megan --en
 # runtest = 'check'
 
 sanity_check_paths = {
-    'files': ['', ],
-    'dirs' : [],
+    'files': ['bin/average', ],
+    'dirs' : ['bin'],
 }
 
 # RegCM does not currently support parallel builds
