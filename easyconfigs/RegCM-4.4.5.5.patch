@@ -1,3 +1,30 @@
+diff -Nru RegCM-4.4.5.5/Main/clmlib/clm3.5/src/main/nanMod.F90 RegCM-4.4.5.5-new/Main/clmlib/clm3.5/src/main/nanMod.F90
+--- RegCM-4.4.5.5/Main/clmlib/clm3.5/src/main/nanMod.F90	2015-03-29 15:14:42.000000000 +0000
++++ RegCM-4.4.5.5-new/Main/clmlib/clm3.5/src/main/nanMod.F90	2017-10-25 01:07:20.255493000 +0000
+@@ -24,6 +24,12 @@
+   real(r8), parameter :: inf = O'0777600000000000000000'
+   real(r8), parameter :: nan = O'0777700000000000000000'
+   integer,  parameter :: bigint = O'17777777777'
++#elif __GFORTRAN__
++  ! Ideally should be using ieee_arithmetic module but gfortran 4.9
++  ! does not yet support this fortran 2003 feature
++  real(r8), parameter :: inf = transfer(9218868437227405312_8, 1._r8)
++  real(r8), parameter :: nan = transfer(-2251799813685248_8, 1._r8)
++  integer,  parameter :: bigint = O'17777777777'
+ #else
+ ! signaling nan otherwise
+   real(r8), parameter :: inf = O'0777600000000000000000'
+diff -Nru RegCM-4.4.5.5/Main/clmlib/clm3.5/tools/newcprnc/specialvalues.f90 RegCM-4.4.5.5-new/Main/clmlib/clm3.5/tools/newcprnc/specialvalues.f90
+--- RegCM-4.4.5.5/Main/clmlib/clm3.5/tools/newcprnc/specialvalues.f90	2015-03-29 15:14:40.000000000 +0000
++++ RegCM-4.4.5.5-new/Main/clmlib/clm3.5/tools/newcprnc/specialvalues.f90	2017-10-25 01:27:47.837429000 +0000
+@@ -6,6 +6,6 @@
+ 
+    integer, parameter :: uninit_int = -99999
+    
+-   real(r8), parameter :: inf = O'0777600000000000000000'  ! infinity (assumes IEEE)
++   real(r8), parameter :: inf = O'777600000000000000000'  ! infinity (assumes IEEE)
+    real(r8), parameter :: uninit_r8 = inf
+ end module specialvalues
 diff -Nru RegCM-4.4.5.5/Main/clmlib/clm4.5/mod_clm_cndv.F90 RegCM-4.4.5.5-new/Main/clmlib/clm4.5/mod_clm_cndv.F90
 --- RegCM-4.4.5.5/Main/clmlib/clm4.5/mod_clm_cndv.F90	2015-03-29 15:14:42.000000000 +0000
 +++ RegCM-4.4.5.5-new/Main/clmlib/clm4.5/mod_clm_cndv.F90	2017-10-24 23:27:10.296428863 +0000
@@ -24,6 +51,21 @@ diff -Nru RegCM-4.4.5.5/Main/clmlib/clm4.5/mod_clm_control.F90 RegCM-4.4.5.5-new
  #else
      ihost = hostnm(hostname)
      call getlog(user)
+diff -Nru RegCM-4.4.5.5/Main/clmlib/clm_drydep.F90 RegCM-4.4.5.5-new/Main/clmlib/clm_drydep.F90
+--- RegCM-4.4.5.5/Main/clmlib/clm_drydep.F90	2015-03-29 15:14:42.000000000 +0000
++++ RegCM-4.4.5.5-new/Main/clmlib/clm_drydep.F90	2017-10-25 01:15:41.339718862 +0000
+@@ -278,7 +278,11 @@
+      Module Procedure set_hcoeff_vector
+   End Interface
+ 
++#ifdef __GFORTRAN__
++  real(r8), parameter :: inf = transfer(9218868437227405312_8, 1._r8)
++#else
+   real(r8), private, parameter :: inf = O'0777600000000000000000'  !--- infinity to initialize data to
++#endif
+   real(r8), private, parameter :: small_value = 1.e-36_r8          !--- smallest value to use ---
+ 
+   !---------------------------------------------------------------------------
 diff -Nru RegCM-4.4.5.5/Main/mod_header.F90 RegCM-4.4.5.5-new/Main/mod_header.F90
 --- RegCM-4.4.5.5/Main/mod_header.F90	2015-03-29 15:14:44.000000000 +0000
 +++ RegCM-4.4.5.5-new/Main/mod_header.F90	2017-10-24 23:28:12.198873000 +0000
@@ -63,3 +105,18 @@ diff -Nru RegCM-4.4.5.5/PreProc/Terrain/mod_header.F90 RegCM-4.4.5.5-new/PreProc
  #else
      ihost = hostnm(hostname)
      call getlog(user)
+diff -Nru RegCM-4.4.5.5/Share/mod_realkinds.F90 RegCM-4.4.5.5-new/Share/mod_realkinds.F90
+--- RegCM-4.4.5.5/Share/mod_realkinds.F90	2015-03-29 15:14:44.000000000 +0000
++++ RegCM-4.4.5.5-new/Share/mod_realkinds.F90	2017-10-25 00:55:58.708614000 +0000
+@@ -32,6 +32,11 @@
+   ! quiet nan for portland group compilers
+   real(rk8), parameter :: inf = O'0777600000000000000000'
+   real(rk8), parameter :: nan = O'0777700000000000000000'
++#elif __GFORTRAN__
++  ! Ideally should be using ieee_arithmetic module but gfortran 4.9 
++  ! does not yet support this fortran 2003 feature
++  real(rk8), parameter :: inf = transfer(9218868437227405312_8, 1._rk8)
++  real(rk8), parameter :: nan = transfer(-2251799813685248_8, 1._rk8)
+ #else
+   ! signaling nan otherwise
+   real(rk8), parameter :: inf = O'0777600000000000000000'
