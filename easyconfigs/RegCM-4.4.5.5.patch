@@ -1,0 +1,77 @@
+diff -Nru RegCM-4.4.5.5/Main/clmlib/clm4.5/mod_clm_cndv.F90 RegCM-4.4.5.5-new/Main/clmlib/clm4.5/mod_clm_cndv.F90
+--- RegCM-4.4.5.5/Main/clmlib/clm4.5/mod_clm_cndv.F90	2015-03-29 15:14:42.000000000 +0000
++++ RegCM-4.4.5.5-new/Main/clmlib/clm4.5/mod_clm_cndv.F90	2017-10-25 03:43:23.749241356 +0000
+@@ -232,6 +232,9 @@
+ #ifdef IBM
+     hostname='ibm platform '
+     user= 'Unknown'
++#elif _CRAYFTN
++    hostname='cray platform'
++    user= 'Unknown'
+ #else
+     ihost = hostnm(hostname)
+     call getlog(user)
+diff -Nru RegCM-4.4.5.5/Main/clmlib/clm4.5/mod_clm_control.F90 RegCM-4.4.5.5-new/Main/clmlib/clm4.5/mod_clm_control.F90
+--- RegCM-4.4.5.5/Main/clmlib/clm4.5/mod_clm_control.F90	2015-03-29 15:14:42.000000000 +0000
++++ RegCM-4.4.5.5-new/Main/clmlib/clm4.5/mod_clm_control.F90	2017-10-25 03:41:37.121355285 +0000
+@@ -266,6 +266,9 @@
+ #ifdef IBM
+     hostname='ibm platform '
+     user= 'Unknown'
++#elif _CRAYFTN
++    hostname='cray platform'
++    user= 'Unknown'
+ #else
+     ihost = hostnm(hostname)
+     call getlog(user)
+diff -Nru RegCM-4.4.5.5/Main/mod_header.F90 RegCM-4.4.5.5-new/Main/mod_header.F90
+--- RegCM-4.4.5.5/Main/mod_header.F90	2015-03-29 15:14:44.000000000 +0000
++++ RegCM-4.4.5.5-new/Main/mod_header.F90	2017-10-25 03:44:18.206425000 +0000
+@@ -68,6 +68,9 @@
+ #ifdef IBM
+       hostname='ibm platform '
+       user= 'Unknown'
++#elif _CRAYFTN
++      hostname='cray platform'
++      user= 'Unknown'
+ #else
+       ihost = hostnm(hostname)
+       call getlog(user)
+diff -Nru RegCM-4.4.5.5/Main/radlib/mod_rrtmg_driver.F90 RegCM-4.4.5.5-new/Main/radlib/mod_rrtmg_driver.F90
+--- RegCM-4.4.5.5/Main/radlib/mod_rrtmg_driver.F90	2015-03-29 15:14:40.000000000 +0000
++++ RegCM-4.4.5.5-new/Main/radlib/mod_rrtmg_driver.F90	2017-10-25 03:49:54.411831677 +0000
+@@ -101,7 +101,7 @@
+     implicit none
+     integer(ik4) :: k
+ 
+-#if defined ( __PGI ) || defined ( __OPENCC__ ) || defined ( __INTEL_COMPILER )
++#if defined ( __PGI ) || defined ( __OPENCC__ ) || defined ( __INTEL_COMPILER ) || defined ( _CRAYFTN )
+     integer , external :: getpid
+ #endif
+ #if defined ( IBM )
+diff -Nru RegCM-4.4.5.5/PreProc/ICBC/mod_header.F90 RegCM-4.4.5.5-new/PreProc/ICBC/mod_header.F90
+--- RegCM-4.4.5.5/PreProc/ICBC/mod_header.F90	2015-03-29 15:14:45.000000000 +0000
++++ RegCM-4.4.5.5-new/PreProc/ICBC/mod_header.F90	2017-10-25 03:45:00.527338000 +0000
+@@ -44,6 +44,9 @@
+ #ifdef IBM
+     hostname = 'ibm platform '
+     user = 'Unknown'
++#elif _CRAYFTN
++    hostname='cray platform'
++    user= 'Unknown'
+ #else
+     ihost = hostnm(hostname)
+     call getlog(user)
+diff -Nru RegCM-4.4.5.5/PreProc/Terrain/mod_header.F90 RegCM-4.4.5.5-new/PreProc/Terrain/mod_header.F90
+--- RegCM-4.4.5.5/PreProc/Terrain/mod_header.F90	2015-03-29 15:14:46.000000000 +0000
++++ RegCM-4.4.5.5-new/PreProc/Terrain/mod_header.F90	2017-10-25 03:45:30.366758000 +0000
+@@ -47,6 +47,9 @@
+ #ifdef IBM
+     hostname='ibm platform '
+     user= 'Unknown'
++#elif _CRAYFTN
++    hostname='cray platform'
++    user= 'Unknown'
+ #else
+     ihost = hostnm(hostname)
+     call getlog(user)
