@@ -1,0 +1,65 @@
+diff -Nru RegCM-4.4.5.5/Main/clmlib/clm4.5/mod_clm_cndv.F90 RegCM-4.4.5.5-new/Main/clmlib/clm4.5/mod_clm_cndv.F90
+--- RegCM-4.4.5.5/Main/clmlib/clm4.5/mod_clm_cndv.F90	2015-03-29 15:14:42.000000000 +0000
++++ RegCM-4.4.5.5-new/Main/clmlib/clm4.5/mod_clm_cndv.F90	2017-10-24 23:27:10.296428863 +0000
+@@ -232,6 +232,9 @@
+ #ifdef IBM
+     hostname='ibm platform '
+     user= 'Unknown'
++#elif _CRAYFTN
++    hostname='cray platform'
++    user= 'Unknown'
+ #else
+     ihost = hostnm(hostname)
+     call getlog(user)
+diff -Nru RegCM-4.4.5.5/Main/clmlib/clm4.5/mod_clm_control.F90 RegCM-4.4.5.5-new/Main/clmlib/clm4.5/mod_clm_control.F90
+--- RegCM-4.4.5.5/Main/clmlib/clm4.5/mod_clm_control.F90	2015-03-29 15:14:42.000000000 +0000
++++ RegCM-4.4.5.5-new/Main/clmlib/clm4.5/mod_clm_control.F90	2017-10-24 23:26:16.681359627 +0000
+@@ -266,6 +266,9 @@
+ #ifdef IBM
+     hostname='ibm platform '
+     user= 'Unknown'
++#elif _CRAYFTN
++    hostname='cray platform'
++    user= 'Unknown'
+ #else
+     ihost = hostnm(hostname)
+     call getlog(user)
+diff -Nru RegCM-4.4.5.5/Main/mod_header.F90 RegCM-4.4.5.5-new/Main/mod_header.F90
+--- RegCM-4.4.5.5/Main/mod_header.F90	2015-03-29 15:14:44.000000000 +0000
++++ RegCM-4.4.5.5-new/Main/mod_header.F90	2017-10-24 23:28:12.198873000 +0000
+@@ -68,6 +68,9 @@
+ #ifdef IBM
+       hostname='ibm platform '
+       user= 'Unknown'
++#elif _CRAYFTN
++      hostname='cray platform'
++      user= 'Unknown'
+ #else
+       ihost = hostnm(hostname)
+       call getlog(user)
+diff -Nru RegCM-4.4.5.5/PreProc/ICBC/mod_header.F90 RegCM-4.4.5.5-new/PreProc/ICBC/mod_header.F90
+--- RegCM-4.4.5.5/PreProc/ICBC/mod_header.F90	2015-03-29 15:14:45.000000000 +0000
++++ RegCM-4.4.5.5-new/PreProc/ICBC/mod_header.F90	2017-10-24 23:29:20.814767000 +0000
+@@ -44,6 +44,9 @@
+ #ifdef IBM
+     hostname = 'ibm platform '
+     user = 'Unknown'
++#elif _CRAYFTN
++    hostname = 'cray platform'
++    user = 'Unknown'
+ #else
+     ihost = hostnm(hostname)
+     call getlog(user)
+diff -Nru RegCM-4.4.5.5/PreProc/Terrain/mod_header.F90 RegCM-4.4.5.5-new/PreProc/Terrain/mod_header.F90
+--- RegCM-4.4.5.5/PreProc/Terrain/mod_header.F90	2015-03-29 15:14:46.000000000 +0000
++++ RegCM-4.4.5.5-new/PreProc/Terrain/mod_header.F90	2017-10-24 23:29:54.447977000 +0000
+@@ -47,6 +47,9 @@
+ #ifdef IBM
+     hostname='ibm platform '
+     user= 'Unknown'
++#elif _CRAYFTN
++    hostname='cray platform'
++    user= 'Unknown'
+ #else
+     ihost = hostnm(hostname)
+     call getlog(user)
