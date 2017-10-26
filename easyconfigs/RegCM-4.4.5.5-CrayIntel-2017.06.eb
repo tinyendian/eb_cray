@@ -18,13 +18,14 @@ sources = [{
   'filename': '%(name)s-%(version)s.tar',
   'extract_cmd': 'tar xf %s', # Workaround for missing compress executable
 }]
+patches = ['RegCM-4.4.5.5.patch']
 checksums = ['dad7cd68d49158986e37d63dd94fd9aa']
 
 dependencies = [
   ('cray-netcdf/4.4.1.1.3', EXTERNAL_MODULE),
 ]
 
-configopts = 'FC=ftn CC=cc CXX=CC MPIFC=ftn --disable-shared --enable-megan --enable-cpl --enable-clm --enable-clm45 --enable-nc4-gzip'
+configopts = 'FC=ftn CC=cc CXX=CC MPIFC=ftn --with-flavor=intel --disable-shared --enable-megan --enable-cpl --enable-clm --enable-clm45 --enable-nc4-gzip'
 
 # runtest = 'check'
 
