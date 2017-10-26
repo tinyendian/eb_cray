@@ -8,7 +8,7 @@ homepage = 'https://github.com/stfc/PSyclone'
 description = """Domain-specific compiler for Finite Difference/Volume/Element Earth-system models in Fortran
 """
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
 
 source_urls = ['https://github.com/stfc/PSyclone/archive']
 sources = ['%(version)s.tar.gz']

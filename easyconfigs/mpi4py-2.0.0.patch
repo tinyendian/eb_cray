@@ -1,0 +1,22 @@
+diff -Nur mpi4py-2.0.0/mpi.cfg mpi4py-2.0.0-new/mpi.cfg
+--- mpi4py-2.0.0/mpi.cfg	2015-10-11 17:28:07.000000000 +0000
++++ mpi4py-2.0.0-new/mpi.cfg	2017-10-26 03:15:35.471721000 +0000
+@@ -11,11 +11,17 @@
+ # please separate them with the path separator for your platform,
+ # i.e., ':' on Unix-like systems and ';' on Windows
+ 
+-
+ # Default configuration
+ # ---------------------
+ [mpi]
+ 
++# Cray configuration
++#-------------------
++mpicc = cc
++mpicxx = CC
++
++
++
+ ## mpi_dir              = /usr
+ ## mpi_dir              = /usr/local
+ ## mpi_dir              = /usr/local/mpi
