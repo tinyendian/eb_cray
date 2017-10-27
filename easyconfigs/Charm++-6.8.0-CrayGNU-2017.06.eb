@@ -1,0 +1,27 @@
+# alexander.pletzer@nesi.org.nz 
+name = 'Charm++'
+version = '6.8.0'
+
+homepage = 'http://charm.cs.illinois.edu/help'
+description = """An asynchronous message-driven C++ communication library targeted towards tightly coupled, high-performance parallel machines."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+toolchainopts = {'usempi': True}
+
+source_urls = ['http://charm.cs.illinois.edu/distrib']
+sources = ['charm-%(version)s.tar.gz']
+
+easyblock = 'MakeCp'
+
+charm_arch = 'gni-crayxc'
+# This is a bit of a hack. The sharp sign (#) at the end is critical! prebuildopts 
+# are all the commands passed before make is invoked. Charm++ does not use make 
+# so we're passing the Charm++ commands followed by the comment sign # to inactivate
+# the make command. *** Be sure to module load craype-hugepages8M when building ***
+prebuildopts = './build %(namelower)s ' + charm_arch + ' --with-production -j8 #'
+
+runtest = False
+
+files_to_copy = ['doc'] + [(charm_arch + '/') + x for x in ['bin', 'examples', 'include', 'lib', 'lib_so', 'tests']]
+
+moduleclass = 'mpi'
