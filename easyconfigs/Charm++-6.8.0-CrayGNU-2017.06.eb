@@ -13,6 +13,10 @@ sources = ['charm-%(version)s.tar.gz']
 
 easyblock = 'MakeCp'
 
+# On kupe need to set this env variable to help Charm++ figure out the network topology
+import os
+os.environ['PE_PKGCONFIG_LIBS'] = 'cray-pmi:cray-ugni:' + os.environ['PE_PKGCONFIG_LIBS']
+
 # serial build
 parallel = 1
 charm_arch = 'gni-crayxc'
