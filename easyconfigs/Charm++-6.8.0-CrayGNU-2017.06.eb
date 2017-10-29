@@ -11,6 +11,10 @@ toolchainopts = {'usempi': True}
 source_urls = ['http://charm.cs.illinois.edu/distrib']
 sources = ['charm-%(version)s.tar.gz']
 
+dependencies = [
+    ('craype-hugepages8M', EXTERNAL_MODULE),
+]
+
 easyblock = 'MakeCp'
 
 # On kupe need to set this env variable to help Charm++ figure out the network topology
