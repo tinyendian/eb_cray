@@ -18,7 +18,8 @@ patches = ['ESMF-7.0.1.patch']
 checksums = ['85e294409d2337cc4b01210a040572539058442da464be4760a3c4d8d8c419c0']
 
 dependencies = [
-    ('cray-netcdf/4.4.1.1.3', EXTERNAL_MODULE),
+    ('cray-hdf5/1.10.1.1', EXTERNAL_MODULE),
+    ('cray-netcdf/4.4.1.1.6', EXTERNAL_MODULE),
     ('cray-libsci/17.09.1', EXTERNAL_MODULE),
 ]
 

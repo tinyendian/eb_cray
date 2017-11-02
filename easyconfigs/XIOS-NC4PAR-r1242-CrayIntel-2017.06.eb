@@ -18,7 +18,8 @@ sources = ['XIOS-%(version)s.tar.gz']
 patches = ['%(name)s-%(version)s_arch-XC30_Cray.patch']
 
 dependencies = [
-    ('cray-netcdf-hdf5parallel/4.4.1.1.3', EXTERNAL_MODULE),
+    ('cray-hdf5-parallel/1.10.1.1', EXTERNAL_MODULE),
+    ('cray-netcdf-hdf5parallel/4.4.1.1.6', EXTERNAL_MODULE),
 ]
 
 # XIOS uses its own build script and the FCM build system that uses
