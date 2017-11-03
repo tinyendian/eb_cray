@@ -158,6 +158,12 @@ class EB_NCL(EasyBlock):
 
 #ifdef SecondSite
 
+/* Allow file paths to contain x86_64. Note that this will cause macro recursion errors. */
+#ifdef x86_64
+#undef x86_64
+#define x86_64 x86_64
+#endif
+
 #define YmakeRoot %(installdir)s
 
 #define LibSearch %(libs)s
