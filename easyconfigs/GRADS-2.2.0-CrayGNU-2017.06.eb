@@ -70,14 +70,14 @@ osdependencies = [
 ]
 
 builddependencies = [
-    ('cray-netcdf/4.4.1.1.3', EXTERNAL_MODULE),
+    ('cray-netcdf/4.4.1.1.6', EXTERNAL_MODULE),
     ('UDUNITS', '1.12.11'),
     ('JasPer', '2.0.12'),
     ('zlib', '1.2.11'),
 ]
 
 dependencies = [
-    ('cray-hdf5/1.10.0.3', EXTERNAL_MODULE),
+    ('cray-hdf5/1.10.1.1', EXTERNAL_MODULE),
     ('cairo', '1.14.10'),
     ('libpng', '1.6.32'),
     ('libgd', '2.2.5'),

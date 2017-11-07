@@ -19,7 +19,8 @@ checksums = ['e8badc507b9b774801288d1c2d59eb79ab31b004df4858d0674ed0d87dfc91be']
 osdependencies = [('libX11-devel')]
 
 dependencies = [
-    ('cray-netcdf/4.4.1.1.3', EXTERNAL_MODULE),
+    ('cray-hdf5/1.10.1.1', EXTERNAL_MODULE),
+    ('cray-netcdf/4.4.1.1.6', EXTERNAL_MODULE),
     ('UDUNITS', '2.2.25'),
     ('libpng', '1.6.32'),
 ]

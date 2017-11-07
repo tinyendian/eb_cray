@@ -5,8 +5,11 @@ version = '1.23.1'
 
 homepage = 'https://software.ecmwf.int/wiki/display/GRIB/Home'
 description = """The ECMWF GRIB API is an application program interface accessible from C, FORTRAN and Python
- programs developed for encoding and decoding WMO FM-92 GRIB edition 1 and edition 2 messages. A useful set of
- command line tools is also provided to give quick access to GRIB messages."""
+programs developed for encoding and decoding WMO FM-92 GRIB edition 1 and edition 2 messages. A useful set of
+command line tools is also provided to give quick access to GRIB messages.
+
+Note that JPEG and Python support have been disabled for this build.
+"""
 
 toolchain = {'name': 'CrayIntel', 'version': '2017.06'}
 
@@ -20,7 +23,7 @@ osdependencies = [('cmake')]
 separate_build_dir = True
 
 # Build static libs (preferred on XC platform)
-configopts = '-DBUILD_SHARED_LIBS=OFF'
+configopts = '-DBUILD_SHARED_LIBS=OFF -DENABLE_PYTHON=OFF -DENABLE_JPG=OFF'
 
 runtest = 'check'
 

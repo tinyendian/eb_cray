@@ -19,7 +19,7 @@ osdependencies = [('cmake')]
 separate_build_dir = True
 
 # Missing dependency
-configopts = '-DJAS_ENABLE_OPENGL=off'
+configopts = '-DJAS_ENABLE_OPENGL=off -DJAS_ENABLE_DOC=off'
 
 runtest = 'test'
 
