@@ -2,7 +2,6 @@ easyblock = 'PythonPackage'
 
 name = 'SCons'
 version = '3.0.0'
-versionsuffix = '-Python-%(pyver)s'
 
 homepage = 'http://www.scons.org/'
 description = "SCons is a software construction tool."
