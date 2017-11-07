@@ -1,0 +1,30 @@
+# 
+name = 'splat'
+version = '1.0.3'
+
+homepage = 'http://niwa.co.nz'
+description = """Splat deploys (builds and installs) the components of heterogenous systems such as cylc suites, described by splat config files, into target directory trees."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+
+# must save tarball under s/splat/splat-1.0.3.tgz
+source_urls = ['file://s/splat']
+sources = ['splat-%(version)s.tar.gz']
+
+dependencies = [
+    ('Anaconda2', '4.2.0'),
+]
+
+easyblock = 'MakeCp'
+
+# This is a bit of a hack. The sharp sign (#) at the end is critical! prebuildopts 
+# are all the commands passed before make is invoked. splat does not use make 
+# so we're commenting out the make command. It's a no op command. 
+prebuildopts = ' #'
+
+runtest = False
+
+
+files_to_copy = ['bin','conf','doc','examples','lib']
+
+moduleclass = 'tools'
