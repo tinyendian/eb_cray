@@ -9,7 +9,7 @@ toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
 
 # must save tarball under s/splat/splat-1.0.3.tgz
 source_urls = ['file://s/splat']
-sources = ['splat-%(version)s.tar.gz']
+sources = ['splat-%(version)s.tgz']
 
 dependencies = [
     ('Anaconda2', '4.2.0'),
