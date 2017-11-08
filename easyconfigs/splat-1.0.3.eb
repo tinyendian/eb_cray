@@ -5,15 +5,12 @@ version = '1.0.3'
 homepage = 'http://niwa.co.nz'
 description = """Splat deploys (builds and installs) the components of heterogenous systems such as cylc suites, described by splat config files, into target directory trees."""
 
-toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+toolchain = {'name': 'dummy', 'version': 'dummy'}
 
 # must save tarball under s/splat/splat-1.0.3.tgz
 source_urls = ['file://s/splat']
 sources = ['splat-%(version)s.tgz']
-
-dependencies = [
-    ('Anaconda2', '4.2.0'),
-]
+checksums = ['c3edf9923511f6696136f6cd67001b1027569d320260ce474abfa31be4355e3e']
 
 easyblock = 'MakeCp'
 

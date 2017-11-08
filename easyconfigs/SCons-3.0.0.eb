@@ -6,12 +6,11 @@ version = '3.0.0'
 homepage = 'http://www.scons.org/'
 description = "SCons is a software construction tool."
 
-toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+toolchain = {'name': 'dummy', 'version': 'dummy'}
 
-sources = [SOURCELOWER_TAR_GZ]
 source_urls = ['http://prdownloads.sourceforge.net/%(namelower)s']
-
-dependencies = [ ('Anaconda2', '4.2.0'), ]
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['0f532f405b98c60b731d231b3c503ab5bf47d89a6f66f70cb62c9249e9f45216']
 
 sanity_check_paths = {
     'files': ['bin/scons', 'bin/scons-time', 'bin/sconsign'],
