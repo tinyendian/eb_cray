@@ -1,0 +1,28 @@
+# author: alexander.pletzer@nesi.org.nz
+easyblock = 'PythonPackage'
+
+name = 'mpi4py'
+version = '2.0.0'
+
+homepage = 'https://bitbucket.org/mpi4py/'
+description = """
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+
+source_urls = ['https://bitbucket.org/mpi4py/mpi4py/downloads/']
+sources = ['%(name)s-%(version)s.tar.gz']
+patches = ['mpi4py-2.0.0.patch']
+checksums = ['4f7d8126d7367c239fd67615680990e3']
+
+dependencies = [
+    ('Anaconda2', '4.2.0'),
+]
+
+sanity_check_paths = {
+        'files': [],
+        'dirs': [('lib',)],
+}
+
+moduleclass = 'devel'
+

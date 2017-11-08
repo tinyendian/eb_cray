@@ -1,0 +1,22 @@
+# author: alexander.pletzer@nesi.org.nz
+easyblock = 'PythonPackage'
+
+name = 'PSyclone'
+version = '1.5.0'
+
+homepage = 'https://github.com/stfc/PSyclone'
+description = """Domain-specific compiler for Finite Difference/Volume/Element Earth-system models in Fortran
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+
+source_urls = ['https://github.com/stfc/PSyclone/archive']
+sources = ['%(version)s.tar.gz']
+checksums = ['d84643ad51e737e4fd0b6cadd7c92aff']
+
+dependencies = [
+    ('Anaconda2', '4.2.0'),
+]
+
+moduleclass = 'lang'
+
