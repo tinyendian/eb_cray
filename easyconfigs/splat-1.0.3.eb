@@ -1,4 +1,6 @@
-# 
+# Jorge Bornemann
+import os.path
+
 name = 'splat'
 version = '1.0.3'
 
@@ -8,9 +10,14 @@ description = """Splat deploys (builds and installs) the components of heterogen
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 
 # must save tarball under s/splat/splat-1.0.3.tgz
+if not os.path.isfile('s/splat/splat-1.0.3.tgz'):
+    msg = 'ERROR: You need to fetch splat-%(version)s.tgz from local niwa gitlab project splat-eb and save the tarball under "s/splat"' % {'version': version}
+    print msg
+    raise RuntimeError, msg
 source_urls = ['file://s/splat']
 sources = ['splat-%(version)s.tgz']
 checksums = ['c3edf9923511f6696136f6cd67001b1027569d320260ce474abfa31be4355e3e']
+
 
 easyblock = 'MakeCp'
 
@@ -20,7 +27,6 @@ easyblock = 'MakeCp'
 prebuildopts = ' #'
 
 runtest = False
-
 
 files_to_copy = ['bin','conf','doc','examples','lib']
 
