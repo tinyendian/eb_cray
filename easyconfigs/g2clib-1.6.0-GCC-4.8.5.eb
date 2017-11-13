@@ -1,0 +1,30 @@
+name = 'g2clib'
+version = '1.6.0'
+
+homepage = 'http://www.nco.ncep.noaa.gov/pmb/codes/GRIB2/'
+description = """Library contains GRIB2 encoder/decoder ('C' version)."""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+
+source_urls = [homepage]
+sources = ['%(name)s-%(version)s.tar']
+patches = ['%(name)s-%(version)s-jpeg2000_inmem.patch']
+checksums = [
+    'afec1ea29979b84369d0f46f305ed12f73f1450ec2db737664ec7f75c1163add',  # g2clib-1.6.0.tar
+    'ffa5a578ad8f113e92cd6f8be3404cce288e541c54c93254b3558bac28348512',  # g2clib-1.6.0-jpeg2000_inmem.patch
+]
+
+builddependencies = [
+    ('JasPer', '2.0.12'),
+    ('libpng', '1.6.32')
+]
+
+# Build system does not support parallel builds
+parallel = 1
+
+sanity_check_paths = {
+    'files': ['lib/libg2c_v%(version)s.a'],
+    'dirs': ['include'],
+}
+
+moduleclass = 'data'

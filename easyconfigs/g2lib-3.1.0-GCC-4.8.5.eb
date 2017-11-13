@@ -1,0 +1,40 @@
+name = 'g2lib'
+version = '3.1.0'
+
+homepage = 'http://www.nco.ncep.noaa.gov/pmb/codes/GRIB2/'
+description = """Library contains GRIB2 encoder/decoder and search/indexing routines."""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+
+source_urls = [homepage]
+sources = ['%(name)s-%(version)s.tar']
+
+# Change order of compilation to fix dependency issue
+# Comment out unsupported jpeg struct member
+patches = ['%(name)s-%(version)s-makefile.patch', '%(name)s-%(version)s-jpeg2000_inmem.patch']
+
+checksums = [
+    '8a2de259de82094c5867f8d7945359f211592a4a503f9ed65dc60469337414e7',  # g2lib-3.1.0.tar
+    '4688f9bf4b85de5544e66841fb135534328f8a25185f8b9e0fa37cb560075992',  # g2lib-3.1.0-makefile.patch
+    '9d6904aa131bf087ea6db3ce4fcb731dcf38e35d021a1dadbac55ae7dbadcd42',  # g2lib-3.1.0-jpeg2000_inmem.patch
+]
+
+builddependencies = [
+    ('JasPer', '2.0.12'),
+    ('libpng', '1.6.32')
+]
+
+# Build setup for gfortran on Linux as recommended in "makefile"
+# Set "-fno-range-check" to work around integer overflow error message
+buildopts = 'FC=ftn CC=cc CPP="cpp -P -C" FFLAGS="-O3 -I. -fno-range-check" '
+buildopts += 'CFLAGS="-O3 -DLINUX -D__64BIT__ -I$EBROOTJASPER/include -I$EBROOTLIBPNG/include"'
+
+# Build system does not support parallel builds
+parallel = 1
+
+sanity_check_paths = {
+    'files': ['lib/libg2.a'],
+    'dirs': [],
+}
+
+moduleclass = 'data'
