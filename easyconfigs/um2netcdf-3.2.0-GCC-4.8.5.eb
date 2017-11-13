@@ -1,0 +1,32 @@
+easyblock = 'ConfigureMake'
+
+name = 'um2netcdf'
+version = '3.2.0'
+
+homepage = 'http://www.niwa.co.nz'
+description = """um2netcdf converts Unified Model output files in
+fieldsfile format into netCDF format."""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['39ca62907ac4dca13c4bad89423495c6c9511946f77f39b8ece69da021ec76f7']
+
+dependencies = [
+    ('netcdf/gcc/64/4.4.0', EXTERNAL_MODULE),
+]
+
+# No configure step needed
+skipsteps = ['configure']
+
+prebuildopts = 'cp config/x86_linux_gcc.mk config/x86_linux_cc.mk; cd src;'
+preinstallopts = 'export BINDIR=%(installdir)s/bin; cd src;'
+
+osdependencies = [('libxml2-devel')]
+
+sanity_check_paths = {
+    'files': ["bin/um2netcdf"],
+    'dirs': [],
+}
+
+moduleclass = 'vis'
