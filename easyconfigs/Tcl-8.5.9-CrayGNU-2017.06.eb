@@ -20,7 +20,7 @@ start_dir = 'unix'
 dependencies = [
 ]
 
-configopts = '--enable-static --enable-threads EXTRA_INSTALL="install-private-headers"'
+configopts = '--enable-shared=no --enable-threads EXTRA_INSTALL="install-private-headers"'
 
 runtest = 'test'
 
