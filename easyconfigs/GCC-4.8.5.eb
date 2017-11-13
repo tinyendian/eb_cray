@@ -1,0 +1,11 @@
+easyblock = "Toolchain"
+
+name = 'GCC'
+version = '4.8.5'
+
+homepage = '(none)'
+description = """GNU Compiler Collection (GCC) based compiler toolchain."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+moduleclass = 'toolchain'
