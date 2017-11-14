@@ -4,7 +4,7 @@ version = '3.3.0'
 homepage = 'http://www.r-project.org/'
 description = """R is a free software environment for statistical computing and graphics."""
 
-toolchain = {'name': 'intel', 'version': '2015a'}
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
 toolchainopts = {'precise': True, 'opt': True}  # 'openmp' is enabled in R by default
 
 sources = [SOURCE_TAR_GZ]
@@ -17,23 +17,23 @@ configopts += " --with-recommended-packages=no"
 osdependencies = [('openssl-devel', 'libssl-dev')]
 
 dependencies = [
-    ('bzip2', '1.0.6'),
-    ('XZ', '5.2.2'),
-    ('PCRE', '8.38'),
-    ('libreadline', '6.3'),
-    ('ncurses', '5.9'),
-    ('libpng', '1.6.17'),  # for plotting  # or 1.6.12
+#    ('bzip2', '1.0.6'),
+#    ('XZ', '5.2.2'),
+#    ('PCRE', '8.38'),
+#    ('libreadline', '6.3'),
+#    ('ncurses', '5.9'),
+#    ('libpng', '1.6.17'),  # for plotting  # or 1.6.12
 #    ('libxml2', '2.9.2'),  # for XML, via GDAL though
-    ('SQLite', '3.10.0'),  # for RSQLite
+#    ('SQLite', '3.10.0'),  # for RSQLite
 #    ('cURL', '7.43.0'),    # for RCurl, via GDAL though
-    ('Java', '1.8.0_40', '', True),  # Java bindings are built if Java is found, might as well provide it
-    ('GEOS', '3.5.0'),     # for rgeos, which is for spacetime.
-    ('GDAL', '2.0.0'),     # for rgdal
-    ('PROJ4', '4.9.1'),    # for rgdal
+#    ('Java', '1.8.0_40', '', True),  # Java bindings are built if Java is found, might as well provide it
+#    ('GEOS', '3.5.0'),     # for rgeos, which is for spacetime.
+#    ('GDAL', '2.0.0'),     # for rgdal
+#    ('PROJ4', '4.9.1'),    # for rgdal
 #    ('CUDA', '7.5.18', '', True), # for gmatrix
-    ('JAGS', '4.2.0'),     # for rjags
-    ('NLopt', '2.4.2'),    # for nloptr
-    ('OpenSSL', '1.0.1t'), # for openssl -> base64 -> bioconductor
+#    ('JAGS', '4.2.0'),     # for rjags
+#    ('NLopt', '2.4.2'),    # for nloptr
+#    ('OpenSSL', '1.0.1t'), # for openssl -> base64 -> bioconductor
 ]
 
 
@@ -75,7 +75,7 @@ exts_list = [
 #    ('gmatrix', '0.3', ext_options),
 
     ('Rmpi', '0.6-5', ext_options_extra(patches=['Rmpi-0.6-5_impi5.patch'])),
-    ('snow', '0.3-13', ext_options_extra(patches = ['snowfixedmpi.patch'])),
+#    ('snow', '0.3-13', ext_options_extra(patches = ['snowfixedmpi.patch'])),
     ('snowfall', '1.84-6.1', ext_options),
     ('iterators', '1.0.8', ext_options),
     ('codetools', '0.2-14', ext_options),
@@ -280,10 +280,10 @@ exts_list = [
     # Programming with Big Data in R (MPI)
     ('pbdMPI', '0.3-1', ext_options),
     ('pbdSLAP', '0.2-1', ext_options),
-    ('pbdBASE', '0.4-3', ext_options_extra(patches=['pbdBASE-02.3-0_ignore-BI_COMM_GLOBAL-for-intel-mpi.patch'])),
+    #('pbdBASE', '0.4-3', ext_options_extra(patches=['pbdBASE-02.3-0_ignore-BI_COMM_GLOBAL-for-intel-mpi.patch'])),
     ('pbdDMAT', '0.4-0', ext_options),
 
-    ('BH', '1.60.0-2', ext_options),   # Boost headers for rstan
+    #('BH', '1.60.0-2', ext_options),   # Boost headers for rstan
     ('StanHeaders', '2.9.0', ext_options),
     ('rstan', '2.9.0-3', ext_options),
 ]
