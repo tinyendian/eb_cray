@@ -4,24 +4,24 @@ easyblock = 'MakeCp'
 
 name = 'NAMD'
 version = '2.12'
-versionsuffix = '-gni'
+versionsuffix = '-mpi'
 
 homepage = 'http://www.ks.uiuc.edu/Research/namd/'
 description = """NAMD is a parallel molecular dynamics code designed for high-performance simulation of large biomolecular systems."""
 
-toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+toolchain = {'name': 'CrayIntel', 'version': '2017.06'}
 toolchainopts = {'dynamic': False}
 
 sources = ['NAMD_%(version)s_Source.tar.gz']
 
-prebuildopts = ' ./config Linux-x86_64-g++ Eos --tcl-prefix $EBROOTTCL --charm-base $EBROOTCHARMPLUSPLUS --charm-arch "" --cc cc --cxx CC --cxx-opts  "-std=c++11 $CRAY_UGNI_POST_LINK_OPTS -lugni $CRAY_PMI_POST_LINK_OPTS -lpmi" && '
+prebuildopts = ' ./config Linux-x86_64-g++ Eos --tcl-prefix $EBROOTTCL --charm-base $EBROOTCHARMPLUSPLUS --charm-arch "" --cc cc --cxx CC --cxx-opts  "-std=c++11 $CRAY_PMI_POST_LINK_OPTS -lpmi" && '
 prebuildopts += ' cd Linux-x86_64-g++ && '
 
 builddependencies = [
     ('fftw/2.1.5.9', EXTERNAL_MODULE),
     ('craype-hugepages8M', EXTERNAL_MODULE),
     ('rca', EXTERNAL_MODULE),
-    ('Charm++', '6.8.0', 'gni'), 
+    ('Charm++', '6.8.0', 'mpi'), 
     ('Tcl', '8.5.9'),
 ]
 

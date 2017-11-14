@@ -9,7 +9,7 @@ versionsuffix = '-gni'
 homepage = 'http://www.ks.uiuc.edu/Research/namd/'
 description = """NAMD is a parallel molecular dynamics code designed for high-performance simulation of large biomolecular systems."""
 
-toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+toolchain = {'name': 'CrayIntel', 'version': '2017.06'}
 toolchainopts = {'dynamic': False}
 
 sources = ['NAMD_%(version)s_Source.tar.gz']
