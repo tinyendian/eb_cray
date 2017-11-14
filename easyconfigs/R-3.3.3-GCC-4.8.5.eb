@@ -20,7 +20,7 @@ dependencies = [
 #    ('bzip2', '1.0.6'),
 #    ('XZ', '5.2.2'),
 #    ('PCRE', '8.38'),
-#    ('libreadline', '6.3'),
+     ('libreadline', '6.3'),
 #    ('ncurses', '5.9'),
 #    ('libpng', '1.6.17'),  # for plotting  # or 1.6.12
 #    ('libxml2', '2.9.2'),  # for XML, via GDAL though
