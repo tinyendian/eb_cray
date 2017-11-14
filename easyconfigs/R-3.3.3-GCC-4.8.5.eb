@@ -17,12 +17,13 @@ configopts += " --with-recommended-packages=no"
 osdependencies = [('openssl-devel', 'libssl-dev')]
 
 dependencies = [
-#    ('bzip2', '1.0.6'),
+     ('bzip2', '1.0.6'),
 #    ('XZ', '5.2.2'),
 #    ('PCRE', '8.38'),
      ('libreadline', '6.3'),
-#    ('ncurses', '5.9'),
-#    ('libpng', '1.6.17'),  # for plotting  # or 1.6.12
+     ('ncurses', '6.0'),
+     ('cURL', '7.52.1'),
+     ('libpng', '1.6.32'),  # for plotting  # or 1.6.12
 #    ('libxml2', '2.9.2'),  # for XML, via GDAL though
 #    ('SQLite', '3.10.0'),  # for RSQLite
 #    ('cURL', '7.43.0'),    # for RCurl, via GDAL though
