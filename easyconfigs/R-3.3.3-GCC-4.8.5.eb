@@ -25,11 +25,11 @@ dependencies = [
      ('cURL', '7.52.1'),
      ('libpng', '1.6.32'),  # for plotting  # or 1.6.12
      ('libxml2', '2.9.4'),  # for XML, via GDAL though
-     ('SQLite', '3.16.2'),  # for RSQLite
+#    ('SQLite', '3.16.2'),  # for RSQLite
 #    ('Java', '1.8.0_40', '', True),  # Java bindings are built if Java is found, might as well provide it
      ('GEOS', '3.6.2'),     # for rgeos, which is for spacetime.
 #    ('GDAL', '2.0.0'),     # for rgdal
-     ('PROJ4', '4.9.3'),    # for rgdal
+     ('PROJ', '4.9.3'),    # for rgdal
 #    ('CUDA', '7.5.18', '', True), # for gmatrix
 #    ('JAGS', '4.2.0'),     # for rjags
 #    ('NLopt', '2.4.2'),    # for nloptr
