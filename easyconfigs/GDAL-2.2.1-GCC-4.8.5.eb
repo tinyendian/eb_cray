@@ -1,0 +1,55 @@
+easyblock = 'ConfigureMake'
+
+name = 'GDAL'
+version = '2.2.1'
+
+homepage = 'http://www.gdal.org/'
+description = """GDAL is a translator library for raster geospatial data formats that is released under an X/MIT style
+ Open Source license by the Open Source Geospatial Foundation. As a library, it presents a single abstract data model
+ to the calling application for all supported formats. It also comes with a variety of useful commandline utilities for
+ data translation and processing."""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+
+source_urls = ['http://download.osgeo.org/gdal/%(version)s/']
+sources = [SOURCELOWER_TAR_XZ]
+patches = ['GDAL-%(version)s_fix-uchar-definition.patch']
+checksums = [
+    '927098d54083ac919a497f787b835b099e9a194f2e5444dbff901f7426b86066',  # gdal-2.2.1.tar.xz
+    '12daef0f16ebe438aeedc00b9eb2d35fdc5d39decffb567953459492a2a0fb5f',  # GDAL-2.2.1_fix-uchar-definition.patch
+]
+
+osdependencies = [
+    ('zlib-devel'),
+    ('expat'),
+    ('curl'),
+    ('libxml2-devel'),
+]
+
+dependencies = [
+    ('hdf5/1.10.0', EXTERNAL_MODULE),
+    ('netcdf/gcc/64/4.4.0', EXTERNAL_MODULE),
+    ('GEOS', '3.6.2'),
+    ('JasPer', '2.0.12'),
+    ('libpng', '1.6.32'),
+    ('HDF', '4.2.13'),
+    ('SQLite', '3.16.2'),
+]
+
+# Hardcode search paths for Cray modules
+configopts = '--with-hdf5=$EBROOTHDF5 --with-netcdf=$EBROOTNETCDF LDFLAGS="-Wl,-rpath=$EBROOTHDF5/lib -Wl,-rpath=$EBROOTNETCDF/lib"'
+
+# GDAL does not seem to have any tests
+# runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['bin/gdal%s' % x for x in ('addo', 'buildvrt', '-config', '_contour', 'dem', 'enhance',
+              '_grid', 'info', 'locationinfo', 'manage', '_rasterize', 'server',
+              'srsinfo', 'tindex', 'transform', '_translate', 'warp')] +
+             ['bin/gnmanalyse', 'bin/gnmmanage', 'bin/nearblack', 'bin/ogr2ogr',
+              'bin/ogrinfo', 'bin/ogrlineref', 'bin/ogrtindex', 'bin/testepsg'] +
+             ['lib/libgdal.a', 'lib/libgdal.%s' % SHLIB_EXT],
+    'dirs': ['include']
+}
+
+moduleclass = 'data'
