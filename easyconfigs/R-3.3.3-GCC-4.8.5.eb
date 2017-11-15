@@ -1,5 +1,5 @@
 name = 'R'
-version = '3.3.0'
+version = '3.3.3'
 
 homepage = 'http://www.r-project.org/'
 description = """R is a free software environment for statistical computing and graphics."""
@@ -18,7 +18,7 @@ configopts = "--enable-threads --with-pic --enable-R-shlib"
 #osdependencies = [('openssl-devel', 'libssl-dev')]
 
 dependencies = [
-     ('zlib','1.2.9'),
+     ('zlib','1.2.11'),
      ('bzip2', '1.0.6'),
      ('XZ', '5.2.3'),
      ('PCRE', '8.40'),

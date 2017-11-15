@@ -16,7 +16,7 @@ source_urls = [
 sources = [SOURCELOWER_TAR_GZ]
 
 dependencies = [
-    ('zlib', '1.2.9'),
+    ('zlib', '1.2.11'),
     ('XZ', '5.2.3'),
 ]
 

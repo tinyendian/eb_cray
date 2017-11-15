@@ -11,7 +11,7 @@ source_urls = ['http://www.cpan.org/src/%(version_major)s.0']
 sources = [SOURCELOWER_TAR_GZ]
 checksums = ['e6c185c9b09bdb3f1b13f678999050c639859a7ef39c8cad418448075f5918af']
 
-#builddependencies = [('binutils', '2.27')]
+dependencies = [('Subversion', '1.9.7')]
 
 # !! order of extensions is important !!
 # extensions updated on April 4th 2017
@@ -20,6 +20,11 @@ exts_list = [
         'source_tmpl': 'Config-General-%(version)s.tar.gz',
         'source_urls': ['https://cpan.metacpan.org/authors/id/T/TL/TLINDEN'],
         'checksums': ['0a9bf977b8aabe76343e88095d2296c8a422410fd2a05a1901f2b20e2e1f6fad'],
+    }),
+    ('Config::IniFiles', '2.94', {
+        'source_tmpl': 'Config-IniFiles-%(version)s.tar.gz',
+        'source_urls': ['http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF'],
+        'checksums': ['d6d38a416da79de874c5f1825221f22e972ad500b6527d190cc6e9ebc45194b4'],
     }),
     ('File::Listing', '6.04', {
         'source_tmpl': 'File-Listing-%(version)s.tar.gz',
@@ -1125,6 +1130,16 @@ exts_list = [
         'source_tmpl': 'Statistics-Basic-1.6611.tar.gz',
         'source_urls': ['http://search.cpan.org/CPAN/authors/id/J/JE/JETTERO/'],
         'checksums': ['6855ce5615fd3e1af4cfc451a9bf44ff29a3140b4e7130034f1f0af2511a94fb'],
+    }),
+    ('SVN::Client', '1.8.11.0', {
+        'source_tmpl': 'Alien-SVN-v1.8.11.0.tar.gz',
+        'source_urls': ['http://search.cpan.org/CPAN/authors/id/M/MS/MSCHWERN'],
+        'checksums': ['acf8ebce1cb6958ef24611a453abee32b8e4dfe767563834362891ef3f30fc68'],
+    }),
+    ('XML::Parser', '2.44', {
+        'source_tmpl': 'XML-Parser-2.44.tar.gz',
+        'source_urls': ['http://search.cpan.org/CPAN/authors/id/T/TO/TODDR'],
+        'checksums': ['1ae9d07ee9c35326b3d9aad56eae71a6730a73a116b9fe9e8a4758b7cc033216'],
     }),
 ]
 
