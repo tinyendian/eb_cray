@@ -1,0 +1,49 @@
+# This file is an EasyBuild reciPY as per https://github.com/easybuilders/easybuild
+# Author: Ravi Tripathi
+# Email: ravi89@uab.edu
+#
+# Note: Adapted to Cray platform
+
+easyblock = 'ConfigureMake'
+
+name = 'ImageMagick'
+version = '7.0.7-11'
+
+homepage = 'http://www.imagemagick.org/'
+description = """ImageMagick is a software suite to create, edit, compose, or convert bitmap images"""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+
+source_urls = ['https://www.imagemagick.org/download/releases/']
+sources = [SOURCE_TAR_GZ]
+
+osdependencies = [
+    ('bzip2'),
+    ('libX11-devel'),
+    ('zlib-devel'),
+    ('fontconfig-devel'),
+    ('freetype-devel'),
+    ('libxml2-devel'),
+]
+
+dependencies = [
+    ('fftw3/openmpi/gcc/64/3.3.6', EXTERNAL_MODULE),
+    ('libpng', '1.6.32'),
+]
+
+# Cray module does not append PGK_CONFIG_PATH
+preconfigopts = 'export PKG_CONFIG_PATH=$EBROOTFFTW/lib/pkgconfig:$PKG_CONFIG_PATH; '
+
+runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['bin/animate', 'bin/compare', 'bin/composite',
+              'bin/conjure', 'bin/convert', 'bin/display', 'bin/identify',
+              'bin/import', 'bin/magick', 'bin/magick-script', 'bin/mogrify',
+              'bin/montage', 'bin/stream'],
+    'dirs': ['etc/%(name)s-%(version_major)s', 'include/%(name)s-%(version_major)s', 'lib', 'share'],
+}
+
+modextravars = {'MAGICK_HOME': '%(installdir)s'}
+
+moduleclass = 'vis'

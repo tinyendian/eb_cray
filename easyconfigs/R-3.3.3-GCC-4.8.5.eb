@@ -237,7 +237,7 @@ exts_list = [
     ('brew', '1.0-6', ext_options),
     ('base64enc', '0.1-3', ext_options),
  #  ('sendmailR', '1.2-1', ext_options),
-    ('BatchJobs', '1.6', ext_options),
+ #  ('BatchJobs', '1.6', ext_options),
 
     # For SNPhylo
 #    ('fastmatch', '1.0-4', ext_options),
@@ -286,8 +286,8 @@ exts_list = [
 #   ('pbdDMAT', '0.4-0', ext_options),
 
     #('BH', '1.60.0-2', ext_options),   # Boost headers for rstan
-    ('StanHeaders', '2.9.0', ext_options),
-    ('rstan', '2.9.0-3', ext_options),
+#   ('StanHeaders', '2.9.0', ext_options),
+#   ('rstan', '2.9.0-3', ext_options),
 ]
 
 moduleclass = 'lang'

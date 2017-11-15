@@ -1,0 +1,42 @@
+easyblock = 'ConfigureMake'
+
+name = 'HDF'
+version = '4.2.13'
+
+homepage = 'http://www.hdfgroup.org/products/hdf4/'
+
+description = """
+ HDF (also known as HDF4) is a library and multi-object file format for
+ storing and managing data between machines.
+"""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['http://www.hdfgroup.org/ftp/HDF/releases/HDF%(version)s/src/']
+checksums = ['be9813c1dc3712c2df977d4960e1f13f20f447dfa8c3ce53331d610c1f470483']
+
+osdependencies = [
+    ('zlib-devel')
+]
+
+dependencies = [
+    ('Szip', '2.1.1'),
+    ('libjpeg-turbo', '1.5.2'),
+]
+
+# Disable Fortran bindings to enable shared libraries
+configopts = ''
+configopts += '--with-szlib=$EBROOTSZIP '
+configopts += '--enable-shared --disable-fortran'
+
+# Tests run for a long time
+runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['lib/libdf.a', 'lib/libhdf4.settings', 'lib/libmfhdf.a',
+    'lib/libdf.%s' % SHLIB_EXT, 'lib/libmfhdf.%s' % SHLIB_EXT],
+    'dirs': ['bin', 'include'],
+}
+
+moduleclass = 'data'

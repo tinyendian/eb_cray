@@ -1,6 +1,7 @@
 # alexander.pletzer@nesi.org.nz 
 name = 'Charm++'
 version = '6.8.0'
+versionsuffix = 'mpi'
 
 homepage = 'http://charm.cs.illinois.edu/help'
 description = """An asynchronous message-driven C++ communication library targeted towards tightly coupled, high-performance parallel machines."""
@@ -13,6 +14,7 @@ sources = ['charm-%(version)s.tar.gz']
 
 dependencies = [
     ('craype-hugepages8M', EXTERNAL_MODULE),
+    ('rca', EXTERNAL_MODULE),
 ]
 
 easyblock = 'MakeCp'
@@ -23,12 +25,12 @@ os.environ['PE_PKGCONFIG_LIBS'] = 'cray-pmi:cray-ugni:' + os.environ['PE_PKGCONF
 
 # serial build
 parallel = 1
-charm_arch = 'gni-crayxc'
+charm_arch = 'mpi-crayxc'
 # This is a bit of a hack. The sharp sign (#) at the end is critical! prebuildopts 
 # are all the commands passed before make is invoked. Charm++ does not use make 
 # so we're passing the Charm++ commands followed by the comment sign # to inactivate
 # the make command. *** Be sure to module load craype-hugepages8M when building ***
-prebuildopts = './build %(namelower)s ' + charm_arch + ' --with-production -j8 --build-shared #'
+prebuildopts = './build %(namelower)s ' + charm_arch + ' --with-production -j8 #'
 
 runtest = False
 
