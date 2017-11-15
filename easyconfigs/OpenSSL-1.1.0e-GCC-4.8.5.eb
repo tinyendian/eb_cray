@@ -18,7 +18,7 @@ patches = [
 ]
 
 builddependencies = [('Perl', '5.24.1')]
-dependencies = [('zlib', '1.2.11')]
+dependencies = [('zlib', '1.2.9')]
 
 runtest = 'test'
 
