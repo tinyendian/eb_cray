@@ -16,7 +16,6 @@ toolchain = {'name': 'GCC', 'version': '4.8.5'}
 
 source_urls = ['https://www.imagemagick.org/download/releases/']
 sources = [SOURCE_TAR_GZ]
-# checksums = ['411bdb36d63b3202689dbdea481f49c05929705337ccb3960fc0e8b5bdad3812']
 
 osdependencies = [
     ('bzip2'),
