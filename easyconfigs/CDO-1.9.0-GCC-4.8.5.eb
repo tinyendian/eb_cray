@@ -1,0 +1,40 @@
+# Configuration file for building CDO-1.9.0 with CrayGNU compiler
+easyblock = 'ConfigureMake'
+
+name = 'CDO'
+version = '1.9.0'
+
+homepage = 'https://code.zmaw.de/projects/cdo'
+description = """CDO is a collection of command line Operators to manipulate and analyse Climate and NWP model Data."""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+toolchainopts = {'opt': True, 'pic': True}
+
+sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['https://code.mpimet.mpg.de/attachments/download/15187/']
+checksums = [
+    '2d88561b3b4a880df0422a62e5027e40'    # cdo-1.9.0.tar.gz
+]
+
+osdependencies = [('libxml2-devel')]
+
+dependencies = [
+    ('hdf5_18/1.8.18', EXTERNAL_MODULE),
+    ('netCDF', '4.5.0'),
+    ('fftw3/openmpi/gcc/64/3.3.6', EXTERNAL_MODULE),
+    ('UDUNITS', '2.2.25'),
+    ('PROJ', '4.9.3')
+]
+
+configopts = "--with-hdf5=$EBROOTHDF5 --with-netcdf=$EBROOTNETCDF --with-libxml2=yes "
+configopts += "--with-udunits2=$EBROOTUDUNITS --with-fftw3 --with-proj=$EBROOTPROJ "
+
+# Test currently fails
+# runtest = 'check'
+
+sanity_check_paths = {
+    'files': ["bin/cdo"],
+    'dirs': [],
+}
+
+moduleclass = 'data'

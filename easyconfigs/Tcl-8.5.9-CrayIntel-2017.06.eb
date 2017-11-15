@@ -1,0 +1,27 @@
+# alexander.pletzer@nesi.org.nz
+easyblock = 'ConfigureMake'
+
+name = 'Tcl'
+version = '8.5.9'
+
+homepage = 'http://www.tcl.tk/'
+description = """Tcl (Tool Command Language) is a very powerful but easy to learn dynamic programming language,
+ suitable for a very wide range of uses, including web and desktop applications, networking, administration, testing and many more."""
+
+toolchain = {'name': 'CrayIntel', 'version': '2017.06'}
+toolchainopts = {'opt': True, 'pic': True}
+
+source_urls = ['https://sourceforge.net/projects/tcl/files/Tcl/8.5.9/']
+sources = ['tcl%(version)s-src.tar.gz']
+checksums = ['8512d8db3233041dd68a81476906012a']
+
+start_dir = 'unix'
+
+dependencies = [
+]
+
+configopts = '--enable-shared=no --enable-threads EXTRA_INSTALL="install-private-headers"'
+
+runtest = 'test'
+
+moduleclass = 'lang'

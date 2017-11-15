@@ -1,0 +1,102 @@
+easyblock = 'ConfigureMake'
+
+name = 'GRADS'
+version = '2.2.0'
+
+# Abbreviated version needed for the URL
+version_short = version[0:-2]
+
+homepage = 'http://cola.gmu.edu/grads/'
+description = """The Grid Analysis and Display System (GrADS) is an
+interactive desktop tool that is used for easy access, manipulation,
+and visualization of earth science data."""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+
+source_urls = ['ftp://cola.gmu.edu/grads/' + version_short + '/']
+sources = ['grads-%(version)s-src.tar.gz']
+patches = ['GRADS-2.2.0-configure-png.patch']
+checksums = [
+    '1cb8cdb29da218bca5d4e2931eb2bc0c2e8a290b29540132ac1f2ad088857689',  # grads-2.2.0-src.tar.gz
+    '539957dc1a1bc6c8a9708d6f915f8f0fd19163e69f5e08c859d915aefc80d25d',  # GRADS-2.2.0-configure-png.patch
+]
+
+# The GrADS build system requires a number of workarounds:
+# - Dependent libraries need to be rounded up in the "supplibs"
+#   directory
+# - Dependend libraries should be static (support for shared
+#   libraries seems limited)
+# - The configure script seems to ignore flags, so we need to
+#   edit the Makefile
+
+preconfigopts = "mkdir -p supplibs/include; "
+preconfigopts += "mkdir -p supplibs/lib; "
+preconfigopts += "cp -r $EBROOTLIBPNG/include/* supplibs/include/; "
+preconfigopts += "cp -r $EBROOTLIBPNG/lib/* supplibs/lib/; "
+preconfigopts += "cp $EBROOTCAIRO/include/cairo/* supplibs/include/; "
+preconfigopts += "cp -r $EBROOTCAIRO/lib/* supplibs/lib/; "
+preconfigopts += "cp $EBROOTNETCDF/include/* supplibs/include/; "
+preconfigopts += "cp -r $EBROOTNETCDF/lib/* supplibs/lib/; "
+preconfigopts += "cp $EBROOTHDF5/include/* supplibs/include/; "
+preconfigopts += "cp -r $EBROOTHDF5/lib/* supplibs/lib/; "
+preconfigopts += "cp $EBROOTJASPER/include/jasper/* supplibs/include/; "
+preconfigopts += "cp -r $EBROOTJASPER/lib64/* supplibs/lib/; "
+preconfigopts += "cp $EBROOTUDUNITS/include/* supplibs/include/; "
+preconfigopts += "cp -r $EBROOTUDUNITS/lib/* supplibs/lib/; "
+preconfigopts += "cp -r $EBROOTCURL/include/* supplibs/include/; "
+preconfigopts += "cp -r $EBROOTCURL/lib/* supplibs/lib/; "
+preconfigopts += "cp -r $EBROOTNCURSES/include/* supplibs/include/; "
+preconfigopts += "cp -r $EBROOTNCURSES/lib/* supplibs/lib/; "
+preconfigopts += "cp -r $EBROOTLIBREADLINE/include/* supplibs/include/; "
+preconfigopts += "cp -r $EBROOTLIBREADLINE/lib/* supplibs/lib/; "
+
+# Static library /usr/lib64/libz.a does not seem to work with GrADS
+preconfigopts += "cp $EBROOTZLIB/include/* supplibs/include/; "
+preconfigopts += "cp -r $EBROOTZLIB/lib/* supplibs/lib/; "
+
+# preconfigopts += "cp /usr/lib64/libncurses.a supplibs/lib/; "
+preconfigopts += "cp -r /usr/include/freetype2 supplibs/include/; "
+preconfigopts += "export PKG_CONFIG_PATH=$PWD/supplibs/lib/pkgconfig:$PKG_CONFIG_PATH;  "
+
+
+# "supplibs" is the directory with dependend libraries that the
+# build system expects
+configopts = 'SUPPLIBS="supplibs" '
+prebuildopts = 'sed -ie "s|supplibs|$(pwd)/supplibs|" Makefile; '
+prebuildopts += 'sed -ie "s|supplibs|$(pwd)/supplibs|" src/Makefile; '
+prebuildopts += 'sed -ie "s|LDFLAGS = |LDFLAGS = -ldl -lcurl -lhdf5 -lhdf5_hl |" src/Makefile; '
+
+# Note: freetype dependency needed by cairo to satisfy build system
+osdependencies = [
+    ('libX11-devel'),
+    ('libxml2-devel'),
+    ('freetype-devel')
+]
+
+builddependencies = [
+    ('netCDF', '4.5.0'),
+    ('UDUNITS', '1.12.11'),
+    ('JasPer', '2.0.12'),
+    ('zlib', '1.2.11'),
+    ('cURL', '7.56.1'),
+]
+
+dependencies = [
+    ('hdf5_18/1.8.18', EXTERNAL_MODULE),
+    ('cairo', '1.14.10'),
+    ('libpng', '1.6.32'),
+    ('libgd', '2.2.5'),
+    ('libreadline', '7.0'),
+]
+
+runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['bin/bufrscan', 'bin/grads', 'bin/grib2scan', 'bin/gribmap', 'bin/gribscan', 'bin/stnmap',
+              'lib/libgxdCairo.%s' % SHLIB_EXT, 'lib/libgxdummy.%s' % SHLIB_EXT,
+              'lib/libgxdX11.%s' % SHLIB_EXT, 'lib/libgxpCairo.%s' % SHLIB_EXT,
+              'lib/libgxpGD.%s' % SHLIB_EXT],
+    'dirs': [],
+}
+
+moduleclass = 'data'

@@ -1,0 +1,40 @@
+easyblock = 'ConfigureMake'
+
+name = 'NCVIEW'
+version = '2.1.8'
+
+homepage = "http://meteora.ucsd.edu/~pierce/ncview_home_page.html"
+description = """Ncview is a visual browser for netCDF format files.
+Typically you would use ncview to get a quick and easy, push-button
+look at your netCDF files. You can view simple movies of the data,
+view along various dimensions, take a look at the actual data values,
+change color maps, invert the data, etc."""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+
+source_urls = ['ftp://cirrus.ucsd.edu/pub/ncview/']
+sources = ['ncview-%(version)s.tar.gz']
+checksums = ['e8badc507b9b774801288d1c2d59eb79ab31b004df4858d0674ed0d87dfc91be']
+
+osdependencies = [('libX11-devel')]
+
+dependencies = [
+    ('netcdf/gcc/64/4.4.0', EXTERNAL_MODULE),
+    ('UDUNITS', '2.2.25'),
+    ('libpng', '1.6.32'),
+    ('libXaw', '1.0.12'),
+]
+
+# Ensure correct dynamic linking of libpng
+configopts = '--with-png_incdir=$EBROOTLIBPNG/include --with-png_libdir=$EBROOTLIBPNG/lib '
+configopts += 'LDFLAGS="-L$EBROOTLIBPNG/lib -Wl,-rpath=$EBROOTLIBPNG/lib"'
+
+# Does not seem to have any tests
+# runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['bin/ncview'],
+    'dirs': ['bin'],
+}
+
+moduleclass = 'vis'
