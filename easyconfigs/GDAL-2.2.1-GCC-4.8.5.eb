@@ -22,31 +22,18 @@ checksums = [
 osdependencies = [
     ('zlib-devel'),
     ('expat'),
-<<<<<<< HEAD
-    ('curl'),
-    ('libxml2-devel'),
-]
-
-dependencies = [
-    ('hdf5/1.10.0', EXTERNAL_MODULE),
-=======
     ('libxml2-devel'),
     ('sqlite-devel')
 ]
 
 dependencies = [
     ('hdf5_18/1.8.18', EXTERNAL_MODULE),
->>>>>>> 07723e675608820ea71727f0d1c85cd949b4d6b5
     ('netcdf/gcc/64/4.4.0', EXTERNAL_MODULE),
     ('GEOS', '3.6.2'),
     ('JasPer', '2.0.12'),
     ('libpng', '1.6.32'),
     ('HDF', '4.2.13'),
-<<<<<<< HEAD
-    ('SQLite', '3.16.2'),
-=======
     ('cURL', '7.56.1'),
->>>>>>> 07723e675608820ea71727f0d1c85cd949b4d6b5
 ]
 
 # Hardcode search paths for Cray modules
