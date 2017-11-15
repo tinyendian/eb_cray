@@ -1,6 +1,7 @@
 # alexander.pletzer@nesi.org.nz 
 name = 'Charm++'
 version = '6.8.0'
+versionsuffix = 'mpi'
 
 homepage = 'http://charm.cs.illinois.edu/help'
 description = """An asynchronous message-driven C++ communication library targeted towards tightly coupled, high-performance parallel machines."""
