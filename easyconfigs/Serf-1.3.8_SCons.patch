@@ -1,0 +1,24 @@
+--- SConstruct	2017-11-15 06:26:34.645723000 +0000
++++ SConstruct	2017-11-15 06:27:56.357661659 +0000
+@@ -176,9 +176,9 @@
+ # HANDLING OF OPTION VARIABLES
+ 
+ unknown = opts.UnknownVariables()
+-if unknown:
+-  print 'Unknown variables:', ', '.join(unknown.keys())
+-  Exit(1)
++# if unknown:
++#   print 'Unknown variables:', ', '.join(unknown.keys())
++#   Exit(1)
+ 
+ apr = str(env['APR'])
+ apu = str(env['APU'])
+@@ -437,6 +437,7 @@
+ 
+ env.AlwaysBuild(env.Alias('check', TEST_EXES, sys.executable + ' build/check.py',
+-                          ENV={'PATH' : os.environ['PATH']}))
++                          ENV={'PATH' : os.environ['PATH'],
++                               'LD_LIBRARY_PATH' : os.environ['LD_LIBRARY_PATH']}))
+ 
+ # Find the (dynamic) library in this directory
+ tenv.Replace(RPATH=thisdir)
