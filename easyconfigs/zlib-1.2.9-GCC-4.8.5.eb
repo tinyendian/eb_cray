@@ -1,0 +1,27 @@
+easyblock = 'ConfigureMake'
+
+name = 'zlib'
+version = '1.2.9'
+
+homepage = 'http://www.zlib.net/'
+description = """zlib is designed to be a free, general-purpose, legally unencumbered -- that is,
+ not covered by any patents -- lossless data-compression library for use on virtually any
+ computer hardware and operating system.
+
+Note: Use this module only if a static version of the zlib library is explicitly
+      needed, a shared version is provided with the standard libraries.
+"""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+
+source_urls = ['https://sourceforge.net/projects/libpng/files/zlib/1.2.9/']
+sources = [SOURCELOWER_TAR_GZ]
+
+runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['include/zconf.h', 'include/zlib.h', 'lib/libz.a', 'lib/libz.%s' % SHLIB_EXT],
+    'dirs': [],
+}
+
+moduleclass = 'lib'

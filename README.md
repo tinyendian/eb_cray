@@ -19,10 +19,14 @@ python bootstrap_eb.py $EASYBUILD_PREFIX
 
  3. Put this in your .bashrc
 ```
+export EASYBUILD_PREFIX=$HOME/easybuild
+
 export EASYBUILD_MODULES_TOOL=EnvironmentModulesC
 export EASYBUILD_MODULE_SYNTAX=Tcl
-export EASYBUILD_PREFIX=$HOME/easybuild
+
+# only on XC
 export EASYBUILD_OPTARCH=broadwell
+
 module use $EASYBUILD_PREFIX/modules/all
 module load EasyBuild
 ```
