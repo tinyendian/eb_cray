@@ -1,0 +1,24 @@
+name = "JAGS"
+version = "4.2.0"
+homepage = "http://mcmc-jags.sourceforge.net"
+description = """Just Another Gibbs Sampler - a program for the statistical analysis of Bayesian hierarchical models by Markov Chain Monte Carlo."""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+toolchainopts = {}
+
+sources = ['%(name)s-%(version)s.tar.gz']
+source_urls = [('http://sourceforge.net/projects/mcmc-jags/files/JAGS/%s.x/Source/' % version[0], 'download')]
+
+easyblock = 'ConfigureMake'
+
+dependencies = [
+ ('ATLAS', '3.10.2',),
+]
+
+sanity_check_paths = {
+    'files': ["bin/jags"],
+    'dirs': ["libexec"]
+}
+
+moduleclass = 'math'
+
