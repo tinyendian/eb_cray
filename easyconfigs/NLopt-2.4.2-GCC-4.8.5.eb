@@ -1,0 +1,23 @@
+name = 'NLopt'
+version = '2.4.2'
+
+homepage = 'http://ab-initio.mit.edu/wiki/index.php/NLopt'
+description = "NLopt is a free/open-source library for nonlinear optimization, providing a common interface for a number of different free optimization routines available online as well as original implementations of various other algorithms"
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+
+toolchainopts = {'optarch': True}
+configopts = "--with-pic"
+
+source_urls = ['http://ab-initio.mit.edu/nlopt/']
+sources = ['nlopt-%s.tar.gz' % (version)]
+
+easyblock = 'ConfigureMake'
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib', 'include', 'share']
+}
+
+moduleclass = 'lib'
+
