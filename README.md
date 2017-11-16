@@ -24,8 +24,9 @@ export EASYBUILD_PREFIX=$HOME/easybuild
 export EASYBUILD_MODULES_TOOL=EnvironmentModulesC
 export EASYBUILD_MODULE_SYNTAX=Tcl
 
-# only on XC
-export EASYBUILD_OPTARCH=broadwell
+if hostnamectl | grep -q SUSE; then
+  export EASYBUILD_OPTARCH=broadwell
+fi
 
 module use $EASYBUILD_PREFIX/modules/all
 module load EasyBuild
