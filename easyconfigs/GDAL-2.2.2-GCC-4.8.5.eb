@@ -22,7 +22,7 @@ sources = [SOURCELOWER_TAR_XZ]
 
 dependencies = [
     ('expat', '2.2.5'),
- #   ('JasPer', '1.900.29'),         # pulls in libjpeg-turbo
+    ('JasPer', '2.0.12'),           # pulls in libjpeg-turbo
     ('KEALib', '1.4.6'),            # pulls in HDF5
     ('libgeotiff', '1.4.2'),        # pulls in libTIFF and PROJ
     ('libpng', '1.6.32'),           # pulls in zlib
@@ -30,7 +30,7 @@ dependencies = [
     ('libxml2', '2.9.4'),           # pulls in zlib (again)
     ('netcdf/gcc/64/4.4.0', EXTERNAL_MODULE),
     ('PCRE', '8.40'),
- #   ('PostgreSQL', '9.6.2'),        # pulls in libreadline and zlib (again)
+    ('PostgreSQL', '9.6.2'),        # pulls in libreadline and zlib (again)
     ('cURL', '7.56.1'),
 ]
 
