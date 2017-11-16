@@ -1,5 +1,5 @@
 name = 'R'
-version = '3.3.3'
+version = '3.4.2'
 
 homepage = 'http://www.r-project.org/'
 description = """R is a free software environment for statistical computing and graphics."""
@@ -30,7 +30,7 @@ dependencies = [
 #    ('SQLite', '3.16.2'),  # for RSQLite
 #    ('Java', '1.8.0_40', '', True),  # Java bindings are built if Java is found, might as well provide it
      ('GEOS', '3.6.2'),     # for rgeos, which is for spacetime.
-#    ('GDAL', '2.0.0'),     # for rgdal
+     ('GDAL', '2.2.1'),     # for rgdal
      ('PROJ', '4.9.3'),    # for rgdal
 #    ('CUDA', '7.5.18', '', True), # for gmatrix
 #    ('JAGS', '4.2.0'),     # for rjags
@@ -109,7 +109,7 @@ exts_list = [
     ('DEoptimR', '1.0-4', ext_options),
     ('robustbase', '0.92-5', ext_options),
     ('sp', '1.2-3', ext_options),
- #   ('rgdal', '1.1-10', ext_options),
+    ('rgdal', '1.1-10', ext_options),
     ('raster', '2.5-2', ext_options),
     ('dismo', '1.0-15', ext_options),
     ('zoo', '1.7-13', ext_options),
