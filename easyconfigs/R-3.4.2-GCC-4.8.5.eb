@@ -34,6 +34,8 @@ dependencies = [
     ('PROJ', '4.9.3'),     # for rgdal
     ('NLopt', '2.4.2'),    # for nloptr
     ('OpenSSL', '1.1.0g'), # for openssl -> base64 -> bioconductor
+    ('JAGS', '4.2.0'),
+    ('netCDF', '4.5.0'),
 ]
 
 def ext_options_extra(**kw):
@@ -108,7 +110,7 @@ exts_list = [
     ('sourcetools', '0.1.6', ext_options),
     ('R6', '2.2.2', ext_options),
     ('shiny', '1.0.5', ext_options),
-   #('rgl', '0.98.1', ext_options),
+   #('rgl', '0.98.1', ext_options), # missing gl.h header, need to install OpenGL
     ('quadprog', '1.5-5', ext_options),
     ('BB', '2014.10-1', ext_options),
     ('MASS', '7.3-47', ext_options),
@@ -226,8 +228,8 @@ exts_list = [
 #   #('R2WinBUGS', '2.1-21', ext_options), # discourage
     ('R2OpenBUGS', '3.2-3.2', ext_options),
     ('akima', '0.6-2', ext_options),
-#   #('rjags', '4-6', ext_options),
-#   #('R2jags', '0.5-7', ext_options),  # rjags
+   #('rjags', '4-6', ext_options),
+   #('R2jags', '0.5-7', ext_options),  # rjags
     ('DBI', '0.7', ext_options),
     ('BH', '1.65.0-1', ext_options),
     ('memoise', '1.1.0', ext_options),
@@ -256,8 +258,8 @@ exts_list = [
     ('BBmisc', '1.11', ext_options),
     ('fail', '1.3', ext_options),
     ('brew', '1.0-6', ext_options),
-    #('sendmailR', '1.2-1', ext_options),
-    #('BatchJobs', '1.6', ext_options),
+     ('sendmailR', '1.2-1', ext_options),
+     ('BatchJobs', '1.6', ext_options),
 
     # BioConductor dependencies
 #   #('RcppParallel', '4.3.20', ext_options),  # tbb compile problem
@@ -313,8 +315,9 @@ exts_list = [
     #('pbdBASE', '0.4-5', ext_options_extra(patches=['pbdBASE-0.4-5_ignore-BI_COMM_GLOBAL-for-intel-mpi.patch'])),
     #('pbdDMAT', '0.4-2', ext_options),
 
-    #('StanHeaders', '2.16.0-1', ext_options),
-    #('rstan', '2.16.2', ext_options),
+     ('StanHeaders', '2.16.0-1', ext_options),
+     ('rstan', '2.16.2', ext_options),
+    #('RNetCDF', '1.9-1', ext_options), # needs udunits or udunits2 and netcdf
 ]
 
 moduleclass = 'lang'
