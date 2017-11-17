@@ -35,6 +35,7 @@ dependencies = [
     ('NLopt', '2.4.2'),    # for nloptr
     ('OpenSSL', '1.1.0g'), # for openssl -> base64 -> bioconductor
     ('JAGS', '4.2.0'),
+    ('UDUNITS', '1.12.11',), # used by RNetCDF
     ('netCDF', '4.5.0'),
 ]
 
@@ -317,7 +318,8 @@ exts_list = [
 
      ('StanHeaders', '2.16.0-1', ext_options),
      ('rstan', '2.16.2', ext_options),
-    #('RNetCDF', '1.9-1', ext_options), # needs udunits or udunits2 and netcdf
+    #('RNetCDF', '1.9-1', ext_options), # fails because it needs udunits or udunits2 and netcdf
+     ('ncdf4', '1.16', ext_options), # another netcdf package
 ]
 
 moduleclass = 'lang'
