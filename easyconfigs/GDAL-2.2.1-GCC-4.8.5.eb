@@ -37,7 +37,9 @@ dependencies = [
 ]
 
 # Hardcode search paths for Cray modules
-configopts = '--with-hdf5=$EBROOTHDF5 --with-netcdf=$EBROOTNETCDF LDFLAGS="-Wl,-rpath=$EBROOTHDF5/lib -Wl,-rpath=$EBROOTNETCDF/lib"'
+# Also make sure that correct version of SQlite in "/usr/lib64" is picked up
+configopts = '--with-hdf5=$EBROOTHDF5 --with-netcdf=$EBROOTNETCDF --with-sqlite3=/usr '
+configopts += 'LDFLAGS="-Wl,-rpath=$EBROOTHDF5/lib -Wl,-rpath=$EBROOTNETCDF/lib -Wl,-rpath=/usr/lib64"'
 
 # GDAL does not seem to have any tests
 # runtest = 'check'

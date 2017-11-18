@@ -24,7 +24,7 @@ dependencies = [
      ('PCRE', '8.40'),
      ('libreadline', '6.3'),
      ('ncurses', '6.0'),
-     ('cURL', '7.52.1'),
+     ('cURL', '7.56.1'),
      ('libpng', '1.6.32'),  # for plotting  # or 1.6.12
      ('libxml2', '2.9.4'),  # for XML, via GDAL though
 #    ('SQLite', '3.16.2'),  # for RSQLite
