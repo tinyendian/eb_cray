@@ -86,7 +86,7 @@ dependencies = [
     ('cairo', '1.14.10'),
     ('libpng', '1.6.32'),
     ('libgd', '2.2.5'),
-    ('libreadline', '7.0'),
+    ('libreadline', '6.3'),
 ]
 
 runtest = 'check'
