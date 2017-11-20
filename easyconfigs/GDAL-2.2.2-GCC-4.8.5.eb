@@ -1,0 +1,68 @@
+easyblock = 'ConfigureMake'
+
+name = 'GDAL'
+version = '2.2.2'
+geos_version = '3.6.1'  # or 3.5.1?
+
+homepage = 'http://www.gdal.org/'
+description = """GDAL is a translator library for raster geospatial data formats that is released under an X/MIT style
+ Open Source license by the Open Source Geospatial Foundation. As a library, it presents a single abstract data model
+ to the calling application for all supported formats. It also comes with a variety of useful commandline utilities for
+ data translation and processing."""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+#toolchainopts = {'usempi': True}
+
+source_urls = ['http://download.osgeo.org/gdal/%(version)s/']
+sources = [SOURCELOWER_TAR_XZ]
+
+# Needed for JasPer support. It seems some changes to the JasPer
+# code introduced some compatibility issues.
+#patches = ['GDAL-2.1.3-JasPer-1.900.29-2017-04-07.patch']
+
+dependencies = [
+    ('expat', '2.2.5'),
+    ('JasPer', '2.0.12'),           # pulls in libjpeg-turbo
+    ('KEALib', '1.4.6'),            # pulls in HDF5
+    ('libgeotiff', '1.4.2'),        # pulls in libTIFF and PROJ
+    ('libpng', '1.6.32'),           # pulls in zlib
+    ('libspatialite', '4.3.0a',),   # pulls in FreeXL, GEOS, PROJ (again) and SQLite
+    ('libxml2', '2.9.4'),           # pulls in zlib (again)
+    ('netcdf/gcc/64/4.4.0', EXTERNAL_MODULE),
+    ('PCRE', '8.40'),
+    ('PostgreSQL', '9.6.2'),        # pulls in libreadline and zlib (again)
+    ('cURL', '7.56.1'),
+]
+
+configopts  = '--with-expat=$EBROOTEXPAT'
+configopts += ' --with-hdf5=$EBROOTHDF5'
+configopts += ' --with-geos=$EBROOTGEOS/bin/geos-config'
+#configopts += ' --with-kea=yes'
+#configopts += ' --with-geotiff=$EBROOTLIBGEOTIFF'
+#configopts += ' --with-jasper=$EBROOTJASPER'
+configopts += ' --with-jpeg=$EBROOTLIBJPEGMINTURBO'
+configopts += ' --with-png=$EBROOTLIBPNG'
+configopts += ' --with-libtiff=$EBROOTLIBTIFF'
+configopts += ' --with-xml2=$EBROOTLIBXML2'
+configopts += ' --with-netcdf=$EBROOTNETCDF'
+configopts += ' --with-pcre=$EBROOTPCRE'
+configopts += ' --with-spatialite=$EBROOTGEOS'
+#configopts += ' --with-sqlite3=$EBROOTSQLITE'
+configopts += ' --with-libz=$EBROOTZLIB'
+configopts += ' --with-curl=$EBROOTCURL'
+configopts += ' --without-grass --without-pam --without-python'
+
+# The C++11 standard is required for use with JasPer 1.900.29
+# But should be OK with recent compilers
+#buildopts = 'CXXFLAGS="${CXXFLAGS} --std=c++11"'
+
+# debug
+#parallel = 1
+
+sanity_check_paths = {
+    'files': ['lib/libgdal.%s' % SHLIB_EXT, 'lib/libgdal.a'],
+    'dirs': ['bin', 'include']
+}
+
+moduleclass = 'geo'
+

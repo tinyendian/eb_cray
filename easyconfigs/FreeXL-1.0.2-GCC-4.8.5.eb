@@ -1,0 +1,23 @@
+name = 'FreeXL'
+version = '1.0.2'
+
+easyblock = 'ConfigureMake'
+
+homepage = "https://www.gaia-gis.it/fossil/freexl/index"
+description = "FreeXL is an open source library to extract valid data from within an Excel (.xls) spreadsheet."
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+toolchainopts = {'pic': True}
+
+source_urls = ['http://www.gaia-gis.it/gaia-sins/freexl-sources/']
+sources = [SOURCELOWER_TAR_GZ]
+
+builddependencies = [('CMake', '3.10.0-rc5',)]
+
+sanity_check_paths = {
+    'files': ["lib/libfreexl.la"],
+    'dirs': ["lib"]
+}
+
+moduleclass = 'lib'
+

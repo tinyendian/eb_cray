@@ -12,7 +12,8 @@ source_urls = [('http://sourceforge.net/projects/mcmc-jags/files/JAGS/%s.x/Sourc
 easyblock = 'ConfigureMake'
 
 dependencies = [
- ('ATLAS', '3.10.2',),
+ #('ATLAS', '3.10.2',),
+ ('ATLAS', '3.10.2', '-LAPACK-3.6.1'),
 ]
 
 sanity_check_paths = {
