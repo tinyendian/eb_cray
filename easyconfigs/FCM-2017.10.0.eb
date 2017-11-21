@@ -1,0 +1,27 @@
+easyblock = 'Tarball'
+
+name = 'FCM'
+version = '2017.10.0'
+
+homepage = 'http://metomi.github.io/fcm/doc'
+description = """FCM Build - A powerful build system for modern Fortran software applications. FCM Version Control - Wrappers to the Subversion version control system, usage conventions and processes for scientific software development."""
+
+# This version of the easyconfig file can be used on systems that have all dependencies installed in system directories.
+# A toolchain is not needed in this case.
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+source_urls = ['https://github.com/metomi/fcm/archive']
+sources = ['%(version)s.tar.gz']
+checksums = ['cb8051f2a23239a2f9cc65cc2793f02bfcee7282e923f3f34be03571e2ff167f']
+
+# Symlink FCM keyword file
+postinstallcmds = [
+    'ln -s /opt/niwa/um_sys_prelim/fcm/keyword.cfg %(installdir)s/etc/fcm/keyword.cfg',
+]
+
+sanity_check_paths = {
+    'files': ['bin/fcm'],
+    'dirs': ['etc', 'lib'],
+}
+
+moduleclass = 'devel'
