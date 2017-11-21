@@ -1,0 +1,23 @@
+easyblock = 'Tarball'
+
+name = 'Rose'
+version = '2017.10.0'
+
+homepage = 'http://metomi.github.io/rose/doc/rose.html'
+description = "Rose: a framework for managing and running meteorological suites."
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+source_urls = ['https://github.com/metomi/rose/archive']
+sources = ['%(version)s.tar.gz']
+checksums = ['a705a0677d12714962edc746969139aa44de35d48ec7644cc2683c114a6cf15a']
+
+# Workaround for dead symlinks that crash the copying process
+keepsymlinks = True
+
+sanity_check_paths = {
+    'files': ['bin/rose'],
+    'dirs': ['etc', 'lib'],
+}
+
+moduleclass = 'geo'
