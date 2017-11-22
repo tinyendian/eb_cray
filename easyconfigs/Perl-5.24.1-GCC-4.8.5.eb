@@ -11,10 +11,13 @@ source_urls = ['http://www.cpan.org/src/%(version_major)s.0']
 sources = [SOURCELOWER_TAR_GZ]
 checksums = ['e6c185c9b09bdb3f1b13f678999050c639859a7ef39c8cad418448075f5918af']
 
-dependencies = [('Subversion', '1.9.7')]
+dependencies = [
+    ('Subversion', '1.9.7'),
+    ('netCDF', '4.5.0'),
+    ('OCI', '12.2', '', ('dummy', 'dummy'))
+]
 
 # !! order of extensions is important !!
-# extensions updated on April 4th 2017
 exts_list = [
     ('Config::General', '2.63', {
         'source_tmpl': 'Config-General-%(version)s.tar.gz',
@@ -1122,24 +1125,42 @@ exts_list = [
         'checksums': ['bd6d1c187e80be6de1f0d37add441ba8f14950c7bc1f54e764770ed484b232c1'],
     }),
     ('SVG', '2.77', {
-        'source_tmpl': 'SVG-2.77.tar.gz',
+        'source_tmpl': 'SVG-%(version)s.tar.gz',
         'source_urls': ['http://search.cpan.org/CPAN/authors/id/M/MA/MANWAR/'],
         'checksums': ['1f01cf2dc666a2ba3bf5219ec9e2290143e5e569747431412c8423916a9846c5'],
     }),
     ('Statistics::Basic', '1.6611', {
-        'source_tmpl': 'Statistics-Basic-1.6611.tar.gz',
+        'source_tmpl': 'Statistics-Basic-%(version)s.tar.gz',
         'source_urls': ['http://search.cpan.org/CPAN/authors/id/J/JE/JETTERO/'],
         'checksums': ['6855ce5615fd3e1af4cfc451a9bf44ff29a3140b4e7130034f1f0af2511a94fb'],
     }),
     ('SVN::Client', '1.8.11.0', {
-        'source_tmpl': 'Alien-SVN-v1.8.11.0.tar.gz',
+        'source_tmpl': 'Alien-SVN-v%(version)s.tar.gz',
         'source_urls': ['http://search.cpan.org/CPAN/authors/id/M/MS/MSCHWERN'],
         'checksums': ['acf8ebce1cb6958ef24611a453abee32b8e4dfe767563834362891ef3f30fc68'],
     }),
     ('XML::Parser', '2.44', {
-        'source_tmpl': 'XML-Parser-2.44.tar.gz',
+        'source_tmpl': 'XML-Parser-%(version)s.tar.gz',
         'source_urls': ['http://search.cpan.org/CPAN/authors/id/T/TO/TODDR'],
         'checksums': ['1ae9d07ee9c35326b3d9aad56eae71a6730a73a116b9fe9e8a4758b7cc033216'],
+    }),
+    ('DBD::Oracle', '1.75_2', {
+        'source_tmpl': 'DBD-Oracle-%(version)s.tar.gz',
+        'source_urls': ['http://search.cpan.org/CPAN/authors/id/M/MJ/MJEVANS'],
+        'checksums': ['25ccbc620ba040e1ccd5616a2fbecd0b051d2a038f00f9917a56aa38058d09d8'],
+    }),
+    ('PDL', '2.018', {
+        'source_tmpl': 'PDL-%(version)s.tar.gz',
+        'source_urls': ['http://search.cpan.org/CPAN/authors/id/C/CH/CHM'],
+        'checksums': ['af3ce01f093a08ee814d942b448d5c8d9daafb83d89c8933c4a22c5355233805'],
+    }),
+    ('PDL::NetCDF', '4.20', {
+        'source_tmpl': 'PDL-NetCDF-%(version)s.tar.gz',
+        'source_urls': ['http://search.cpan.org/CPAN/authors/id/D/DH/DHUNT'],
+        'patches': ['PDL-NetCDF-4.20_Makefile.patch'],
+        'checksums': ['ef1cdd1b27f4ef863916ea3e79d43627322b3bf7c2f95331782c7b4231279740',
+                      '47bf49b74e676baa9586cb0575075976b82aeb161de284af3bea46de0c0a0984'
+                     ],
     }),
 ]
 

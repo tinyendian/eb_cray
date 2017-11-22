@@ -1,0 +1,33 @@
+easyblock = 'Binary'
+
+name = 'OCI'
+version = '12.2'
+
+homepage = "http://www.oracle.com/technetwork/database/features/oci/index-090945.html"
+description = """Oracle Call Interface (OCI) is the comprehensive, high performance, native C language interface to Oracle Database for custom or packaged applications."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+# Nothing to be done here
+skipsteps = ['source', 'configure', 'build', 'test', 'install']
+
+# Only provide access to pre-installed Oracle client software
+allow_prepend_abs_path = True
+modextrapaths = {
+    'PATH': '/usr/lib/oracle/12.2/client64/bin',
+    'CPATH': '/usr/include/oracle/12.2/client64',
+    'LD_LIBRARY_PATH': '/usr/lib/oracle/12.2/client64/lib',
+}
+
+# Needed by ROracle package
+modextravars = {
+    'OCI_INC': '/usr/include/oracle/12.2/client64',
+    'OCI_LIB': '/usr/lib/oracle/12.2/client64/lib',
+}
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['/usr/include/oracle/12.2/client64', '/usr/lib/oracle/12.2/client64/bin', '/usr/lib/oracle/12.2/client64/lib'],
+}
+
+moduleclass = 'data'

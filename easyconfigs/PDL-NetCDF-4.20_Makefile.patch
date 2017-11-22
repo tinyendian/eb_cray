@@ -1,0 +1,129 @@
+--- /dev/shm/Perl/5.24.1/GCC-4.8.5/PDLNetCDF/PDL-NetCDF-4.20/Makefile.PL~	2013-11-18 21:17:00.000000000 +0000
++++ /dev/shm/Perl/5.24.1/GCC-4.8.5/PDLNetCDF/PDL-NetCDF-4.20/Makefile.PL	2017-11-22 00:59:23.609038636 +0000
+@@ -10,56 +10,56 @@
+ ## Search for netcdf library and include file
+ #
+ 
+-foreach my $libdir (
+-		    $ENV{NETCDF_LIBDIR},
+-		    '/usr/local/netcdf/lib',
+-		    '/usr/local/lib',
+-		    '/opt/local/lib',
+-		    '/usr/lib',
+-		    '/usr/lib64',
+-		    '/opt/lib',
+-                    '/usr/local/lib64', # Added at request of Hernan De Angelis, 9/16/2013
+-		                  # Add new library paths here!!
+-		    ) {
+-
+-  if (-e "$libdir/libnetcdf.so") {
+-    $netcdf_lib_path = $libdir;
+-    print "Found libnetcdf.so at $libdir/libnetcdf.so\n";
+-    last;
+-  }
+-
+-  if (-e "$libdir/libnetcdf.a") {
+-    $netcdf_lib_path = $libdir;
+-    print "Found libnetcdf.a at $libdir/libnetcdf.a\n";
+-    last;
+-  }
+-
+-}
+-
+-die "Cannot find netcdf library, libnetcdf.so or libnetcdf.a.  
+-Please set the environment variable NETCDF_LIBDIR to the correct library path or install NetCDF" 
+-  unless defined ($netcdf_lib_path);
+-
+-foreach my $incdir (
+-		    $ENV{NETCDF_INCDIR},
+-		    '/usr/local/netcdf/include',
+-		    '/usr/local/include',
+-		    '/opt/local/include',
+-		    '/usr/include',
+-		    '/opt/include',
+-		                  # Add new header paths here!!
+-		    ) {
+-
+-  if (-e "$incdir/netcdf.h") {
+-    $netcdf_include_path = $incdir;
+-    print "Found netcdf.h at $incdir/netcdf.h\n";
+-    last;
+-  }
+-}
+-
+-die "Cannot find netcdf header file, netcdf.h.
+-Please set the environment variable NETCDF_INCDIR to the correct include path or install NetCDF" 
+-  unless defined ($netcdf_include_path);
++# foreach my $libdir (
++# 		    $ENV{NETCDF_LIBDIR},
++# 		    '/usr/local/netcdf/lib',
++# 		    '/usr/local/lib',
++# 		    '/opt/local/lib',
++# 		    '/usr/lib',
++# 		    '/usr/lib64',
++# 		    '/opt/lib',
++#                     '/usr/local/lib64', # Added at request of Hernan De Angelis, 9/16/2013
++# 		                  # Add new library paths here!!
++# 		    ) {
++
++#   if (-e "$libdir/libnetcdf.so") {
++#     $netcdf_lib_path = $libdir;
++#     print "Found libnetcdf.so at $libdir/libnetcdf.so\n";
++#     last;
++#   }
++
++#   if (-e "$libdir/libnetcdf.a") {
++#     $netcdf_lib_path = $libdir;
++#     print "Found libnetcdf.a at $libdir/libnetcdf.a\n";
++#     last;
++#   }
++
++# }
++
++# die "Cannot find netcdf library, libnetcdf.so or libnetcdf.a.  
++# Please set the environment variable NETCDF_LIBDIR to the correct library path or install NetCDF" 
++#   unless defined ($netcdf_lib_path);
++
++# foreach my $incdir (
++# 		    $ENV{NETCDF_INCDIR},
++# 		    '/usr/local/netcdf/include',
++# 		    '/usr/local/include',
++# 		    '/opt/local/include',
++# 		    '/usr/include',
++# 		    '/opt/include',
++# 		                  # Add new header paths here!!
++# 		    ) {
++
++#   if (-e "$incdir/netcdf.h") {
++#     $netcdf_include_path = $incdir;
++#     print "Found netcdf.h at $incdir/netcdf.h\n";
++#     last;
++#   }
++# }
++
++# die "Cannot find netcdf header file, netcdf.h.
++# Please set the environment variable NETCDF_INCDIR to the correct include path or install NetCDF" 
++#   unless defined ($netcdf_include_path);
+ 
+ # Check if compiled under gcc/Linux.  In which case, define bool for the compiler
+ $define_bool = '';
+@@ -89,8 +89,8 @@
+ 	      'TYPEMAPS'     => [&PDL_TYPEMAP()], 
+ 	      'OBJECT'       => 'NetCDF.o ',
+ 	      'PM'           => { 'NetCDF.pm' => '$(INST_LIBDIR)/NetCDF.pm'},
+-	      'INC'          => &PDL_INCLUDE()." -I$netcdf_include_path", 
+-	      'LIBS'         => ["-L$netcdf_lib_path -lnetcdf $ENV{NETCDF_EXTRALIBS}"],  
++	      'INC'          => &PDL_INCLUDE(), 
++	      'LIBS'         => ["-lnetcdf"],  
+ 	      'clean'        => {'FILES'  => 
+ 				   'NetCDF.pm NetCDF.xs NetCDF.o NetCDF.c'},
+ 	      'dist'         => { COMPRESS => 'gzip', SUFFIX => 'gz' },	
+@@ -105,7 +105,7 @@
+     $option = $func unless defined $option;
+ 
+     # Test if PLplot has plsmem, for in memory plotting
+-    eval { compileAndRun ("-I$netcdf_include_path -L$netcdf_lib_path -lnetcdf $ENV{NETCDF_EXTRALIBS}", 0, <<"EOC");
++    eval { compileAndRun ("-lnetcdf", 0, <<"EOC");
+ #include <netcdf.h>
+ main () {  $eval }
+ EOC
