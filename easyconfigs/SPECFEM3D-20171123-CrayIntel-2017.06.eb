@@ -1,10 +1,10 @@
 name = 'SPECFEM3D'
-version = '20170928'
+version = '20171123'
 
 homepage = "https://geodynamics.org/cig/software/specfem3d/"
 description = """SPECFEM3D Cartesian simulates acoustic (fluid), elastic (solid), coupled acoustic/elastic, poroelastic or seismic wave propagation in any type of conforming mesh of hexahedra (structured or not.) It can, for instance, model seismic waves propagating in sedimentary basins or any other regional geological model following earthquakes. It can also be used for non-destructive testing or for ocean acoustics. """
 
-toolchain = {'name': 'CrayCCE', 'version': '2017.06'}
+toolchain = {'name': 'CrayIntel', 'version': '2017.06'}
 
 # has a configure commmand but there is no make install
 easyblock = 'MakeCp'
@@ -12,8 +12,11 @@ with_configure = True
 
 # You will need to download the tarball manually using 
 # git clone --recursive https://github.com/geodynamics/specfem3d.git
-# tar cfz SPECFEM3D-20170928.tar.gz specfem3d
-# mv SPECFEM3D-20170928.tar.gz s/SPECFEM3D
+# cd specfem3d
+# git checkout ee4e5ff6daac4c2b126fe5958eb45c40cb81be5b
+# cd ..
+# tar cfz SPECFEM3D-20171123.tar.gz specfem3d
+# mv SPECFEM3D-20171123.tar.gz s/SPECFEM3D
 source_urls = [
   'file://s/SPECFEM3D',
 ]
@@ -21,12 +24,14 @@ sources = [{
   'filename': '%(name)s-%(version)s.tar.gz',
   'extract_cmd': 'tar xf %s', # Workaround for missing compress executable
 }]
-checksums = ['c711e63af41e0d4b274c4121058c2391']
+checksums = ['026f9a5edff1af1fdd3f4e4e7db0aad6']
 
 dependencies = [
 ]
 
 configopts = 'FC=ftn CC=cc CXX=CC MPIFC=ftn MPICC=cc MPICXX=CC --with-mpi '
+
+parallel = 1
 
 # runtest = 'check'
 
