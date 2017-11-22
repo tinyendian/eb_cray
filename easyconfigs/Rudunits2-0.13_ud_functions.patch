@@ -1,0 +1,14 @@
+--- udunits2/R/ud.functions.R	2016-11-16 22:58:26.000000000 +0000
++++ udunits2/R/ud.functions.R	2017-11-22 01:49:17.364487087 +0000
+@@ -81,8 +81,10 @@
+ 
+ ud.is.parseable <-
+ function(unit.string) {
++  unit.string <- as.character(unit.string)
++  if (length(unit.string)==0) return(FALSE)
+   rv <- .C('R_ut_is_parseable',
+-           as.character(unit.string),
++           unit.string,
+            parseable=logical(1))
+   return(rv$parseable)
+ }

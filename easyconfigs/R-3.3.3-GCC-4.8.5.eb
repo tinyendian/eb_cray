@@ -26,7 +26,7 @@ dependencies = [
      ('GEOS', '3.6.2'),     # for rgeos, which is for spacetime.
      ('NLopt', '2.4.2'),    # for nloptr
      ('OpenSSL', '1.1.0g'), # for openssl -> base64 -> bioconductor
-     ('UDUNITS', '2.2.25'), # for RNetCDF
+     ('UDUNITS', '2.2.25'), # for RNetCDF and udunits2 packages
      ('netCDF', '4.5.0'),   # for RNetCDF
      ('OCI', '12.2', '', ('dummy', 'dummy')), # For ROracle
 ]
@@ -220,7 +220,7 @@ exts_list = [
     ('mapproj', '1.2-5', ext_options),
     ('leaps', '3.0', ext_options),
     ('fields', '9.0', ext_options),
-    ('udunits2', '0.13', ext_options),
+    ('udunits2', '0.13', dict(ext_options.items() + [('patches', ['Rudunits2-0.13_ud_functions.patch'])])),
 ]
 
 moduleclass = 'lang'
