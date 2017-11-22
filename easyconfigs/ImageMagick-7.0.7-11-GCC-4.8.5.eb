@@ -18,7 +18,6 @@ source_urls = ['https://www.imagemagick.org/download/releases/']
 sources = [SOURCE_TAR_GZ]
 
 osdependencies = [
-    ('bzip2'),
     ('libX11-devel'),
     ('zlib-devel'),
     ('fontconfig-devel'),
@@ -29,6 +28,8 @@ osdependencies = [
 dependencies = [
     ('fftw3/openmpi/gcc/64/3.3.6', EXTERNAL_MODULE),
     ('libpng', '1.6.32'),
+    ('bzip2', '1.0.6'),
+    ('libjpeg-turbo', '1.5.2'),
 ]
 
 # Cray module does not append PGK_CONFIG_PATH
