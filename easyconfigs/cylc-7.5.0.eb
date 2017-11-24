@@ -19,7 +19,6 @@ files_to_copy = ['*']
 # env variables
 modextravars = {
     'CYLC_VERSION': '%(version)s',
-    'CYLC_HOME': '%(installdir)s',
 }
 
 # Set location of Cylc wrapper
@@ -35,6 +34,7 @@ postinstallcmds = [
     'sed -i "s;/home/admin/cylc;%(installdir)s/..;" ' + cylc_wrapper_dir + '/cylc',
     'sed -i "s;CYLC_HOME/bin/;CYLC_HOME/bin_/;" ' + cylc_wrapper_dir + '/cylc',
     'ln -s %(installdir)s %(installdir)s/../cylc',
+    'ln -s /opt/niwa/um_sys_prelim/etc/cylc/global.rc_cylc-%(version)s %(installdir)s/conf/global.rc',
 ]
 
 # Check if Cylc and the Cylc wrapper exist

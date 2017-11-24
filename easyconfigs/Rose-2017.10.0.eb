@@ -19,7 +19,6 @@ keepsymlinks = True
 # env variables
 modextravars = {
     'ROSE_VERSION': '%(version)s',
-    'ROSE_HOME': '%(installdir)s',
 }
 
 # Set location of Rose wrapper
@@ -36,6 +35,7 @@ postinstallcmds = [
     'sed -i "s;\-/opt;-%(installdir)s/..;" ' + rose_wrapper_dir + '/rose',
     'sed -i "s;ROSE_HOME/bin/;ROSE_HOME/bin_/;" ' + rose_wrapper_dir + '/rose',
     'ln -s %(installdir)s %(installdir)s/../rose',
+    'ln -s /opt/niwa/um_sys_prelim/etc/rose/rose.conf_rose-%(version)s %(installdir)s/etc/rose.conf',
 ]
 
 # Check if Rose and the Rose wrapper exist

@@ -20,7 +20,7 @@ dependencies = [
 
 # Symlink FCM keyword file
 postinstallcmds = [
-    'ln -s /opt/niwa/um_sys_prelim/fcm/keyword.cfg %(installdir)s/etc/fcm/keyword.cfg',
+    'ln -s /opt/niwa/um_sys_prelim/etc/fcm/keyword.cfg %(installdir)s/etc/fcm/keyword.cfg',
 ]
 
 sanity_check_paths = {
