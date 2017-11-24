@@ -24,7 +24,7 @@ sources = [{
   'filename': '%(name)s-%(version)s.tar.gz',
   'extract_cmd': 'tar xf %s', # Workaround for missing compress executable
 }]
-checksums = ['026f9a5edff1af1fdd3f4e4e7db0aad6']
+checksums = ['b3f871113f50444914b8394bf8c74571a0e6c38c9d68eade49cad4a6de2b94cd']
 
 dependencies = [
 ]

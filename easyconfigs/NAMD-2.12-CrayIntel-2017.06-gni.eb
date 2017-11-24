@@ -13,6 +13,7 @@ toolchain = {'name': 'CrayIntel', 'version': '2017.06'}
 toolchainopts = {'dynamic': False}
 
 sources = ['NAMD_%(version)s_Source.tar.gz']
+checksums = ['436d11e4ff78136c7463d448d2eee92509a39b4c03cab8d07176bb20ddcb675a']
 
 prebuildopts = ' ./config Linux-x86_64-g++ Eos --tcl-prefix $EBROOTTCL --charm-base $EBROOTCHARMPLUSPLUS --charm-arch "" --cc cc --cxx CC --cxx-opts  "-std=c++11 $CRAY_UGNI_POST_LINK_OPTS -lugni $CRAY_PMI_POST_LINK_OPTS -lpmi" && '
 prebuildopts += ' cd Linux-x86_64-g++ && '
