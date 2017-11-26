@@ -33,10 +33,22 @@ exts_list = [
         'source_tmpl': 'v%(version)s.tar.gz',
         'source_urls': ['https://github.com/SciTools/biggus/archive'],
     }),
-    ('shapefile', '1.2.11', {
+    ('pyshp', '1.2.12', {
         'source_tmpl': 'pyshp-%(version)s.tar.gz',
         'source_urls': ['https://pypi.python.org/packages/source/p/pyshp'],
     }),
+    ('pyproj', '1.9.5.1', {
+        'source_tmpl': 'pyproj-%(version)s.tar.gz',
+        'source_urls': ['https://pypi.python.org/packages/source/p/pyproj'],
+    }),
+    ('GDAL', '2.2.2', {
+        'source_tmpl': 'GDAL-%(version)s.tar.gz',
+        'source_urls': ['https://pypi.python.org/packages/source/g/GDAL'],
+    }), 
+    #('Shapely', '1.5.13', {
+    #    'source_tmpl': 'Shapely-v%(version)s.tar.gz',
+    #    'source_urls': ['https://pypi.python.org/packages/ad/f9/4640d50324635fbdc7b109f8ef37de5f04456b89ed175cf2f71ae05efd8f'],
+    #}),
     ('cartopy', '0.15.0', {
         'source_tmpl': 'v%(version)s.tar.gz',
         'source_urls': ['https://github.com/SciTools/cartopy/archive'],
