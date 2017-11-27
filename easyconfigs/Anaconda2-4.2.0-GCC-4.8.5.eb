@@ -21,10 +21,17 @@ prep_env = "PATH=%(installdir)s/bin:$PATH "
 postinstallcmds = [prep_env + "conda install -f -p %(installdir)s -c anaconda netcdf4=1.2.4",
                    prep_env + "conda install -f -p %(installdir)s -c conda-forge pyke=1.1.1",
                    prep_env + "conda install -f -p %(installdir)s -c conda-forge biggus=0.15.0",
+                   prep_env + "conda install -f -p %(installdir)s -c scitools shapely=1.5.13",
+                   prep_env + "conda install -f -p %(installdir)s -c pelson pyshp=1.2.1",
+                   prep_env + "conda install -f -p %(installdir)s -c pelson/label/development2 pyshp", 
+                   prep_env + "conda install -f -p %(installdir)s -c scitools proj.4=4.9.1",         
                    prep_env + "conda install -f -p %(installdir)s -c conda-forge cartopy=0.15.1",
                    prep_env + "conda install -f -p %(installdir)s -c conda-forge cf_units=1.1.3",
                    prep_env + "conda install -f -p %(installdir)s -c conda-forge udunits2=2.2.25",
-                   prep_env + "conda install -f -p %(installdir)s -c conda-forge/label/broken udunits2",]
+                   prep_env + "conda install -f -p %(installdir)s -c conda-forge/label/broken udunits2",
+                   prep_env + "conda install -f -p %(installdir)s -c conda-forge pyugrid=0.1.6",                  
+                   prep_env + "conda install -f -p %(installdir)s -c conda-forge mo_pack=0.2.0",                  
+]
 
 
 moduleclass = 'lang'
