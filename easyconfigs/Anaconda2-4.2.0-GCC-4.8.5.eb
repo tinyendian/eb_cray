@@ -16,5 +16,10 @@ source_urls = ['https://repo.continuum.io/archive/']
 sources = ['%(name)s-%(version)s-Linux-x86_64.sh']
 checksums = ['a0d1fbe47014b71c6764d76fb403f217']
 
+# install additional packages
+prep_env = "PATH=%(installdir)s/bin:$PATH "
+postinstallcmds = [prep_env + "conda install -f -p %(installdir)s -c anaconda netcdf4=1.2.4"]
+
+
 moduleclass = 'lang'
 

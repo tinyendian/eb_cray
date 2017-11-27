@@ -1,9 +1,9 @@
 easyblock = 'Bundle'
 
-name = 'Python-Iris'
+name = 'Iris-python2'
 version = '1.13.0'
-pyver = '2.7.11'
-versionsuffix = '-Python-%s' % pyver
+pyver = '2.7.12'
+#versionsuffix = '-Python-%s' % pyver
 
 homepage = 'http://scitools.org.uk/iris/'
 description = """A powerful, easy to use, and community-driven Python library for analysing and visualising
@@ -49,7 +49,7 @@ exts_list = [
     #    'source_tmpl': 'Shapely-v%(version)s.tar.gz',
     #    'source_urls': ['https://pypi.python.org/packages/ad/f9/4640d50324635fbdc7b109f8ef37de5f04456b89ed175cf2f71ae05efd8f'],
     #}),
-    ('cartopy', '0.15.0', {
+    ('cartopy', '0.14.3', {
         'source_tmpl': 'v%(version)s.tar.gz',
         'source_urls': ['https://github.com/SciTools/cartopy/archive'],
     }),
@@ -61,18 +61,18 @@ exts_list = [
         'source_tmpl': 'v%(version)s.tar.gz',
         'source_urls': ['https://github.com/SciTools/cf_units/archive'],
     }),
-    ('iris', '1.13.0', {
-        'source_tmpl': 'v%(version)s.tar.gz',
-        'source_urls': ['https://github.com/SciTools/iris/archive'],
-    }),
+    #('iris', '1.13.0', {
+    #    'source_tmpl': 'v%(version)s.tar.gz',
+    #    'source_urls': ['https://github.com/SciTools/iris/archive'],
+    #}),
 ]
 
 modextrapaths = {'PYTHONPATH': 'lib/python%s/site-packages' % '.'.join(pyver.split('.')[:2])}
 
-sanity_check_paths = {
-    'files': [],
-    'dirs': ['.']
-}
+#sanity_check_paths = {
+#    'files': [],
+#    'dirs': ['.']
+#}
 
 moduleclass = 'geo'
 
