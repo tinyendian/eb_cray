@@ -15,8 +15,31 @@ sources = ['%(version)s.tar.gz']
 
 files_to_copy = ['*']
 
+# Cylc uses a wrapper to choose between versions, which relies on these
+# env variables
+modextravars = {
+    'CYLC_VERSION': '%(version)s',
+}
+
+# Set location of Cylc wrapper
+cylc_wrapper_dir = '/opt/niwa/share_prelim/bin'
+
+# Prevent EasyBuild from prepending PATH variable and
+# adapt Cylc wrapper to EasyBuild conventions
+# NOTE: These commands expect the Cylc wrapper to be installed,
+#       see <cylc source>/admin/cylc-wrapper for further information!
+postinstallcmds = [
+    'mv %(installdir)s/bin %(installdir)s/bin_',
+    'sed -i "s;CYLC_HOME_ROOT/cylc-;CYLC_HOME_ROOT/;" ' + cylc_wrapper_dir + '/cylc',
+    'sed -i "s;/home/admin/cylc;%(installdir)s/..;" ' + cylc_wrapper_dir + '/cylc',
+    'sed -i "s;CYLC_HOME/bin/;CYLC_HOME/bin_/;" ' + cylc_wrapper_dir + '/cylc',
+    'ln -s %(installdir)s %(installdir)s/../cylc',
+    'ln -s /opt/niwa/um_sys_prelim/etc/cylc/global.rc_cylc-%(version)s %(installdir)s/conf/global.rc',
+]
+
+# Check if Cylc and the Cylc wrapper exist
 sanity_check_paths = {
-    'files': ['bin/cylc'],
+    'files': ['bin_/cylc', cylc_wrapper_dir + '/cylc'],
     'dirs': ['lib'],
 }
 

@@ -11,6 +11,7 @@ toolchainopts = {'usempi': True}
 
 source_urls = ['http://charm.cs.illinois.edu/distrib']
 sources = ['charm-%(version)s.tar.gz']
+checksums = ['deca68622932ea0c677aa764d6d24cd169a2fd99c06e7d7b6947c0f18ec2f8f3']
 
 dependencies = [
     ('craype-hugepages8M', EXTERNAL_MODULE),
