@@ -1,7 +1,7 @@
 easyblock = 'ConfigureMake'
 
 name = 'um2netcdf'
-version = '3.2.0'
+version = '3.2.1'
 
 homepage = 'http://www.niwa.co.nz'
 description = """um2netcdf converts Unified Model output files in
@@ -10,7 +10,7 @@ fieldsfile format into netCDF format."""
 toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
 
 sources = [SOURCELOWER_TAR_GZ]
-checksums = ['39ca62907ac4dca13c4bad89423495c6c9511946f77f39b8ece69da021ec76f7']
+checksums = ['a4f14dfa2bf1e19916c252de400c78f06d380e1b9e7b94d9e10ee758845c462f']
 
 dependencies = [
     ('cray-hdf5/1.10.1.1', EXTERNAL_MODULE),
@@ -20,8 +20,10 @@ dependencies = [
 # No configure step needed
 skipsteps = ['configure']
 
-prebuildopts = 'cp config/x86_linux_gcc.mk config/x86_linux_cc.mk; cd src;'
+prebuildopts = 'cd src;'
+buildopts = 'CC=cray-gcc'
 preinstallopts = 'export BINDIR=%(installdir)s/bin; cd src;'
+installopts = 'CC=cray-gcc'
 
 osdependencies = [('libxml2-devel')]
 

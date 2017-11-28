@@ -21,6 +21,8 @@ dependencies = [
      ('libreadline', '6.3'),
      ('ncurses', '6.0'),
      ('cURL', '7.56.1'),
+     ('libjpeg-turbo', '1.5.2'),
+     ('cairo', '1.14.10'),
      ('libpng', '1.6.32'),  # for plotting  # or 1.6.12
      ('libxml2', '2.9.4'),  # for XML, via GDAL though
      ('GEOS', '3.6.2'),     # for rgeos, which is for spacetime.
