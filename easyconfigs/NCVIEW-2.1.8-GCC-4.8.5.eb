@@ -19,7 +19,7 @@ checksums = ['e8badc507b9b774801288d1c2d59eb79ab31b004df4858d0674ed0d87dfc91be']
 osdependencies = [('libX11-devel')]
 
 dependencies = [
-    ('netcdf/gcc/64/4.4.0', EXTERNAL_MODULE),
+    ('netCDF', '4.5.0'),
     ('UDUNITS', '2.2.25'),
     ('libpng', '1.6.32'),
     ('libXaw', '1.0.12'),

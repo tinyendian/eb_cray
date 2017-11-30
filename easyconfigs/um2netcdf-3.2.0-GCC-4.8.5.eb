@@ -13,7 +13,7 @@ sources = [SOURCELOWER_TAR_GZ]
 checksums = ['39ca62907ac4dca13c4bad89423495c6c9511946f77f39b8ece69da021ec76f7']
 
 dependencies = [
-    ('netcdf/gcc/64/4.4.0', EXTERNAL_MODULE),
+    ('netCDF', '4.5.0'),
 ]
 
 # No configure step needed

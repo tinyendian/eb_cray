@@ -28,7 +28,7 @@ osdependencies = [
 
 dependencies = [
     ('hdf5_18/1.8.18', EXTERNAL_MODULE),
-    ('netcdf/gcc/64/4.4.0', EXTERNAL_MODULE),
+    ('netCDF', '4.5.0'),
     ('GEOS', '3.6.2'),
     ('JasPer', '2.0.12'),
     ('libpng', '1.6.32'),

@@ -17,7 +17,7 @@ builddependencies = [
 ]
 
 dependencies = [
-    ('netcdf/gcc/64/4.4.0', EXTERNAL_MODULE),
+    ('netCDF', '4.5.0'),
     ('GSL', '2.4'),
     ('UDUNITS', '2.2.25'),
 ]
