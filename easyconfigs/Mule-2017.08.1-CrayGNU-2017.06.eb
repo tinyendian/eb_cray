@@ -1,0 +1,33 @@
+easyblock = 'Binary'
+
+name = 'Mule'
+version = '2017.08.1'
+
+homepage = "https://code.metoffice.gov.uk/doc/um/mule/2017.08.1"
+description = """Mule is an API written in Python which allows you to access and manipulate files produced by the UM (Unified Model, of the Met Office (UK))."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+
+dependencies = [
+    ('Anaconda2', '4.2.0'),
+]
+
+# Nothing to be done here
+skipsteps = ['source', 'configure', 'build', 'test', 'install']
+
+# Only provide access to pre-installed Mule package
+allow_prepend_abs_path = True
+base_path = '/opt/niwa/um_sys_prelim/mule/Anaconda2-4.2.0-CrayGNU-2017.06/mule-%(version)s'
+modextrapaths = {
+    'PATH': base_path + '/bin',
+    'PYTHONPATH': base_path + '/lib/python2.7/site-packages',
+}
+
+sanity_check_paths = {
+    'files': [base_path + '/bin/mule-cumf', base_path + '/bin/mule-cutout', base_path + '/bin/mule-fixframe',
+              base_path + '/bin/mule-pumf', base_path + '/bin/mule-select', base_path + '/bin/mule-summary',
+              base_path + '/bin/mule-trim', base_path + '/bin/mule-unpack', base_path + '/bin/mule-version'],
+    'dirs': [base_path + '/lib/python2.7/site-packages'],
+}
+
+moduleclass = 'data'
