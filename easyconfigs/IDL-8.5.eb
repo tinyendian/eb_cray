@@ -17,6 +17,10 @@ modextrapaths = {
     'PATH': '/opt/IDL/idl85/bin'
 }
 
+modextravars = {
+    'IDL_DIR': '/opt/IDL/idl85/bin'
+}
+
 sanity_check_paths = {
     'files': [],
     'dirs': ['/opt/IDL/idl85/bin'],
