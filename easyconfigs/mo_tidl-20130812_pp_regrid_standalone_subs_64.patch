@@ -1,0 +1,107 @@
+--- mo_tidl/ukmo/src/support/pp_regrid_standalone/pp_regrid_standalone_subs_64.f	2017-12-13 04:13:23.625320000 +0000
++++ mo_tidl/ukmo/src/support/pp_regrid_standalone/pp_regrid_standalone_subs_64.f	2017-12-13 04:17:20.928914841 +0000
+@@ -531,7 +531,7 @@
+       index = npxt(lf) - 1                                                      
+       start_index = index                                                       
+                                                                                 
+-      if( defined(1) .eq. .true. ) then                                         
++      if( defined(1) .eqv. .true. ) then                                         
+                                                                                 
+ 	  index = index + 1                                                            
+ 	  lb(index) = (1000 * lx) + 1                                                  
+@@ -541,7 +541,7 @@
+           enddo                                                                 
+       endif                                                                     
+                                                                                 
+-      if( defined(2) .eq. .true. ) then                                         
++      if( defined(2) .eqv. .true. ) then                                         
+                                                                                 
+ 	  index = index + 1                                                            
+ 	  lb(index) = (1000 * ly) + 2                                                  
+@@ -551,7 +551,7 @@
+           enddo                                                                 
+       endif                                                                     
+                                                                                 
+-      if( defined(3) .eq. .true. ) then                                         
++      if( defined(3) .eqv. .true. ) then                                         
+                                                                                 
+ 	  do k=1,3                                                                     
+ 	     do j=1,2                                                                  
+@@ -565,7 +565,7 @@
+           enddo                                                                 
+       endif                                                                     
+                                                                                 
+-      if( defined(4) .eq. .true. ) then                                         
++      if( defined(4) .eqv. .true. ) then                                         
+                                                                                 
+ 	  call bytecopy(ltitle, title, titlelen, titleint)                             
+                                                                                 
+@@ -577,7 +577,7 @@
+           enddo                                                                 
+       endif                                                                     
+                                                                                 
+-      if( defined(5) .eq. .true. ) then                                         
++      if( defined(5) .eqv. .true. ) then                                         
+                                                                                 
+ 	  do i = 1,ndtitle                                                             
+                                                                                 
+@@ -592,7 +592,7 @@
+           enddo                                                                 
+       endif                                                                     
+                                                                                 
+-      if( defined(6) .eq. .true. ) then                                         
++      if( defined(6) .eqv. .true. ) then                                         
+                                                                                 
+ 	  index = index + 1                                                            
+ 	  lb(index) = (1000 * lxb) + 12                                                
+@@ -609,7 +609,7 @@
+           enddo                                                                 
+       endif                                                                     
+                                                                                 
+-      if( defined(7) .eq. .true. ) then                                         
++      if( defined(7) .eqv. .true. ) then                                         
+                                                                                 
+ 	  index = index + 1                                                            
+ 	  lb(index) = (1000 * lyb) + 14                                                
+@@ -5343,6 +5343,8 @@
+       logical opened                                                            
+                                                                                 
+       integer target_os                                                         
++
++      INTEGER       true_len
+                                                                                 
+ ! Work out file name. Add one to account for C type arrays subscripts           
+       file_sub   = fileindex(ifield) + 1                                        
+@@ -6682,17 +6684,21 @@
+       DIMENSION ZROT8(2)                                                        
+       COMPLEX ZZ                                                                
+       LOGICAL ILSHEM(2)                                                         
+-      DATA IBITL  /2*ZE0680000, ZC0008000, 3*Z00000000, ZE2080000,              
+-     *               ZE00A0000, ZC0020000/                                      
+-      DATA IBITR  /2*Z00002A07, Z00008003, 3*Z00000000, Z00002047,              
+-     *               Z00022007, Z00020003/                                      
+-      DATA IBITPL /2*ZE0490000, ZC8010000, 3*Z00000000, ZE3090000/              
+-      DATA IBITPR /2*Z00012607, Z00010013, 3*Z00000000, Z000120C7/              
+-      DATA IBMAP    /Z000FE000, Z003FF800,   Z007FFE00, Z03FFFFC0,              
+-     *               Z3FFFFFFC, Z7FFFFFFE,   ZFFFFFFFF/                         
+-      DATA ITEST    /Z00082000, Z00200800,   Z00400200, Z02000040,              
+-     *               Z20000004, Z40000002,   Z80000001/                         
+-      DATA I000     /Z00000000/,     I001   /Z00000001/                         
++      DATA IBITL  /2*Z'E0680000', Z'C0008000', 3*Z'00000000',              
++     *               Z'E2080000', Z'E00A0000',   Z'C0020000'/                                      
++      DATA IBITR  /2*Z'00002A07', Z'00008003', 3*Z'00000000',              
++     *               Z'00002047', Z'00022007',   Z'00020003'/                                      
++      DATA IBITPL /2*Z'E0490000', Z'C8010000', 3*Z'00000000',
++     *               Z'E3090000'/
++      DATA IBITPR /2*Z'00012607', Z'00010013', 3*Z'00000000',
++     *               Z'000120C7'/
++      DATA IBMAP    /Z'000FE000', Z'003FF800',   Z'007FFE00',
++     *               Z'03FFFFC0', Z'3FFFFFFC',   Z'7FFFFFFE',
++     *               Z'FFFFFFFF'/
++      DATA ITEST    /Z'00082000', Z'00200800',   Z'00400200',
++     *               Z'02000040', Z'20000004',   Z'40000002',
++     *               Z'80000001'/                         
++      DATA I000     /Z'00000000'/,     I001   /Z'00000001'/                         
+ *-----------------------------------------------------------------------        
+ *(1)                      INITIALISATIONS                                       
+ *-----------------------------------------------------------------------        

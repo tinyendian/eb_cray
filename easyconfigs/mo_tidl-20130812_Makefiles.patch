@@ -1,0 +1,237 @@
+--- mo_tidl/cr/src/Makefile	2017-12-12 20:53:40.838336000 +0000
++++ mo_tidl/cr/src/Makefile	2017-12-12 20:57:39.581834610 +0000
+@@ -9,11 +9,11 @@
+ # For Portland Fortran Compiler
+ #FC		=  /opt/pgi/linux86/bin/pgf77
+ # For Intel Fortran Compiler
+-FC		= ifort
++#FC		= ifort
+ # For GNU Fortran Compiler
+-#FC		= /usr/bin/g77
++FC		= gfortran
+ 
+-FFLAGS		= -fpic -DHPUX -DPVW -real-size 32 -double-size 64 -integer-size 32
++FFLAGS		= -fpic -DHPUX -DPVW -fcray-pointer
+ LD_FLAGS	= -shared
+ EXT_SO		= so
+ 
+@@ -42,7 +42,7 @@
+ ARCH_DIR	= $(OS_NAME)64
+ endif
+ 
+-TARGET_DIR	= $(IDL_DEV_ACTIVE)/cr/shared/$(ARCH_DIR)
++TARGET_DIR	= ../shared/$(ARCH_DIR)
+ 
+ MODULES		= pottem unesco
+ 
+--- mo_tidl/ukmo/src/mo_overrides/Makefile	2017-12-12 22:45:53.146252000 +0000
++++ mo_tidl/ukmo/src/mo_overrides/Makefile	2017-12-12 22:46:32.489603224 +0000
+@@ -6,7 +6,8 @@
+ #       $Id: Makefile 6857 2012-11-14 16:57:59Z itam $
+ #-------------------------------------------------------------------------------
+ 
+-IDL_DIR = /usr/local/exelis/idl
++# IDL_INSTALL_DIR provided by IDL module
++IDL_DIR = $(IDL_INSTALL_DIR)
+ 
+ 
+ # The following macros establish general defaults. They are overridden
+--- mo_tidl/trans/src/get_idl_address/Makefile	2017-12-12 22:51:21.729076259 +0000
++++ mo_tidl/trans/src/get_idl_address/Makefile	2017-12-12 22:52:41.648827808 +0000
+@@ -6,6 +6,7 @@
+ #       $Id: Makefile 6857 2012-11-14 16:57:59Z itam $
+ #-------------------------------------------------------------------------------
+ 
+-IDL_DIR = /usr/local/exelis/idl
++# IDL_INSTALL_DIR provided by IDL module
++IDL_DIR = $(IDL_INSTALL_DIR)
+ 
+ 
+--- mo_tidl/trans/src/ukmo_compatibility/Makefile	2017-12-12 22:57:09.090485000 +0000
++++ mo_tidl/trans/src/ukmo_compatibility/Makefile	2017-12-12 22:58:40.890683523 +0000
+@@ -6,7 +6,8 @@
+ #       $Id: Makefile 6857 2012-11-14 16:57:59Z itam $
+ #-------------------------------------------------------------------------------
+ 
+-INCLUDES	= -I/usr/local/exelis/idl/external/include
++# IDL_INSTALL_DIR provided by IDL module
++INCLUDES	= -I$(IDL_INSTALL_DIR)/external/include
+ SOURCES 	= ukmo_dcread.c ukmo_sysroutines.c
+ OBJECTS 	= ukmo_dcread.o ukmo_sysroutines.o
+ HEADERS 	= ukmo_compatibility.h
+--- mo_tidl/trans/src/lad/src/build	2017-12-12 23:10:55.227104000 +0000
++++ mo_tidl/trans/src/lad/src/build	2017-12-12 23:12:32.825029659 +0000
+@@ -91,7 +91,8 @@
+ 
+ echo "RESTORE, getenv('IDL_UKMO_TRAN')+'/dlm/trans_override_support.sav'" >> $CMD
+ 
+-echo ".r /usr/local/itt/idl/lib/julday.pro" >> $CMD
++# IDL_INSTALL_DIR provided by IDL module
++echo ".r $IDL_INSTALL_DIR/lib/julday.pro" >> $CMD
+ 
+ for FILE in `ls -1 *.pro`
+ do
+--- mo_tidl/ukmo/src/hq_flush/Makefile	2017-12-12 23:14:35.059164000 +0000
++++ mo_tidl/ukmo/src/hq_flush/Makefile	2017-12-12 23:15:41.945892002 +0000
+@@ -6,7 +6,8 @@
+ #       $Id: Makefile 6857 2012-11-14 16:57:59Z itam $
+ #-------------------------------------------------------------------------------
+ 
+-IDL_DIR		= /usr/local/exelis/idl
++# IDL_INSTALL_DIR provided by IDL module
++IDL_DIR = $(IDL_INSTALL_DIR)
+ 
+ CC		= gcc
+ LD		= ld
+--- mo_tidl/ukmo/src/Makefile	2017-12-13 01:44:49.184960000 +0000
++++ mo_tidl/ukmo/src/Makefile	2017-12-13 01:45:36.531825187 +0000
+@@ -6,7 +6,8 @@
+ #       $Id: Makefile 6857 2012-11-14 16:57:59Z itam $
+ #-------------------------------------------------------------------------------
+ 
+-IDL_DIR = /usr/local/exelis/idl/
++# IDL_INSTALL_DIR provided by IDL module
++IDL_DIR = $(IDL_INSTALL_DIR)
+ 
+ CC 		= gcc
+ LD      	= ld
+--- mo_tidl/ukmo/src/support/decode/Makefile	2017-12-13 01:50:18.719952000 +0000
++++ mo_tidl/ukmo/src/support/decode/Makefile	2017-12-13 01:51:33.884014762 +0000
+@@ -9,11 +9,11 @@
+ # For Portland Fortran Compiler
+ #FC		=  /opt/pgi/linux86/bin/pgf77
+ # For Intel Fortran Compiler
+-FC		= ifort
++#FC		= ifort
+ # For GNU Fortran Compiler
+-#FC		= /usr/bin/g77
++FC		= gfortran
+ 
+-FFLAGS		= -fpic -DHPUX -DPVW -real-size 32 -double-size 64 -integer-size 32
++FFLAGS		= -fPIC -DHPUX -DPVW -fdefault-real-8 -fdefault-double-8
+ LD_FLAGS	= -shared
+ EXT_SO		= so
+ 
+--- mo_tidl/ukmo/src/support/gc/Makefile	2017-12-13 02:16:39.214875000 +0000
++++ mo_tidl/ukmo/src/support/gc/Makefile	2017-12-13 02:17:42.171404686 +0000
+@@ -9,11 +9,11 @@
+ # For Portland Fortran Compiler
+ #FC		=  /opt/pgi/linux86/bin/pgf77
+ # For Intel Fortran Compiler
+-FC		= ifort
++#FC		= ifort
+ # For GNU Fortran Compiler
+-#FC		= /usr/bin/g77
++FC		= gfortran
+ 
+-FFLAGS		= -fpic -DHPUX -DPVW -real-size 32 -double-size 64 -integer-size 32
++FFLAGS		= -fPIC -DHPUX -DPVW -fcray-pointer -fdefault-real-8 -fdefault-double-8
+ LD_FLAGS	= -shared
+ EXT_SO		= so
+ 
+--- mo_tidl/ukmo/src/support/misc/Makefile	2017-12-13 02:36:55.061525000 +0000
++++ mo_tidl/ukmo/src/support/misc/Makefile	2017-12-13 02:37:46.029535929 +0000
+@@ -9,11 +9,11 @@
+ # For Portland Fortran Compiler
+ #FC		=  /opt/pgi/linux86/bin/pgf77
+ # For Intel Fortran Compiler
+-FC		= ifort
++#FC		= ifort
+ # For GNU Fortran Compiler
+-#FC		= /usr/bin/g77
++FC		= gfortran
+ 
+-FFLAGS		= -fpic -DHPUX -DPVW -real-size 32 -double-size 64 -integer-size 32
++FFLAGS		= -fPIC -DHPUX -DPVW -fdefault-real-8 -fdefault-double-8 -fcray-pointer
+ LD_FLAGS	= -shared
+ EXT_SO		= so
+ 
+--- mo_tidl/ukmo/src/support/pp_regrid_standalone/Makefile	2017-12-13 03:42:06.000067000 +0000
++++ mo_tidl/ukmo/src/support/pp_regrid_standalone/Makefile	2017-12-13 03:43:01.942426966 +0000
+@@ -9,11 +9,11 @@
+ # For Portland Fortran Compiler
+ #FC		=  /opt/pgi/linux86/bin/pgf77
+ # For Intel Fortran Compiler
+-FC		= ifort
++#FC		= ifort
+ # For GNU Fortran Compiler
+-#FC		= /usr/bin/g77
++FC		= gfortran
+ 
+-FFLAGS		= -fpic -DHPUX -DPVW -real-size 32 -double-size 64 -integer-size 32
++FFLAGS		= -fpic -DHPUX -DPVW -fdefault-real-8 -fdefault-double-8 -fcray-pointer -fno-range-check
+ LD_FLAGS	= -shared
+ EXT_SO		= so
+ 
+--- mo_tidl/ukmo/src/support/regrid_avg/Makefile	2017-12-13 04:22:15.793078000 +0000
++++ mo_tidl/ukmo/src/support/regrid_avg/Makefile	2017-12-13 04:23:26.031292000 +0000
+@@ -9,11 +9,11 @@
+ # For Portland Fortran Compiler
+ #FC		=  /opt/pgi/linux86/bin/pgf77
+ # For Intel Fortran Compiler
+-FC		= ifort
++#FC		= ifort
+ # For GNU Fortran Compiler
+-#FC		= /usr/bin/g77
++FC		= gfortran
+ 
+-FFLAGS		= -fpic -DHPUX -DPVW -real-size 32 -double-size 64 -integer-size 32
++FFLAGS		= -fpic -DHPUX -DPVW -fdefault-real-8 -fdefault-double-8 -fcray-pointer
+ LD_FLAGS	= -shared
+ EXT_SO		= so
+ 
+--- mo_tidl/ukmo/src/support/libukmo_unpack/Makefile	2017-12-13 05:14:00.302345000 +0000
++++ mo_tidl/ukmo/src/support/libukmo_unpack/Makefile	2017-12-13 05:14:45.062363410 +0000
+@@ -6,7 +6,8 @@
+ #       $Id: Makefile 6857 2012-11-14 16:57:59Z itam $
+ #-------------------------------------------------------------------------------
+ 
+-IDL_DIR		= /usr/local/itt/8/idl/idl
++# IDL_INSTALL_DIR provided by IDL module
++IDL_DIR         = $(IDL_INSTALL_DIR)
+ 
+ CC		= gcc
+ LD		= ld
+@@ -62,7 +63,7 @@
+ #                  fetchSRCEref : refetches all from SRCE (as above code)
+ #                  checksame    : compares locally-built .so with the current one in the 'standard place'
+ #
+-		make_library .
++		./make_library .
+ 		mv lib/$(MODULE_ORIGNAME).$(EXT_SO) ./$(MODULE).$(EXT_SO)
+ #               #remove the files we don't need (including the .a, because of odd problem - see http://fcm9/projects/idl/ticket/1952)
+ 		-rm lib/*.o lib/*.a
+--- mo_tidl/mogrib/src/Makefile	2017-12-13 05:29:10.072732000 +0000
++++ mo_tidl/mogrib/src/Makefile	2017-12-13 05:31:28.261635272 +0000
+@@ -40,17 +40,18 @@
+ # configure default directories
+ #
+ 
+-IDL_DIR 		= /usr/local/itt/idl/external
+-JASPER_DIR 		= $(TIDL_EXTERNAL_PATH)/jasper_latest_$(ARCH)
++# Env variables provided by modules
++IDL_DIR 		= $(IDL_INSTALL_DIR)
++JASPER_DIR 		= $(EBROOTJASPER)
+ #ECMWF_GRIB_API_DIR 	= $(TIDL_EXTERNAL_PATH)/ecmwf_grib_api_latest_$(ARCH)
+-ECMWF_GRIB_API_DIR 	= $(TIDL_EXTERNAL_PATH)/ecmwf_grib_api/1.9.16/linux$(ARCH)
++ECMWF_GRIB_API_DIR 	= $(EBROOTGRIB_API)
+ #ECMWF_GRIB_API_DIR 	= $(TIDL_EXTERNAL_PATH)/ecmwf_grib_api/1.8.0/linux$(ARCH)
+ 
+ # The following macros establish general defaults. They are overridden
+ # in the "all" rule as needed to satisfy a given platform's requirements.
+ 
+ CC		= gcc
+-C_FLAGS		= -I$(IDL_DIR)/include -I$(ECMWF_GRIB_API_DIR)/include -c $(CFLAGS)
++C_FLAGS		= -I$(IDL_DIR)/external/include -I$(ECMWF_GRIB_API_DIR)/include -c $(CFLAGS)
+ LD 		= ld
+ SHELL		= /bin/sh
+ X_CFLAGS	=
+@@ -140,7 +141,7 @@
+ 			@date
+ 
+ ecmwf_grib.$(EXT_SO) : 	$(MODULE).o
+-			$(LD) $(X_LD_FLAGS) -o $@ $^ $(X_LD_POST) $(ECMWF_GRIB_API_DIR)/lib/libgrib_api.a $(JASPER_DIR)/lib/libjasper.a
++			$(LD) $(X_LD_FLAGS) -o $@ $^ $(X_LD_POST) -L$(EBROOTGRIB_API)/lib -lgrib_api -L$(EBROOTJASPER)/lib64 -ljasper
+ 
+ .PHONY:			clean
+ clean : 

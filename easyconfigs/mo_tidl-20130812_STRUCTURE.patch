@@ -1,0 +1,86 @@
+--- mo_tidl/ukmo/src/support/misc/getp2c_32.f	2017-12-13 02:42:18.655195000 +0000
++++ mo_tidl/ukmo/src/support/misc/getp2c_32.f	2017-12-13 02:45:00.385511045 +0000
+@@ -68,11 +68,11 @@
+      
+ C     Declare the IDL string structure
+ 
+-      STRUCTURE /STRING/
++      TYPE STRING
+             INTEGER*2 SLEN
+             INTEGER*4 STYPE
+             INTEGER*4 S
+-      END STRUCTURE
++      END TYPE
+ 
+ C     Declare a parameter for the length of a Fortran string
+ 
+@@ -82,7 +82,7 @@
+ C     Declare subroutine formal parameters
+ 
+       INTEGER               N_ELEMENTS
+-      RECORD /STRING/       IDL_ARRAY(N_ELEMENTS)
++      TYPE(STRING)          IDL_ARRAY(N_ELEMENTS)
+       LOGICAL               PAD
+       CHARACTER*(*)         FORT_ARRAY(N_ELEMENTS)
+       INTEGER               FORT_ARRAY_LEN(N_ELEMENTS)
+@@ -99,14 +99,14 @@
+ 
+       DO I = 1, N_ELEMENTS
+ 
+-        IF (IDL_ARRAY(I).S .EQ. 0) THEN
++        IF (IDL_ARRAY(I)%S .EQ. 0) THEN
+           FORT_ARRAY_LEN(I) = 0
+         ELSE
+ C         Convert the IDL string to a Fortran string
+-          CALL IDL_2_FORT(%VAL(IDL_ARRAY(I).S), IDL_ARRAY(I).SLEN
++          CALL IDL_2_FORT(%VAL(IDL_ARRAY(I)%S), IDL_ARRAY(I)%SLEN
+      &,TMP_STR, ARRAY_LEN)
+ 
+-          FORT_ARRAY_LEN(I) = MIN(IDL_ARRAY(I).SLEN, ARRAY_LEN)
++          FORT_ARRAY_LEN(I) = MIN(IDL_ARRAY(I)%SLEN, ARRAY_LEN)
+         ENDIF
+ 
+         IF (FORT_ARRAY_LEN(I) .GT. 0) THEN
+--- mo_tidl/ukmo/src/support/misc/getp2c_64.f	2017-12-13 02:51:04.735624000 +0000
++++ mo_tidl/ukmo/src/support/misc/getp2c_64.f	2017-12-13 02:51:59.334456926 +0000
+@@ -68,11 +68,11 @@
+      
+ C     Declare the IDL string structure
+ 
+-      STRUCTURE /STRING/
++      TYPE STRING
+             INTEGER*2 SLEN
+             INTEGER*4 STYPE
+             INTEGER*8 S
+-      END STRUCTURE
++      END TYPE
+ 
+ C     Declare a parameter for the length of a Fortran string
+ 
+@@ -82,7 +82,7 @@
+ C     Declare subroutine formal parameters
+ 
+       INTEGER               N_ELEMENTS
+-      RECORD /STRING/       IDL_ARRAY(N_ELEMENTS)
++      TYPE(STRING)          IDL_ARRAY(N_ELEMENTS)
+       LOGICAL               PAD
+       CHARACTER*(*)         FORT_ARRAY(N_ELEMENTS)
+       INTEGER               FORT_ARRAY_LEN(N_ELEMENTS)
+@@ -99,14 +99,14 @@
+ 
+       DO I = 1, N_ELEMENTS
+ 
+-        IF (IDL_ARRAY(I).S .EQ. 0) THEN
++        IF (IDL_ARRAY(I)%S .EQ. 0) THEN
+           FORT_ARRAY_LEN(I) = 0
+         ELSE
+ C         Convert the IDL string to a Fortran string
+-          CALL IDL_2_FORT(%VAL(IDL_ARRAY(I).S), IDL_ARRAY(I).SLEN
++          CALL IDL_2_FORT(%VAL(IDL_ARRAY(I)%S), IDL_ARRAY(I)%SLEN
+      &,TMP_STR, ARRAY_LEN)
+ 
+-          FORT_ARRAY_LEN(I) = MIN(IDL_ARRAY(I).SLEN, ARRAY_LEN)
++          FORT_ARRAY_LEN(I) = MIN(IDL_ARRAY(I)%SLEN, ARRAY_LEN)
+         ENDIF
+ 
+         IF (FORT_ARRAY_LEN(I) .GT. 0) THEN

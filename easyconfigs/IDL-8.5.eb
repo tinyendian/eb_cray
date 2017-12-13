@@ -11,19 +11,21 @@ toolchain = {'name': 'dummy', 'version': 'dummy'}
 # Nothing to be done here
 skipsteps = ['source', 'configure', 'build', 'test', 'install']
 
+idl_install_dir = '/opt/IDL/idl85'
+
 # Only provide access to pre-installed IDL
 allow_prepend_abs_path = True
 modextrapaths = {
-    'PATH': '/opt/IDL/idl85/bin'
+    'PATH': idl_install_dir + '/bin'
 }
 
 modextravars = {
-    'IDL_DIR': '/opt/IDL/idl85/bin'
+    'IDL_INSTALL_DIR': idl_install_dir
 }
 
 sanity_check_paths = {
     'files': [],
-    'dirs': ['/opt/IDL/idl85/bin'],
+    'dirs': [idl_install_dir + '/bin'],
 }
 
 moduleclass = 'data'
