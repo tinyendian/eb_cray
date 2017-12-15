@@ -1,0 +1,37 @@
+easyblock = 'MakeCp'
+
+name = 'XIOS-NC4PAR'
+version = '1.0-r684'
+
+homepage = "http://forge.ipsl.jussieu.fr/ioserver"
+description = """XIOS stands for XML-IO-Server and is a library
+dedicated to I/O management in climate codes. This version uses
+netCDF4 with the parallel HDF5 library."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+
+# You will need to check out XIOS and create a tarball manually using 
+# svn co -r 684 http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/branchs/xios-1.0-r684 xios-1.0-r684
+# tar cfz XIOS-1.0-r684.tar.gz XIOS-1.0-r684
+source_urls = ['file://path/to/tarball']
+sources = ['XIOS-%(version)s.tar.gz']
+patches = ['%(name)s-%(version)s-CrayGNU-2017.06_arch-XC30_Cray.patch']
+
+dependencies = [
+    ('cray-hdf5-parallel/1.10.1.1', EXTERNAL_MODULE),
+    ('cray-netcdf-hdf5parallel/4.4.1.1.6', EXTERNAL_MODULE),
+]
+
+# XIOS uses its own build script and the FCM build system that uses
+# gmake. Use 8 build processes.
+prebuildopts = "./make_xios --prod --arch XC30_Cray --netcdf_lib netcdf4_par --job 8"
+
+# Copy these directories
+files_to_copy = ['bin', 'lib', 'doc', 'inc']
+
+sanity_check_paths = {
+    'files': ['bin/xios_server.exe', 'lib/libxios.a', ],
+    'dirs' : ['doc', 'inc'],
+}
+
+moduleclass = 'lib'
