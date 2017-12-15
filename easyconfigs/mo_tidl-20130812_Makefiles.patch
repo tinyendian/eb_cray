@@ -108,7 +108,7 @@
 +FC		= gfortran
  
 -FFLAGS		= -fpic -DHPUX -DPVW -real-size 32 -double-size 64 -integer-size 32
-+FFLAGS		= -fPIC -DHPUX -DPVW -fdefault-real-8 -fdefault-double-8
++FFLAGS		= -fPIC -DHPUX -DPVW
  LD_FLAGS	= -shared
  EXT_SO		= so
  
@@ -125,7 +125,7 @@
 +FC		= gfortran
  
 -FFLAGS		= -fpic -DHPUX -DPVW -real-size 32 -double-size 64 -integer-size 32
-+FFLAGS		= -fPIC -DHPUX -DPVW -fcray-pointer -fdefault-real-8 -fdefault-double-8
++FFLAGS		= -fPIC -DHPUX -DPVW -fcray-pointer
  LD_FLAGS	= -shared
  EXT_SO		= so
  
@@ -142,7 +142,7 @@
 +FC		= gfortran
  
 -FFLAGS		= -fpic -DHPUX -DPVW -real-size 32 -double-size 64 -integer-size 32
-+FFLAGS		= -fPIC -DHPUX -DPVW -fdefault-real-8 -fdefault-double-8 -fcray-pointer
++FFLAGS		= -fPIC -DHPUX -DPVW -fcray-pointer
  LD_FLAGS	= -shared
  EXT_SO		= so
  
@@ -159,7 +159,7 @@
 +FC		= gfortran
  
 -FFLAGS		= -fpic -DHPUX -DPVW -real-size 32 -double-size 64 -integer-size 32
-+FFLAGS		= -fpic -DHPUX -DPVW -fdefault-real-8 -fdefault-double-8 -fcray-pointer -fno-range-check
++FFLAGS		= -fpic -DHPUX -DPVW -fcray-pointer -fno-range-check
  LD_FLAGS	= -shared
  EXT_SO		= so
  
@@ -176,7 +176,7 @@
 +FC		= gfortran
  
 -FFLAGS		= -fpic -DHPUX -DPVW -real-size 32 -double-size 64 -integer-size 32
-+FFLAGS		= -fpic -DHPUX -DPVW -fdefault-real-8 -fdefault-double-8 -fcray-pointer
++FFLAGS		= -fpic -DHPUX -DPVW -fcray-pointer
  LD_FLAGS	= -shared
  EXT_SO		= so
  
