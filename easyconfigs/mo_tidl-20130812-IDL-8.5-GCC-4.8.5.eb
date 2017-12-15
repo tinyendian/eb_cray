@@ -21,7 +21,8 @@ patches = [
     'mo_tidl-20130812_STRUCTURE.patch',
     'mo_tidl-20130812_FTELL_FSEEK.patch',
     'mo_tidl-20130812_pp_regrid_standalone_subs_64.patch',
-    'mo_tidl-20130812_idlmake.patch'
+    'mo_tidl-20130812_idlmake.patch',
+    'mo_tidl-20130812_script.patch'
 ]
 checksums = ['8e64ef77be7e412e136b914c1596dc37']
 

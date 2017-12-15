@@ -1,0 +1,27 @@
+--- mo_tidl/ukmo/bin/tidlde_call	2017-12-13 07:21:06.314854000 +0000
++++ mo_tidl/ukmo/bin/tidlde_call	2017-12-13 07:22:04.734355927 +0000
+@@ -128,9 +128,9 @@
+ time_log=/tmp/tidl_$$.time
+ 
+ if [[ -x /usr/bin/time ]]; then
+-    eval /usr/bin/time -o ${time_log} -f \"REAL=%e USER=%U SYS=%S CPU=%P PAGEF=%F BATCH=${IS_BATCH}\" /usr/local/exelis/idl/bin/idlde $*
++    eval /usr/bin/time -o ${time_log} -f \"REAL=%e USER=%U SYS=%S CPU=%P PAGEF=%F BATCH=${IS_BATCH}\" $IDL_INSTALL_DIR/bin/idlde $*
+ else
+-    eval /usr/local/exelis/idl/bin/idlde $*
++    eval $IDL_INSTALL_DIR/bin/idlde $*
+ fi
+ 
+ rcStatus=$?
+--- mo_tidl/ukmo/bin/tidl_call	2017-12-13 07:25:31.122831000 +0000
++++ mo_tidl/ukmo/bin/tidl_call	2017-12-13 07:26:31.653677118 +0000
+@@ -25,8 +25,8 @@
+ #-------------------------------------------------------------------------------
+ 
+ export DESKTOP_UKMO_IDL=/usr/local/tidl8
+-export ITT_INSTALL_DIR=/usr/local/exelis/idl
+-export IDL_LIB=/usr/local/exelis/idl/lib
++export ITT_INSTALL_DIR=$IDL_INSTALL_DIR
++export IDL_LIB=$IDL_INSTALL_DIR/lib
+ 
+ 
+ # Display the license usage information.
