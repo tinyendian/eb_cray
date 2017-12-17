@@ -91,6 +91,19 @@ dependencies = [
 
 runtest = 'check'
 
+# GrADS needs an extra configuration file
+modextravars = {
+    'GAUDPT': '%(installdir)s/lib/udpt'
+}
+postinstallcmds = [
+    'echo "gxdisplay  Cairo    %(installdir)s/lib/libgxdCairo.so" >> %(installdir)s/lib/udpt',
+    'echo "gxdisplay  X11      %(installdir)s/lib/libgxdX11.so" >> %(installdir)s/lib/udpt',
+    'echo "gxdisplay  gxdummy  %(installdir)s/lib/libgxdummy.so" >> %(installdir)s/lib/udpt',
+    'echo "gxprint    Cairo    %(installdir)s/lib/libgxpCairo.so" >> %(installdir)s/lib/udpt',
+    'echo "gxprint    GD       %(installdir)s/lib/libgxpGD.so" >> %(installdir)s/lib/udpt',
+    'echo "gxprint    gxdummy  %(installdir)s/lib/libgxdummy.so" >> %(installdir)s/lib/udpt',
+]
+
 sanity_check_paths = {
     'files': ['bin/bufrscan', 'bin/grads', 'bin/grib2scan', 'bin/gribmap', 'bin/gribscan', 'bin/stnmap',
               'lib/libgxdCairo.%s' % SHLIB_EXT, 'lib/libgxdummy.%s' % SHLIB_EXT,
