@@ -1,0 +1,56 @@
+easyblock = 'Tarball'
+
+name = 'midl'
+version = '20140411-IDL-8.5'
+
+homepage = 'http://cms.ncas.ac.uk/documents/IDL/idl_guide.html'
+description = """The Met Office library is a collection of routines written in
+IDL at the Met Office, originally written in PV-WAVE in the Hadley Centre in
+the early 1990s, with development continuing to the present day. Its main
+purpose is to support analysis and visualisation of PP data produced by the
+Unified Model (UM)."""
+
+# A toolchain is not needed in this case.
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+# Tarball needs to be provided manually
+source_urls = ['']
+sources = ['midl_20140411.tar.gz']
+
+dependencies = [
+    ('IDL', '8.5', '', ('dummy', 'dummy')),
+]
+
+modextravars = {
+    'IDL_STARTUP': '%(installdir)s/niwa_idl/lib/idlstartup',
+    'IU_DIR': '%(installdir)s/ukmo_idl',
+    'IU_LIB': '%(installdir)s/ukmo_idl/lib',
+    'IU_DATA': '%(installdir)s/ukmo_idl/data',
+    'IU_BIN': '%(installdir)s/ukmo_idl/bin',
+    'IU_SHARED': '%(installdir)s/ukmo_idl/shared',
+    'IU_DLM': '%(installdir)s/ukmo_idl/dlm/Linux64',
+    'IU_MAN': '%(installdir)s/ukmo_idl/man',
+    'CR_IDL': '%(installdir)s/cr_idl',
+    'NCAS_IDL': '%(installdir)s/ncas_idl',
+    'NIWA_IDL': '%(installdir)s/niwa_idl',
+    'IDL_PATH': '<IDL_DEFAULT>:%(installdir)s/cr_idl/lib:%(installdir)s/ncas_idl/lib:%(installdir)s/niwa_idl/lib:%(installdir)s/ukmo_idl/lib',
+    'IDL_DLM_PATH': '<IDL_DEFAULT>:%(installdir)s/ukmo_idl/dlm/Linux64',
+    'WAVE_DATA_PATH': '%(installdir)s/ukmo_idl/data:%(installdir)s/ukmo_idl/static:%(installdir)s/cr_idl/data:%(installdir)s/ncas_idl/data',
+    'WAVE_SHARED_PATH': '%(installdir)s/ukmo_idl/shared/Linux64:%(installdir)s/cr_idl/shared/Linux64:%(installdir)s/ncas_idl/shared/Linux64',
+    'WAVE_PP_PATH': '%(installdir)s/ncas_idl/data/masks:.',
+    'WAVE_CODES_SCRIPT': '%(installdir)s/ukmo_idl/lib/codes_script',
+    'WAVE_MAX_COLORS': '100'
+}
+
+allow_prepend_abs_path = True
+modextrapaths = {
+    'PATH': ['%(installdir)s/ukmo_idl/bin'],
+    'MANPATH': ['%(installdir)s/ukmo_idl/man'],
+}
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['cr_idl', 'iu_misc', 'ncas_idl', 'ukmo_idl'],
+}
+
+moduleclass = 'data'
