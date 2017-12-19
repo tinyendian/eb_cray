@@ -1,0 +1,66 @@
+easyblock = 'Tarball'
+
+name = 'mo_tidl'
+version = '20130812-IDL-8.5'
+
+homepage = 'http://cms.ncas.ac.uk/documents/IDL/idl_guide.html'
+description = """The Met Office library is a collection of routines written in
+IDL at the Met Office, originally written in PV-WAVE in the Hadley Centre in
+the early 1990s, with development continuing to the present day. Its main
+purpose is to support analysis and visualisation of PP data produced by the
+Unified Model (UM)."""
+
+# A toolchain is not needed in this case.
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+
+# Tarball needs to be provided manually
+source_urls = ['']
+sources = ['mo_tidl_20130812_0938.tgz']
+patches = [
+    'mo_tidl-20130812_Makefiles.patch',
+    'mo_tidl-20130812_STRUCTURE.patch',
+    'mo_tidl-20130812_FTELL_FSEEK.patch',
+    'mo_tidl-20130812_pp_regrid_standalone_subs_64.patch',
+    'mo_tidl-20130812_idlmake.patch',
+    'mo_tidl-20130812_script.patch'
+]
+checksums = ['8e64ef77be7e412e136b914c1596dc37']
+
+dependencies = [
+    ('IDL', '8.5', '', ('dummy', 'dummy')),
+    ('JasPer', '2.0.12'),
+    ('grib_api', '1.23.1'),
+]
+
+modextravars = {
+    'IDL_DEV': '1',
+    'IDL_DEV_DEFAULT': '%(installdir)s',
+    'IDL_DEV_ACTIVE': '%(installdir)s',
+    'IDL_COMPATIBILITY_MODE': '2',
+    'MO_COPYRIGHT': '1',
+    'FCM_ENABLE': '0',
+}
+
+allow_prepend_abs_path = True
+modextrapaths = {
+    'PATH': ['%(installdir)s/ukmo/bin/external', '%(installdir)s/ukmo/bin',
+             '%(installdir)s/ukmo/bin/scripts', '%(installdir)s/ukmo/trans/bin']
+}
+
+# Workaround for dead symlinks that crash the copying process
+keepsymlinks = True
+
+# Build libraries
+# Note that the user who builds this module needs to create a "~/fcm" directory
+# for storing the build log.
+# Check the log file for errors!
+postinstallcmds = [
+    '. %(installdir)s/ukmo/bin/external/tidl_setup %(installdir)s; idlupdatedev'
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['cr', 'mogrib', 'nwp', 'trans', 'ukmo'],
+}
+
+moduleclass = 'data'

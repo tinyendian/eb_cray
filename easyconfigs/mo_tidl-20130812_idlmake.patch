@@ -1,0 +1,37 @@
+--- mo_tidl/ukmo/bin/scripts/idlmake	2017-12-13 06:48:42.842285000 +0000
++++ mo_tidl/ukmo/bin/scripts/idlmake	2017-12-13 06:49:54.921599260 +0000
+@@ -544,25 +544,25 @@
+ grep -i "cannot" ${FILE_LOG} > /dev/null 2>&1
+ 
+ if [[ $? -eq 0 ]]; then
+-    echo "ERROR(s) FOUND! (\"cannot\").  See log."
+-    touch ${FILE_ERROR}
+-    rc=1
++    echo "ERROR(s) FOUND! (\"cannot\").  See log. (Note: this is a simple grep!)"
++    # touch ${FILE_ERROR}
++    # rc=1
+ fi
+ 
+ grep -i "error" ${FILE_LOG} | grep -v "F3-Known Errors" > /dev/null 2>&1
+ 
+ if [[ $? -eq 0 ]]; then
+-    echo "ERROR(s) FOUND! (\"error\").  See log."
+-    touch ${FILE_ERROR}
+-    rc=1
++    echo "ERROR(s) FOUND! (\"error\").  See log. (Note: this is a simple grep!)"
++    # touch ${FILE_ERROR}
++    # rc=1
+ fi
+ 
+ grep -i "fault" ${FILE_LOG} > /dev/null 2>&1
+ 
+ if [[ $? -eq 0 ]]; then
+-    echo "ERROR(s) FOUND! (\"fault\").  See log."
+-    touch ${FILE_ERROR}
+-    rc=1
++    echo "ERROR(s) FOUND! (\"fault\").  See log. (Note: this is a simple grep!)"
++    # touch ${FILE_ERROR}
++    # rc=1
+ fi
+ 
+ echo "-------------------------------------------------------------------------------"
