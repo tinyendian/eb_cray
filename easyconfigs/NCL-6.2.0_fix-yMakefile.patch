@@ -1,0 +1,11 @@
+--- ni/src/mkwrap/yMakefile	2014-04-01 02:23:04.000000000 +0000
++++ ni/src/mkwrap/yMakefile	2018-01-03 21:59:53.909240259 +0000
+@@ -35,7 +35,7 @@
+ YACC		=	yacc
+ 
+ EXTRA_DEFINES = $(OS1_DEF) $(MAJOR_DEF)
+-SYS_LIBS        = -ll
++SYS_LIBS        = LexLibrary
+ 
+ HDRS		=	$(GEN_HDRS) $(STATIC_HDRS) 
+ 

@@ -1,0 +1,52 @@
+name = 'NCL'
+version = '6.2.0'
+
+homepage = 'http://www.ncl.ucar.edu'
+description = """NCL is an interpreted language designed specifically for scientific data analysis and 
+ visualization."""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+toolchainopts = {'cstd': 'c99', 'openmp': True}
+
+# Not sure if this FileId will always work
+source_urls = ['https://www.earthsystemgrid.org/dataset/ncl.620.source.0/file']
+sources = ['ncl_ncarg-%(version)s.tar.gz']
+patches = ['NCL-6.2.0_fix-types.patch', 'NCL-6.2.0_fix-yMakefile.patch']
+checksums = [
+    'a3c0e523b809bb10f333efce052cbf87652e21bc04eb81300103fbc6ef0ac7ae',  # ncl_ncarg-6.2.0.tar.gz
+    'f6dfaf95e5de9045745e122cb44f9c035f81fab92f5892991ddfe93945891c8f',  # NCL-6.2.0_fix-types.patch
+    '7b2d4608dc9aa26db02c274715606abe2ffdf7bf9a77a45b81b930d028af5905',  # NCL-6.2.0_fix-yMakefile.patch
+]
+
+osdependencies = [
+    ('libX11-devel'),
+    ('freetype-devel')
+]
+
+builddependencies = [
+    ('HDF-EOS', '2.19v1.00'),
+    ('HDF-EOS5', '5.1.15'),
+    ('g2lib', '3.1.0'),
+    ('g2clib', '1.6.0'),
+    ('makedepend', '1.0.5'),
+    ('libXaw', '1.0.12'),
+    ('flex', '2.6.4')
+]
+
+dependencies = [
+    ('hdf5_18/1.8.18', EXTERNAL_MODULE),
+    ('netCDF', '4.5.0'),
+    ('netCDF-Fortran', '4.4.4'),
+    ('UDUNITS', '2.2.25'),
+    ('Szip', '2.1.1'),
+    ('JasPer', '2.0.12'),
+    ('cairo', '1.14.10'),
+    ('GDAL', '2.2.1'),
+    ('GSL', '2.4'),
+    ('libiconv', '1.15'),
+]
+
+# NCL build system does not currently support parallel builds
+parallel = 1
+
+moduleclass = 'data'
