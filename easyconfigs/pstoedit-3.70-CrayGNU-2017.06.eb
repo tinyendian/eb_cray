@@ -1,0 +1,20 @@
+easyblock = 'ConfigureMake'
+
+name = 'pstoedit'
+version = '3.70'
+
+homepage = 'http://www.pstoedit.net'
+description = """pstoedit translates PostScript and PDF graphics into other vector formats."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+
+source_urls = ['https://sourceforge.net/projects/pstoedit/files/pstoedit/3.70']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['06b86113f7847cbcfd4e0623921a8763143bbcaef9f9098e6def650d1ff8138c']
+
+sanity_check_paths = {
+    'files': ['bin/pstoedit', ],
+    'dirs': [],
+}
+
+moduleclass = 'tools'
