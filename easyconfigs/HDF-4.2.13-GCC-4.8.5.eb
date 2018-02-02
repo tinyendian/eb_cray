@@ -39,4 +39,10 @@ sanity_check_paths = {
     'dirs': ['bin', 'include'],
 }
 
+# Avoid collision between netCDF and HDF versions
+postinstallcmds = [
+    'mv %(installdir)s/bin/ncdump %(installdir)s/bin/hdf_ncdump',
+    'mv %(installdir)s/bin/ncgen %(installdir)s/bin/hdf_ncgen',
+]
+
 moduleclass = 'data'
