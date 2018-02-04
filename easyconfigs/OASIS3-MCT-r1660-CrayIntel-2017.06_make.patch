@@ -1,0 +1,45 @@
+--- oasis3-mct-r1660_UKMO_GC3/util/make_dir/make.cray_xc40_mo	2018-02-01 22:42:01.763562000 +0000
++++ oasis3-mct-r1660_UKMO_GC3/util/make_dir/make.cray_xc40_mo	2018-02-01 22:49:19.867191000 +0000
+@@ -14,7 +14,7 @@
+ #COUPLE          = $(HOME)/oasis3-mct
+ #
+ # ARCHDIR       : directory created when compiling
+-ARCHDIR         = $(PRISMHOME)/crayxc40
++ARCHDIR         = $(PRISMHOME)/crayxc50
+ #
+ # MPI library
+ MPIDIR      = 
+@@ -33,7 +33,7 @@
+ F           = $(F90)
+ f90         = $(F90)
+ f           = $(F90)
+-CC          = gcc
++CC          = cc
+ LD          = ftn
+ AR          = ar
+ ARFLAGS     = -ruv
+@@ -48,12 +48,12 @@
+ #
+ # -g is necessary in F90FLAGS and LDFLAGS for pgf90 versions lower than 6.1
+ # 
+-F90FLAGS_1  = -e m -sreal64 -O2 $(PSMILE_INCDIR) $(CPPDEF)
++F90FLAGS_1  = -real-size 64 -O2 $(PSMILE_INCDIR) $(CPPDEF)
+ f90FLAGS_1  = $(F90FLAGS_1)
+ FFLAGS_1    = $(F90FLAGS_1)
+ fFLAGS_1    = $(F90FLAGS_1)
+ CCFLAGS_1   = $(PSMILE_INCDIR) $(CPPDEF) 
+-LDFLAGS   =  -h byteswapio
++LDFLAGS   = 
+ #
+ ###################
+ #
+--- oasis3-mct-r1660_UKMO_GC3/util/make_dir/make.inc	2018-02-01 22:42:01.750477000 +0000
++++ oasis3-mct-r1660_UKMO_GC3/util/make_dir/make.inc	2018-02-01 22:59:06.950820986 +0000
+@@ -10,6 +10,6 @@
+ # Note: Choose one of these includes files and modify it according to your
+ #       local settings. Replace the currently active file with your own.
+ #
+-include  $(HOME)/oasis3-mct/util/make_dir/make.intel_corail
++include  $(COUPLE)/util/make_dir/make.cray_xc40_mo
+ #
+ ### End User configurable options ###

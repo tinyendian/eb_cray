@@ -1,0 +1,39 @@
+easyblock = 'MakeCp'
+
+name = 'XIOS-NC4-OASIS3MCT'
+version = 'r952'
+
+homepage = "http://forge.ipsl.jussieu.fr/ioserver"
+description = """XIOS stands for XML-IO-Server and is a library
+dedicated to I/O management in climate codes. This version uses
+netCDF4 with the serial HDF5 library and supports the
+OASIS3-MCT coupler."""
+
+toolchain = {'name': 'CrayIntel', 'version': '2017.06'}
+
+# You will need to check out XIOS and create a tarball manually using 
+# svn co http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/trunk@952 XIOS-r952
+# tar cfz XIOS-r952.tar.gz XIOS-r952
+source_urls = ['file://path/to/tarball']
+sources = ['XIOS-%(version)s.tar.gz']
+patches = ['%(name)s-%(version)s_arch-XC30_Cray.patch']
+
+dependencies = [
+    ('cray-hdf5/1.10.1.1', EXTERNAL_MODULE),
+    ('cray-netcdf/4.4.1.1.6', EXTERNAL_MODULE),
+    ('OASIS3-MCT', 'r1660'),
+]
+
+# XIOS uses its own build script and the FCM build system that uses
+# gmake. Use 8 build processes.
+prebuildopts = "./make_xios --prod --arch XC30_Cray --netcdf_lib netcdf4_seq --use_oasis oasis3_mct --job 8"
+
+# Copy these directories
+files_to_copy = ['bin', 'lib', 'doc', 'inc']
+
+sanity_check_paths = {
+    'files': ['bin/xios_server.exe', 'lib/libxios.a', ],
+    'dirs' : ['doc', 'inc'],
+}
+
+moduleclass = 'lib'

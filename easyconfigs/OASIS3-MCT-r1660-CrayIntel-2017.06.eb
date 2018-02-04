@@ -1,0 +1,38 @@
+easyblock = 'MakeCp'
+
+name = 'OASIS3-MCT'
+version = 'r1660'
+
+homepage = "https://portal.enes.org/oasis"
+description = """The OASIS coupler is a software allowing synchronized exchanges of coupling information between numerical codes representing different components of the climate system."""
+
+toolchain = {'name': 'CrayIntel', 'version': '2017.06'}
+
+# You will need to check out OASIS3-MCT and create a tarball manually using 
+# svn co https://oasis3mct.cerfacs.fr/svn/branches/dev_shaddad/r1660_UKMO_GC3@1765
+# mv r1660_UKMO_GC3 oasis3-mct-r1660_UKMO_GC3
+# tar czf oasis3-mct-r1660_UKMO_GC3.tar.gz oasis3-mct-r1660_UKMO_GC3
+source_urls = ['file://path/to/tarball']
+sources = ['oasis3-mct-%(version)s_UKMO_GC3.tar.gz']
+patches = ['%(name)s-%(version)s-CrayIntel-2017.06_make.patch']
+
+dependencies = [
+    ('cray-hdf5/1.10.1.1', EXTERNAL_MODULE),
+    ('cray-netcdf/4.4.1.1.6', EXTERNAL_MODULE),
+]
+
+prebuildopts = 'cd util/make_dir; '
+buildopts = '-f TopMakefileOasis3 COUPLE=%(builddir)s/oasis3-mct-%(version)s_UKMO_GC3 '
+buildopts += 'PRISMHOME=%(builddir)s/oasis3-mct-%(version)s_UKMO_GC3'
+
+parallel = 1
+
+# Copy these directories
+files_to_copy = ['crayxc50/build', 'crayxc50/lib']
+
+sanity_check_paths = {
+    'files': ['lib/libmct.a', 'lib/libmpeu.a', 'lib/libpsmile.MPI1.a', 'lib/libscrip.a', ],
+    'dirs' : ['build', 'lib'],
+}
+
+moduleclass = 'lib'
