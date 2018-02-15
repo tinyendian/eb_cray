@@ -1,0 +1,28 @@
+easyblock = 'ConfigureMake'
+
+name = 'jpeg'
+version = '9c'
+versionsuffix = 'static'
+
+homepage = 'http://www.ijg.org/'
+description = """The JasPer Project is an open-source initiative to provide a free
+ software-based reference implementation of the codec specified in the JPEG-2000 Part-1 standard."""
+
+toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+toolchainopts = {'static' : True, 'pic' : True}
+
+source_urls = ['http://www.ijg.org/files']
+sources = ['jpegsrc.v9c.tar.gz']
+checksums = ['1f3a3f610f57e88ff3f1f9db530c605f3949ee6e78002552e324d493cf086ad4']
+
+# Missing dependency
+#configopts = ''
+
+runtest = 'test'
+
+sanity_check_paths = {
+    'files': ['lib/libjpeg.a'],
+    'dirs': ['bin'],
+}
+
+moduleclass = 'vis'
