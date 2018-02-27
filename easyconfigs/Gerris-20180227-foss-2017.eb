@@ -1,0 +1,33 @@
+easyblock = 'ConfigureMake'
+
+name = 'Gerris'
+version = '20180227'
+
+homepage = "http://gfs.sourceforge.net/wiki/index.php/Main_Page"
+description = """Gerris is a Free Software program for the solution of the partial differential equations describing fluid flow."""
+
+toolchain = {'name': 'foss', 'version': '2017b'}
+
+source_urls = ['http://gerris.dalembert.upmc.fr/gerris']
+sources = ['gerris-snapshot.tar.gz']
+
+dependencies = [
+    ('GTS', '121130', '', ('GCC', '4.8.5')),
+    ('GSL', '2.4', '', ('GCC', '4.8.5')),
+    ('PROJ', '4.9.3', '', ('GCC', '4.8.5')),
+    ('netCDF', '4.5.0', '', ('GCC', '4.8.5')),
+]
+
+# Some tests seem to be set up incorrectly
+# runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['bin/bat2gts', 'bin/gerris2D', 'bin/gfs2doc', 'bin/gfs2oogl2D', 'bin/gfscombine2D', 'bin/gfscompare2D', 'bin/gfs-highlight',
+              'bin/gfsjoin2D', 'bin/gfsplot', 'bin/kdt2kdt', 'bin/ppm2mpeg', 'bin/ppm2video', 'bin/rsurface2kdt', 'bin/streamanime',
+              'bin/darcs2dist', 'bin/gerris3D', 'bin/gfs2gfs', 'bin/gfs2oogl3D', 'bin/gfscombine3D', 'bin/gfscompare3D', 'bin/gfsjoin',
+              'bin/gfsjoin3D', 'bin/gfsxref', 'bin/kdtquery', 'bin/ppm2theora', 'bin/ppmcombine', 'bin/shapes', 'bin/xyz2kdt',
+              'lib/libgfs2D.a', 'lib/libgfs2D.%s' % SHLIB_EXT, 'lib/libgfs3D.a', 'lib/libgfs3D.%s' % SHLIB_EXT],
+    'dirs': ['include', 'lib/gerris'],
+}
+
+moduleclass = 'tools'

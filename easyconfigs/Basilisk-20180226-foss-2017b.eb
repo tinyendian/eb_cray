@@ -1,0 +1,42 @@
+easyblock = 'MakeCp'
+
+name = 'Basilisk'
+version = '20180226'
+
+homepage = "basilisk.fr"
+description = """Basilisk is a Free Software program for the solution of partial differential equations on adaptive Cartesian meshes."""
+
+toolchain = {'name': 'foss', 'version': '2017b'}
+
+source_urls = ['http://basilisk.fr/basilisk']
+sources = ['basilisk.tar.gz']
+
+osdependencies = [('flex')]
+
+dependencies = [
+    ('gnuplot', '5.2.2', '', ('GCC', '4.8.5')),
+    ('pstoedit', '3.70', '', ('GCC', '4.8.5')),
+    ('GSL', '2.4', '', ('GCC', '4.8.5')),
+    ('Valgrind', '3.13.0', '', ('GCC', '4.8.5'))
+]
+
+skipsteps = ['configure', 'build']
+
+keepsymlinks = True
+files_to_copy = ['*']
+
+# Basilisk is a toolbox for creating physics simulations and uses a compiler wrapper
+# called "qcc" to build codes. The wrapper needs to know location of source files,
+# so it needs to built after installing Basilisk.
+postinstallcmds = ['export BASILISK=%(installdir)s; export PATH=$PATH:%(installdir)s; cd %(installdir)s; ln -s config.gcc config; make -k; make; ']
+
+sanity_check_paths = {
+    'files': ['qcc'],
+    'dirs': ['kdt'],
+}
+
+allow_prepend_abs_path = True
+modextrapaths = {'PATH': '%(installdir)s'}
+modextravars = {'BASILISK': '%(installdir)s'}
+
+moduleclass = 'tools'
