@@ -1,0 +1,30 @@
+easyblock = 'ConfigureMake'
+
+name = 'FriBidi'
+version = '1.0.1'
+
+homepage = "https://github.com/fribidi/fribidi"
+description = """The Free Implementation of the Unicode Bidirectional Algorithm."""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+
+source_urls = ['https://github.com/fribidi/fribidi/archive']
+sources = ['v%(version)s.tar.gz']
+checksums = ['243d88a45e94facfdd06d51a83849a6256b60f9db0b8d491027bea6a8cabef0b']
+
+dependencies = [
+    ('GLib', '2.53.5'),
+]
+
+preconfigopts = './bootstrap; '
+
+parallel = 1
+
+runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['bin/fribidi', 'lib/libfribidi.%s' % SHLIB_EXT],
+    'dirs': ['include'],
+}
+
+moduleclass = 'tools'

@@ -1,0 +1,40 @@
+easyblock = 'ConfigureMake'
+
+name = 'Pango'
+version = '1.41.1'
+
+homepage = 'http://www.pango.org/'
+description = """Pango is a library for laying out and rendering of text, with an emphasis on internationalization.
+Pango can be used anywhere that text layout is needed, though most of the work on Pango so far has been done in the
+context of the GTK+ widget toolkit. Pango forms the core of text and font handling for GTK+-2.x."""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+
+source_urls = [FTPGNOME_SOURCE]
+sources = [SOURCELOWER_TAR_XZ]
+checksums = ['1353a4cf5227299294955d0c6232326b346b087ebac6496241d54ca5d2e2abc3']
+
+dependencies = [
+     ('GLib', '2.53.5'),
+     ('cairo', '1.14.10'),
+     ('HarfBuzz', '1.7.5'),
+     ('fontconfig', '2.11.93'),
+     ('FriBidi', '1.0.1'),
+]
+
+configopts = "--enable-static --enable-shared "
+
+runtest = 'check'
+
+modextrapaths = {
+    'XDG_DATA_DIRS': 'share',
+}
+
+sanity_check_paths = {
+    'files': ['bin/pango-view', 'lib/libpango-1.0.a', 'lib/libpango-1.0.%s' % SHLIB_EXT,
+             'lib/libpangocairo-1.0.a', 'lib/libpangocairo-1.0.%s' % SHLIB_EXT,
+             'lib/libpangoft2-1.0.a', 'lib/libpangoft2-1.0.%s' % SHLIB_EXT],
+    'dirs': ['include'],
+}
+
+moduleclass = 'vis'

@@ -1,0 +1,33 @@
+easyblock = 'ConfigureMake'
+
+name = 'GLib'
+version = '2.53.5'
+
+homepage = 'http://www.gtk.org/'
+description = """GLib is one of the base libraries of the GTK+ project"""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+toolchainopts = {'pic': True}
+
+source_urls = [FTPGNOME_SOURCE]
+sources = [SOURCELOWER_TAR_XZ]
+checksums = ['991421f41a4ed4cc1637e5f9db0d03fd236d2cbd19f3c5b097a343bec5126602']
+
+dependencies = [
+    ('libffi', '3.2.1'),
+    ('libxml2', '2.9.4'),
+    ('PCRE', '8.40'),
+]
+
+configopts = "--disable-maintainer-mode --disable-silent-rules --disable-libelf --disable-systemtap "
+configopts += "--enable-static --enable-shared --disable-libmount"
+
+# Test runs for a very long time
+# runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['lib/libglib-%(version_major)s.0.a', 'lib/libglib-%%(version_major)s.0.%s' % SHLIB_EXT],
+    'dirs': ['bin', 'include'],
+}
+
+moduleclass = 'vis'

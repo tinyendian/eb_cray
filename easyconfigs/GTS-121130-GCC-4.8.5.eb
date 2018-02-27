@@ -1,0 +1,29 @@
+easyblock = 'ConfigureMake'
+
+name = 'GTS'
+version = '121130'
+
+homepage = 'http://gts.sourceforge.net/'
+description = """GTS stands for the GNU Triangulated Surface Library.
+ It is an Open Source Free Software Library intended to provide a set of useful
+ functions to deal with 3D surfaces meshed with interconnected triangles.
+"""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+
+source_urls = ['http://gts.sourceforge.net/tarballs']
+sources = ['gts-snapshot-%(version)s.tar.gz']
+
+dependencies = [
+    ('GLib', '2.53.5')
+]
+
+# Test suite does not run
+# runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['lib/libgts.%s' % SHLIB_EXT, 'bin/gts2oogl', 'bin/gtscheck'],
+    'dirs': []
+}
+
+moduleclass = 'vis'

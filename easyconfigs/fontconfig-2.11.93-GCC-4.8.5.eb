@@ -1,0 +1,25 @@
+easyblock = 'ConfigureMake'
+
+name = "fontconfig"
+version = '2.11.93'
+
+homepage = 'http://www.freedesktop.org/software/fontconfig'
+description = """Fontconfig is a library designed to provide system-wide font configuration, customization and
+application access."""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+
+source_urls = ['http://www.freedesktop.org/software/fontconfig/release/']
+sources = [SOURCE_TAR_GZ]
+checksums = ['296b5e83189589e537992d65ff01e0cd74eba9a91eb16a6890ce942e3695c526']
+
+dependencies = [
+    ('expat', '2.2.5'),
+    ('freetype', '2.8'),
+]
+
+configopts = '--disable-docs '
+
+runtest = 'check'
+
+moduleclass = 'vis'
