@@ -205,7 +205,6 @@ class EB_CP2K(EasyBlock):
             self.libsmm = '-L%s/lib -lxsmmf -lxsmm' % libxsmm
             options['LIBS'] += ' %s ' % self.libsmm
             self.log.debug('Using libxsmm %s' % libxsmm)
-            print "-=-=-=-= using libxsmm: %s" % libxsmm
         elif libsmm:
             libsmms = glob.glob(os.path.join(libsmm, 'lib', 'libsmm_*nn.a'))
             dfs = [os.path.basename(os.path.splitext(x)[0]).replace('lib', '-D__HAS_') for x in libsmms]
@@ -430,9 +429,7 @@ class EB_CP2K(EasyBlock):
 
             options['DFLAGS'] += ' -D__LIBXC'
             if LooseVersion(cur_libxc_version) >= LooseVersion('2.2'):
-                #options['LIBS'] += ' /home/schoenherrm/easybuild/software/libxc/2.2.2-CrayGNU-2017.06/lib/libxcf90.a /home/schoenherrm/easybuild/software/libxc/2.2.2-CrayGNU-2017.06/lib/libxc.a ' 
                 options['LIBS'] += ' -L%s/lib -lxcf90 -lxc' % libxc
-                print "-=-=-=-=-= libxc DIR: %s" % libxc
             else:
                 options['LIBS'] += ' -L%s/lib -lxc' % libxc
             self.log.info("Using Libxc-%s" % cur_libxc_version)

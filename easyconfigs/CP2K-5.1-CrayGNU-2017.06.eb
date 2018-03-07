@@ -29,11 +29,10 @@ checksums = [
 # Missing dependency
 configopts = '-D__FFTW3 -D__LIBXC -D__LIBINT '
 
-
 dependencies = [
     ('FFTW', '3.3.7'),
     ('Libint', '1.1.4'),
-    ('libxc', '2.2.2'),
+    ('libxc', '2.2.2'),   
     ('libxsmm', '1.8.3'),
 ]
 #
@@ -47,8 +46,8 @@ builddependencies = [
 parallel = 1
 
 # regression test
-#runtest = False
-runtest = True
+runtest = False
+#runtest = True
 #--mpi-cmd-template="srun -n %(nr_ranks)s --oversubscribe %(cmd)s"
 # regression test reports failures
 #ignore_regtest_fails = False
