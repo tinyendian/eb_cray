@@ -1,0 +1,29 @@
+# Jorge Bornemann
+import os.path
+
+name = 'splat'
+version = '1.0.4'
+
+homepage = 'http://niwa.co.nz'
+description = """Splat deploys (builds and installs) the components of heterogenous systems such as cylc suites, described by splat config files, into target directory trees."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+# must save tarball under s/splat/splat-1.0.4.tgz
+# Tarball to be sourced from https://git.niwa.local/oliverh/splat/repository/archive.tar.gz?ref=1.0.4
+source_urls = ['file://s/splat']
+sources = ['splat-%(version)s.tar.gz']
+checksums = ['dfcd7c79ee1edc6b554fd25101f1fbcc']
+
+easyblock = 'Tarball'
+
+# This is a bit of a hack. The sharp sign (#) at the end is critical! prebuildopts 
+# are all the commands passed before make is invoked. splat does not use make 
+# so we're commenting out the make command. It's a no op command. 
+prebuildopts = ' #'
+
+runtest = False
+
+files_to_copy = ['bin','conf','examples','lib']
+
+moduleclass = 'tools'
