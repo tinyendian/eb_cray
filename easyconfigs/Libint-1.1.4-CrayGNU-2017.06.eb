@@ -9,9 +9,14 @@ toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
 toolchainopts = {'opt': True, 'pic': True}
 
 sources = [SOURCELOWER_TAR_GZ]
+checksums = ['f67b13bdf1135ecc93b4cff961c1ff33614d9f8409726ddc8451803776885cff']
+
 source_urls = ('http://sourceforge.net/projects/libint/files/v1-releases/', 'download')
 
 configopts = "--enable-deriv --enable-r12"
+
+# Package does not seem to come with any tests
+# runtest = 'check'
 
 sanity_check_paths = {
     'files': ['include/lib%(x)s/lib%(x)s.h' % {'x': x} for x in ['deriv', 'int', 'r12']] +
