@@ -17,12 +17,7 @@ checksums = ['dfcd7c79ee1edc6b554fd25101f1fbcc']
 
 easyblock = 'Tarball'
 
-# This is a bit of a hack. The sharp sign (#) at the end is critical! prebuildopts 
-# are all the commands passed before make is invoked. splat does not use make 
-# so we're commenting out the make command. It's a no op command. 
-prebuildopts = ' #'
-
-runtest = False
+skipsteps = ['configure', 'build', 'test']
 
 files_to_copy = ['bin','conf','examples','lib']
 
