@@ -1,0 +1,15 @@
+easyblock = "Toolchain"
+
+name = 'GCC'
+version = '6.3.0'
+
+homepage = '(none)'
+description = """GNU Compiler Collection (GCC) based compiler toolchain."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+dependencies = [
+    ('gcc/6.3.0', EXTERNAL_MODULE),
+]
+
+moduleclass = 'toolchain'
