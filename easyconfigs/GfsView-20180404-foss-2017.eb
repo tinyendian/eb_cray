@@ -15,6 +15,7 @@ checksums = ['60440319e506d78f7bb5ebf63383f541e30d5e99ad05ea175876fb346e0766d9']
 
 dependencies = [
     ('Gerris', '20180227'),
+    ('FTGL', '2.1.3-rc5', '', ('GCC', '4.8.5'))
 ]
 
 runtest = 'check'
