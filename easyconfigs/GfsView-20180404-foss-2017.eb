@@ -1,0 +1,28 @@
+easyblock = 'ConfigureMake'
+
+name = 'GfsView'
+version = '20180404'
+
+homepage = "http://gfs.sourceforge.net/wiki/index.php/Main_Page"
+description = """Gerris is a Free Software program for the solution of the partial differential equations describing fluid flow.
+                 GfsView is a visualisation application for Gerris output."""
+
+toolchain = {'name': 'foss', 'version': '2017b'}
+
+source_urls = ['http://gerris.dalembert.upmc.fr/gerris']
+sources = ['gfsview-snapshot.tar.gz']
+checksums = ['60440319e506d78f7bb5ebf63383f541e30d5e99ad05ea175876fb346e0766d9']
+
+dependencies = [
+    ('Gerris', '20180227'),
+]
+
+runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['bin/gfsview', 'bin/gfsview2D', 'bin/gfsview3D', 'lib/libgfsgl2D.a', 'lib/libgfsgl3D.a',
+              'lib/libgfsgl2D.%s' % SHLIB_EXT, 'lib/libgfsgl3D.%s' % SHLIB_EXT],
+    'dirs': ['share'],
+}
+
+moduleclass = 'vis'
