@@ -24,10 +24,6 @@ sources = [SOURCE_TAR_GZ]
 checksums = ['a416d22f02bdf3873ef82c5eb7f8e94146795811ef808e12b035ada88ef7b1a1']
 
 dependencies = [
-    ('fontconfig', '2.11.93'),
-    ('freetype', '2.8'),
-    ('cairo', '1.14.10'),
-    ('Pango', '1.41.1'),
     ('libjpeg-turbo', '1.5.2'),
     ('libpng', '1.6.32'),
     ('libgd', '2.2.5'),
