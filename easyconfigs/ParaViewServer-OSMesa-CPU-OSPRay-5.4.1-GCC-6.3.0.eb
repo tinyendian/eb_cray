@@ -1,15 +1,15 @@
 easyblock = 'CMakeMake'
 
-name = 'ParaViewServer-Mesa-CPU'
+name = 'ParaViewServer-OSMesa-CPU-OSPRay'
 version = '5.4.1'
 
 homepage = "http://www.paraview.org"
 description = """
 ParaView is a scientific parallel visualizer.
 
-This version supports CPU-only rendering using the
-Mesa library, it does not support GPU rendering,
-and it does not provide a GUI.
+This version supports CPU-only rendering without
+X context using the OSMesa library, it does not
+support GPU rendering, and it does not provide a GUI.
 
 Use the GALLIUM_DRIVER environment variable to choose
 a software renderer, it is recommended to use
@@ -17,6 +17,8 @@ a software renderer, it is recommended to use
 GALLIUM_DRIVER=swr
 
 for best performance.
+
+Ray tracing using the OSPRay library is also supported.
 """
 
 toolchain = {'name': 'GCC', 'version': '6.3.0'}
@@ -30,9 +32,13 @@ checksums = ['390d0f5dc66bf432e202a39b1f34193af4bf8aad2355338fa5e2778ea07a80e4']
 dependencies = [
     ('hdf5_18/1.8.18', EXTERNAL_MODULE),
     ('Mesa', '18.0.0'),
+    ('tbb', '2018_U3'),
+    ('OSPRay', '1.5.0')
 ]
 
-builddependencies = [('CMake', '3.10.2')]
+builddependencies = [
+    ('CMake', '3.10.2'),
+]
 
 separate_build_dir = True
 
@@ -40,14 +46,16 @@ separate_build_dir = True
 configopts = '-DCMAKE_BUILD_TYPE=Release '
 configopts += '-DPARAVIEW_INSTALL_DEVELOPMENT_FILES=ON '
 configopts += '-DVTK_USE_SYSTEM_HDF5=ON -DPARAVIEW_ENABLE_PYTHON=ON -DBUILD_SHARED_LIBS=ON '
-configopts += '-DPARAVIEW_BUILD_QT_GUI=OFF -DVTK_USE_X=ON '
-configopts += '-DOPENGL_INCLUDE_DIR=$EBROOTMESA/include '
-configopts += '-DOPENGL_gl_LIBRARY=$EBROOTMESA/lib/libGL.so '
+configopts += '-DPARAVIEW_BUILD_QT_GUI=OFF -DVTK_USE_X=OFF '
+configopts += '-DOPENGL_INCLUDE_DIR=IGNORE '
+configopts += '-DOPENGL_gl_LIBRARY=IGNORE '
 configopts += '-DOSMESA_INCLUDE_DIR=$EBROOTMESA/include '
 configopts += '-DOSMESA_LIBRARY=$EBROOTMESA/lib/libOSMesa.so '
 configopts += '-DVTK_OPENGL_HAS_OSMESA=ON '
-configopts += '-DVTK_SMP_IMPLEMENTATION_TYPE=OpenMP '
+configopts += '-DVTK_SMP_IMPLEMENTATION_TYPE=tbb '
 configopts += '-DPARAVIEW_ENABLE_CATALYST=ON '
+configopts += '-DPARAVIEW_USE_OSPRAY=ON '
+configopts += '-DOSPRAY_INSTALL_DIR=$EBROOTOSPRAY '
 
 # Without internet connection turn off testing (uncomment the following line)
 # configopts += '-DBUILD_TESTING=OFF '

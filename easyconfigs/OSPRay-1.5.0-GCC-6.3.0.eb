@@ -1,0 +1,41 @@
+easyblock = 'CMakeMake'
+
+name = 'OSPRay'
+version = '1.5.0'
+
+homepage = "https://www.ospray.org"
+description = """
+OSPRay features interactive CPU rendering capabilities geared towards Scientific Visualization applications. Advanced shading effects such as Ambient Occlusion, shadows, and transparency can be rendered interactively, enabling new insights into data exploration.
+"""
+
+toolchain = {'name': 'GCC', 'version': '6.3.0'}
+
+source_urls = ['https://github.com/%(name)s/%(name)s/archive']
+sources = ['v%(version)s.tar.gz']
+checksums = ['c6708bea857d20102c29968601ddb52d2cd341b91dae6e74d4a1eddb788d6e03']
+
+builddependencies = [
+    ('CMake', '3.10.2'),
+    ('ispc', '1.9.2'),
+]
+
+dependencies = [
+    ('tbb', '2018_U3'),
+    ('LLVM', '6.0.0'),
+    ('Mesa', '18.0.0'),
+    ('Embree', '2.17.4'),
+]
+
+separate_build_dir = True
+
+# Package does not seem to come with tests
+# runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['bin/ospBenchmark', 'bin/ospCvtParaViewTfcn', 'bin/ospExampleViewer', 'bin/ospRawToAmr',
+              'lib64/libospray.%s' % SHLIB_EXT],
+    'dirs': ['include/ospray', 'share'],
+}
+
+moduleclass = 'vis'
+

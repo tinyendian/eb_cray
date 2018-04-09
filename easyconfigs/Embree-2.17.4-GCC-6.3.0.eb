@@ -1,0 +1,51 @@
+easyblock = 'CMakeMake'
+
+name = 'Embree'
+version = '2.17.4'
+
+homepage = "https://embree.github.io/"
+description = """
+Embree is a collection of high-performance ray tracing kernels, developed at Intel. The target users of Embree are graphics application engineers who want to improve the performance of their photo-realistic rendering application by leveraging Embree's performance-optimized ray tracing kernels.
+"""
+
+toolchain = {'name': 'GCC', 'version': '6.3.0'}
+
+source_urls = ['https://github.com/%(name)s/%(name)s/archive']
+sources = ['v%(version)s.tar.gz']
+checksums = ['4bf9087a5c33483f3bcb88d335070aff95b688a2a09a35f936a99bd915090af3']
+
+builddependencies = [
+    ('CMake', '3.10.2'),
+    ('ispc', '1.9.2'),
+]
+
+dependencies = [
+    ('tbb', '2018_U3'),
+    ('LLVM', '6.0.0'),
+    ('Mesa', '18.0.0'),
+]
+
+# Use Clang, GCC crashes with an internal compiler error in AVX512 intrinsics
+configopts = '-DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang '
+configopts += '-DEMBREE_TUTORIALS=OFF -DEMBREE_MAX_ISA=AVX512SKX '
+# These are required by OSPRay
+configopts += '-DEMBREE_ISPC_SUPPORT=ON '
+configopts += '-DEMBREE_INTERSECTION_FILTER=ON '
+configopts += '-DEMBREE_INTERSECTION_FILTER_RESTORE=ON '
+configopts += '-DEMBREE_GEOMETRY_TRIANGLES=ON '
+configopts += '-DEMBREE_GEOMETRY_USER=ON '
+configopts += '-DEMBREE_GEOMETRY_HAIR=ON '
+configopts += '-DEMBREE_RAY_PACKETS=ON '
+
+separate_build_dir = True
+
+# Package does not seem to come with tests
+# runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['lib64/libembree.%s' % SHLIB_EXT],
+    'dirs': ['bin/embree2', 'include/embree2', 'share'],
+}
+
+moduleclass = 'vis'
+

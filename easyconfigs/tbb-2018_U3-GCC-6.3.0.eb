@@ -1,0 +1,26 @@
+name = 'tbb'
+version = '2018_U3'
+
+homepage = 'https://01.org/tbb/'
+description = """Intel(R) Threading Building Blocks (Intel(R) TBB) lets you easily write parallel C++ programs that
+ take full advantage of multicore performance, that are portable, composable and have future-proof scalability."""
+
+toolchain = {'name': 'GCC', 'version': '6.3.0'}
+
+source_urls = ['https://github.com/01org/tbb/archive/']
+sources = ['%(version)s.tar.gz']
+checksums = ['23793c8645480148e9559df96b386b780f92194c80120acce79fcdaae0d81f45']
+
+# Copy libraries to conventional location, so that they can be easily found by other projects
+postinstallcmds = [
+    'mkdir %(installdir)s/lib; cp %(installdir)s/build/linux_intel64_gcc_cc6.3.0_libc2.17_kernel3.10.0_release/*.so* %(installdir)s/lib/'
+]
+
+sanity_check_paths = {
+    'files': ['lib/libtbbmalloc_proxy.%s' % SHLIB_EXT,
+              'lib/libtbbmalloc.%s' % SHLIB_EXT,
+              'lib/libtbb.%s' % SHLIB_EXT],
+    'dirs': ['build', 'include/serial', 'include/tbb', 'src']
+}
+
+moduleclass = 'lib'
