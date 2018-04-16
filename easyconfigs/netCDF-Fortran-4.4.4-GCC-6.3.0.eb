@@ -1,0 +1,28 @@
+name = 'netCDF-Fortran'
+version = '4.4.4'
+
+homepage = 'http://www.unidata.ucar.edu/software/netcdf/'
+description = """NetCDF (network Common Data Form) is a set of software libraries 
+ and machine-independent data formats that support the creation, access, and sharing of array-oriented 
+ scientific data."""
+
+toolchain = {'name': 'GCC', 'version': '6.3.0'}
+toolchainopts = {'pic': True}
+
+source_urls = [
+    'ftp://ftp.unidata.ucar.edu/pub/netcdf/',
+    'ftp://ftp.unidata.ucar.edu/pub/netcdf/old',
+]
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['b2d395175f8d283e68c8be516e231a96b191ade67ad0caafaf7fa01b1e6b5d75']
+
+dependencies = [('netCDF', '4.5.0')]
+
+runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['bin/nf-config', 'lib/libnetcdff.a', 'lib/libnetcdff.so'],
+    'dirs': ['include'],
+}
+
+moduleclass = 'data'

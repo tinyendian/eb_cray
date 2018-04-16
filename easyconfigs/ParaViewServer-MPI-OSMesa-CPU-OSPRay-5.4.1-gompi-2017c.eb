@@ -1,0 +1,74 @@
+easyblock = 'CMakeMake'
+
+name = 'ParaViewServer-MPI-OSMesa-CPU-OSPRay'
+version = '5.4.1'
+
+homepage = "http://www.paraview.org"
+description = """
+ParaView is a scientific parallel visualizer.
+
+This version supports CPU-only rendering without
+X context using the OSMesa library, it does not
+support GPU rendering, and it does not provide a GUI.
+
+Use the GALLIUM_DRIVER environment variable to choose
+a software renderer, it is recommended to use
+
+GALLIUM_DRIVER=swr
+
+for best performance.
+
+Ray tracing using the OSPRay library is also supported.
+"""
+
+toolchain = {'name': 'gompi', 'version': '2017c'}
+toolchainopts = {'pic': True, }
+
+download_suffix = 'download.php?submit=Download&version=v%(version_major_minor)s&type=source&os=all&downloadFile='
+source_urls = ['http://www.paraview.org/paraview-downloads/%s' % download_suffix]
+sources = ["ParaView-v%(version)s.tar.gz"]
+checksums = ['390d0f5dc66bf432e202a39b1f34193af4bf8aad2355338fa5e2778ea07a80e4']
+
+dependencies = [
+    ('hdf5_18/1.8.18', EXTERNAL_MODULE),
+    ('Mesa', '18.0.0', '', ('GCC', '6.3.0')),
+    ('tbb', '2018_U3', '', ('GCC', '6.3.0')),
+    ('OSPRay', '1.5.0', '', ('GCC', '6.3.0'))
+]
+
+builddependencies = [
+    ('CMake', '3.10.2', '', ('GCC', '6.3.0')),
+]
+
+separate_build_dir = True
+
+# Note: It seems that the OpenSWR renderer needs VTK X support enabled to work
+configopts = '-DCMAKE_BUILD_TYPE=Release '
+configopts += '-DPARAVIEW_INSTALL_DEVELOPMENT_FILES=ON '
+configopts += '-DVTK_USE_SYSTEM_HDF5=ON -DPARAVIEW_ENABLE_PYTHON=ON -DBUILD_SHARED_LIBS=ON '
+configopts += '-DPARAVIEW_BUILD_QT_GUI=OFF -DVTK_USE_X=OFF '
+configopts += '-DOPENGL_INCLUDE_DIR=IGNORE '
+configopts += '-DOPENGL_gl_LIBRARY=IGNORE '
+configopts += '-DOSMESA_INCLUDE_DIR=$EBROOTMESA/include '
+configopts += '-DOSMESA_LIBRARY=$EBROOTMESA/lib/libOSMesa.so '
+configopts += '-DVTK_OPENGL_HAS_OSMESA=ON '
+configopts += '-DVTK_SMP_IMPLEMENTATION_TYPE=tbb '
+configopts += '-DPARAVIEW_ENABLE_CATALYST=ON '
+configopts += '-DPARAVIEW_USE_OSPRAY=ON '
+configopts += '-DOSPRAY_INSTALL_DIR=$EBROOTOSPRAY '
+configopts += '-DPARAVIEW_USE_MPI=ON '
+
+# Without internet connection turn off testing (uncomment the following line)
+# configopts += '-DBUILD_TESTING=OFF '
+# Or consult https://gitlab.kitware.com/vtk/vtk/blob/master/Documentation/dev/git/data.md
+# and download ExternalData to $EASYBUILD_SOURCEPATH and adjust -DExternalData_OBJECT_STORES accordingly
+# Without internet connection, comment the following two lines (configopts and prebuildopts)
+# configopts += '-DExternalData_OBJECT_STORES=%(builddir)s/ExternalData '
+
+# The ParaView server can be cranky, test downloads are quite often failing, especially in the case
+# of parallel downloads. Using ; insted of && gives a second chance to download the test files, if the
+# first serial attempt would fail.
+# prebuildopts = 'make VTKData ;'
+
+moduleclass = 'vis'
+

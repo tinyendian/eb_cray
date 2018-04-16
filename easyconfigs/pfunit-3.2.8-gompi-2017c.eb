@@ -1,0 +1,31 @@
+easyblock = 'ConfigureMake'
+
+name = 'pfunit'
+version = '3.2.8'
+
+homepage = 'http://pfunit.sourceforge.net/'
+description = """pFUnit is a unit testing framework enabling JUnit-like testing of serial 
+and MPI-parallel software written in Fortran."""
+
+toolchain = {'name': 'gompi', 'version': '2017c'}
+
+source_urls = ['https://downloads.sourceforge.net/project/pfunit/Source']
+sources = [{
+     'filename': 'pFUnit-%(version)s.tar.gz',
+     'extract_cmd': 'gzip -cd %s | tar -xvzf -', # work around stubborn tar program
+}]
+checksums = ['6f91f4502262d6251da8beab9255d91aca1e5133540a59fa1ce4625b3de292ab']
+
+# No configure step needed
+skipsteps = ['configure']
+
+prebuildopts = 'export F90_VENDOR=GNU; export F90=gfortran; export MPIF90=mpif90; '
+buildopts = 'MPI=yes'
+installopts = 'INSTALL_DIR=%(installdir)s'
+
+sanity_check_paths = {
+    'files': ["lib/libpfunit.a", "mod/pfunit.mod", "include/driver.F90"],
+    'dirs': ["bin"],
+}
+
+moduleclass = 'vis'
