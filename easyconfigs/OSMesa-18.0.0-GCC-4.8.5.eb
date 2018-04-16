@@ -1,0 +1,74 @@
+easyblock = 'ConfigureMake'
+
+name = 'OSMesa'
+version = '18.0.0'
+
+homepage = 'http://www.mesa3d.org/'
+description = """
+ Mesa is an open-source implementation of the OpenGL specification -
+ a system for rendering interactive 3D graphics.
+
+ Note that this build enables CPU-based rendering with OpenSWR and LLVM.
+ The module is intended to be used with visualisation software, such as
+ ParaView, on nodes where no GPU hardware is available.
+
+ Only off-screen rendering is supported by this module.
+
+ For best off-screen rendering performance, set
+
+ GALLIUM_DRIVER=swr
+
+ in your environment. Note that this can lead to problems if you are
+ using the OpenGL library provided at a system level in the same
+ session.
+"""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+# swr detects and builds parts specific for AVX and AVX2. If we use
+# -xHost, this always gets overwritten and will fail.
+###toolchainopts = {'optarch': False}
+
+source_urls = [
+    'https://mesa.freedesktop.org/archive/',
+    'https://mesa.freedesktop.org/archive/%(version)s',
+]
+sources = ['mesa-%(version)s.tar.xz']
+checksums = ['694e5c3d37717d23258c1f88bc134223c5d1aac70518d2f9134d6df3ee791eea']
+
+dependencies = [
+    ('LLVM', '6.0.0'),
+]
+
+# Enable only plain OpenGL, GLES is for embedded systems
+configopts = "--enable-opengl --disable-gles1 --disable-gles2 "
+# Disable state trackers
+configopts += "--disable-va --disable-xvmc --disable-vdpau "
+# Disable floating point textures due to patent issue
+configopts += "--disable-texture-float "
+# Enable LLVM, which is needed for high-performance CPU rendering
+configopts += "--enable-llvm --enable-llvm-shared-libs "
+# Enable the original swrast and high-performance OpenSWR rendering drivers
+configopts += "--with-gallium-drivers=swrast,swr "
+# GCC v4.8.5 does not support AVX-512, so restrict to AVX2
+configopts += "--with-swr-archs=avx,avx2 "
+# Disable the Direct Rendering Infrastructure, not useful for remote X servers
+configopts += "--disable-dri --with-dri-drivers= --disable-gbm "
+# EGL interface is not needed
+configopts += "--disable-egl "
+# Build Gallium version of GLX library for on-screen rendering with X11
+configopts += "--disable-glx --with-platforms= "
+# Build Gallium version of OSMesa for off-screen rendering
+configopts += "--disable-osmesa --enable-gallium-osmesa "
+
+runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['lib/libglapi.%s' % SHLIB_EXT, 'lib/libOSMesa.%s' % SHLIB_EXT,
+              'lib/libswrAVX.%s' % SHLIB_EXT, 'lib/libswrAVX2.%s' % SHLIB_EXT,
+              'include/GL/glext.h', 'include/GL/gl_mangle.h',
+              'include/GL/osmesa.h', 'include/GL/glcorearb.h',
+              'include/GL/gl.h'],
+    'dirs': []
+}
+
+moduleclass = 'vis'

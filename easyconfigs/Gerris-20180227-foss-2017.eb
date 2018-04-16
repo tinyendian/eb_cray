@@ -4,18 +4,29 @@ name = 'Gerris'
 version = '20180227'
 
 homepage = "http://gfs.sourceforge.net/wiki/index.php/Main_Page"
-description = """Gerris is a Free Software program for the solution of the partial differential equations describing fluid flow."""
+description = """Gerris is a Free Software program for the solution of the partial differential equations describing fluid flow.
+This module also includes GfsView, a visualisation application for Gerris output."""
 
 toolchain = {'name': 'foss', 'version': '2017b'}
 
 source_urls = ['http://gerris.dalembert.upmc.fr/gerris']
-sources = ['gerris-snapshot.tar.gz']
+sources = ['gerris-snapshot.tar.gz', 'gfsview-snapshot.tar.gz']
 
 dependencies = [
     ('GTS', '121130', '', ('GCC', '4.8.5')),
     ('GSL', '2.4', '', ('GCC', '4.8.5')),
     ('PROJ', '4.9.3', '', ('GCC', '4.8.5')),
     ('netCDF', '4.5.0', '', ('GCC', '4.8.5')),
+    ('OSMesa', '18.0.0', '', ('GCC', '4.8.5')),
+    ('FTGL', '2.1.3-rc5', '', ('GCC', '4.8.5')),
+]
+
+# The ConfigureMake easyblock only builds on package at a time, so add GfsView on in the post-processing step.
+# It is necessary to build both within the same module, due to the tight integration between Gerris and GfsView.
+postinstallcmds = [
+    'cd ../gfsview-snapshot-*; ' +
+    './configure --prefix=%(installdir)s PKG_CONFIG_PATH=%(installdir)s/lib/pkgconfig:$PKG_CONFIG_PATH; ' +
+    'make install'
 ]
 
 # Some tests seem to be set up incorrectly
@@ -26,7 +37,9 @@ sanity_check_paths = {
               'bin/gfsjoin2D', 'bin/gfsplot', 'bin/kdt2kdt', 'bin/ppm2mpeg', 'bin/ppm2video', 'bin/rsurface2kdt', 'bin/streamanime',
               'bin/darcs2dist', 'bin/gerris3D', 'bin/gfs2gfs', 'bin/gfs2oogl3D', 'bin/gfscombine3D', 'bin/gfscompare3D', 'bin/gfsjoin',
               'bin/gfsjoin3D', 'bin/gfsxref', 'bin/kdtquery', 'bin/ppm2theora', 'bin/ppmcombine', 'bin/shapes', 'bin/xyz2kdt',
-              'lib/libgfs2D.a', 'lib/libgfs2D.%s' % SHLIB_EXT, 'lib/libgfs3D.a', 'lib/libgfs3D.%s' % SHLIB_EXT],
+              'lib/libgfs2D.a', 'lib/libgfs2D.%s' % SHLIB_EXT, 'lib/libgfs3D.a', 'lib/libgfs3D.%s' % SHLIB_EXT] +
+             ['bin/gfsview', 'bin/gfsview2D', 'bin/gfsview3D', 'bin/gfsview-batch2D', 'bin/gfsview-batch3D', 'lib/libgfsgl2D.a',
+              'lib/libgfsgl3D.a', 'lib/libgfsgl2D.%s' % SHLIB_EXT, 'lib/libgfsgl3D.%s' % SHLIB_EXT],
     'dirs': ['include', 'lib/gerris'],
 }
 
