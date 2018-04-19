@@ -17,6 +17,4 @@ sources = ['%%(namelower)s_%s_src.tar.gz' % '_'.join(version.split('.'))]
 patches = ['ESMF-7.0.1.patch']
 checksums = ['85e294409d2337cc4b01210a040572539058442da464be4760a3c4d8d8c419c0']
 
-buildopts = 'ESMF_OS=Linux ESMF_COMPILER=gfortran ESMF_COMM=mpiuni ESMF_ABI=64 ESMF_LAPACK=internal'
-
 moduleclass = 'geo'

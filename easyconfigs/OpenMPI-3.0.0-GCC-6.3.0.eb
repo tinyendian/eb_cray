@@ -14,7 +14,7 @@ checksums = ['0bbb279b88edc25bbded39520dab6d4b32020277a6088fb1456c9437a8231cf8']
 
 dependencies = [('hwloc', '1.11.9')]
 
-configopts = '--enable-shared --enable-mpi-thread-multiple --with-verbs '
+configopts = '--enable-shared --enable-mpi-cxx --with-verbs '
 configopts += '--enable-mpirun-prefix-by-default '  # suppress failure modes in relation to mpirun path
 configopts += '--with-hwloc=$EBROOTHWLOC '  # hwloc support
 configopts += '--disable-dlopen '  # statically link component, don't do dynamic loading

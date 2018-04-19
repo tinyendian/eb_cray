@@ -60,8 +60,17 @@ class EB_ESMF(ConfigureMake):
             compiler = comp_family.lower()
         env.setvar('ESMF_COMPILER', compiler)
 
+        # specify MPI library (needed on Linux)
+        mpi_family = self.toolchain.mpi_family()
+        if mpi_family in [toolchain.OPENMPI]:
+            env.setvar('ESMF_COMM', 'openmpi')
+
         # use Cray's libsci
-        env.setvar('ESMF_LAPACK', 'user')
+        toolchain_family = self.toolchain.toolchain_family()
+        if toolchain_family in [toolchain.CRAYPE]:
+            env.setvar('ESMF_LAPACK', 'user')
+        else:
+            env.setvar('ESMF_LAPACK', 'internal')
 
         # 'make info' provides useful debug info
         cmd = "make info"

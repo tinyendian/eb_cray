@@ -23,6 +23,4 @@ dependencies = [
     ('cray-libsci/17.09.1', EXTERNAL_MODULE),
 ]
 
-buildopts = 'ESMF_OS=Unicos ESMF_COMPILER=intel ESMF_COMM=mpi ESMF_ABI=64'
-
 moduleclass = 'geo'
