@@ -35,6 +35,8 @@ postinstallcmds = [
     'sed -i "s;CYLC_HOME/bin/;CYLC_HOME/bin_/;" ' + cylc_wrapper_dir + '/cylc',
     'ln -s %(installdir)s %(installdir)s/../cylc',
     'ln -s /opt/niwa/um_sys_prelim/etc/cylc/global.rc_cylc-%(version)s %(installdir)s/conf/global.rc',
+     # Check if VERSION file was created correctly (must only contain Cylc version number)
+    'grep -q "^%(version)s$" %(installdir)s/VERSION'
 ]
 
 # Check if Cylc and the Cylc wrapper exist
