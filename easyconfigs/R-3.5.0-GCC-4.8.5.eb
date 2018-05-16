@@ -1,0 +1,229 @@
+name = 'R'
+version = '3.5.0'
+
+homepage = 'http://www.r-project.org/'
+description = """R is a free software environment for statistical computing and graphics."""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+toolchainopts = {'precise': True, 'opt': True}  # 'openmp' is enabled in R by default
+
+sources = [SOURCE_TAR_GZ]
+source_urls = ['http://cran.us.r-project.org/src/base/R-%(version_major)s']
+
+preconfigopts = 'BLAS_LIBS="$LIBBLAS" LAPACK_LIBS="$LIBLAPACK"'
+configopts = "--enable-threads --with-pic --enable-R-shlib"
+
+dependencies = [
+     ('zlib','1.2.11'),
+     ('bzip2', '1.0.6'),
+     ('XZ', '5.2.3'),
+     ('PCRE', '8.40'),
+     ('libreadline', '6.3'),
+     ('ncurses', '6.0'),
+     ('cURL', '7.56.1'),
+     ('libjpeg-turbo', '1.5.2'),
+     ('cairo', '1.14.10'),
+     ('libpng', '1.6.32'),  # for plotting  # or 1.6.12
+     ('libxml2', '2.9.4'),  # for XML, via GDAL though
+     ('GEOS', '3.6.2'),     # for rgeos, which is for spacetime.
+     ('NLopt', '2.4.2'),    # for nloptr
+     ('OpenSSL', '1.1.0g'), # for openssl -> base64 -> bioconductor
+     ('UDUNITS', '2.2.25'), # for RNetCDF and udunits2 packages
+     ('netCDF', '4.5.0'),   # for RNetCDF
+     ('OCI', '12.2', '', ('dummy', 'dummy')), # For ROracle
+]
+
+def ext_options_extra(**kw):
+    options = {
+        'source_urls': [
+            'http://cran.r-project.org/src/contrib/Archive/%(name)s',  # package archive
+            'http://cran.r-project.org/src/contrib',  # alternative for current packages
+        ],
+        'source_tmpl': '%(name)s_%(version)s.tar.gz',
+    }
+    for (name, value) in kw.items():
+        options[name] = value
+    return options
+
+ext_options = ext_options_extra()
+
+
+# Left out from original ictce easyconfig: translations & tcltk (extensions), libjpeg-turbo (dep)
+
+exts_list = [
+    # default libraries, only here to sanity check their presence
+    'base',
+    'compiler',
+    'datasets',
+    'graphics',
+    'grDevices',
+    'grid',
+    'methods',
+    'parallel',
+    'splines',
+    'stats',
+    'stats4',
+    'tools',
+    'utils',
+
+    # non-standard libraries, should be specified with fixed versions!
+
+    ('iterators', '1.0.8', ext_options),
+    ('codetools', '0.2-14', ext_options),
+    ('foreach', '1.4.3', ext_options),
+    ('irace', '1.07', ext_options),
+    ('lattice', '0.20-33', ext_options),
+    ('RColorBrewer', '1.1-2', ext_options),
+    ('gtable', '0.2.0', ext_options),
+    ('gridExtra', '2.2.1', ext_options),
+    ('latticeExtra', '0.6-28', ext_options),
+    ('Matrix', '1.2-6', ext_options),
+    ('SparseM', '1.7', ext_options),
+    ('MatrixModels', '0.4-1', ext_options),
+    ('quantreg', '5.24', ext_options),
+    ('png', '0.1-7', ext_options),
+    ('Rcpp', '0.12.16', ext_options),
+    ('RcppEigen', '0.3.2.8.1', ext_options),
+    ('quadprog', '1.5-5', ext_options),
+    ('BB', '2014.10-1', ext_options),
+    ('MASS', '7.3-45', ext_options),
+    ('class', '7.3-14', ext_options),
+    ('e1071', '1.6-7', ext_options),
+    ('nnet', '7.3-12', ext_options),
+    ('colorspace', '1.2-6', ext_options),
+    ('DEoptimR', '1.0-4', ext_options),
+    ('robustbase', '0.92-5', ext_options),
+    ('sp', '1.2-3', ext_options),
+    ('raster', '2.5-2', ext_options),
+    ('dismo', '1.0-15', ext_options),
+    ('zoo', '1.7-13', ext_options),
+    ('lmtest', '0.9-34', ext_options),
+    ('vcd', '1.4-1', ext_options),
+    ('rpart', '4.1-10', ext_options),
+    ('randomForest', '4.6-12', ext_options),
+    ('survival', '2.39-4', ext_options),
+    ('mice', '2.25', ext_options),
+    ('nlme', '3.1-128', ext_options),
+    ('minqa', '1.2.4', ext_options),
+    ('ape', '3.4', ext_options),
+    ('mgcv', '1.8-12', ext_options),
+    ('nloptr', '1.0.4', ext_options),  # "cannot open source file "nlopt.h"" NLopt source download?
+    ('lme4', '1.1-12', ext_options),  # nlopt
+    ('pbkrtest', '0.4-6', ext_options), # lme4
+    ('car', '2.1-2', ext_options),  # pbkrtest
+    ('logistf', '1.21', ext_options),
+    ('bitops', '1.0-6', ext_options),
+    ('RCurl', '1.95-4.8', ext_options),
+    ('boot', '1.3-18', ext_options),
+    ('foreign', '0.8-66', ext_options),
+    ('gam', '1.12', ext_options),
+    ('gamlss.data', '4.3-4', ext_options),
+    ('gamlss.dist', '4.3-6', ext_options),
+    ('hwriter', '1.3.2', ext_options),
+    ('KernSmooth', '2.23-15', ext_options),
+    ('mnormt', '1.5-4', ext_options),
+    ('mvtnorm', '1.0-5', ext_options),
+    ('numDeriv', '2014.2-1', ext_options),
+    ('coda', '0.18-1', ext_options),
+    ('pscl', '1.4.9', ext_options),
+    ('sandwich', '2.3-4', ext_options),
+    ('sfsmisc', '1.1-0', ext_options),
+    ('spatial', '7.3-11', ext_options),
+    ('VGAM', '1.0-1', ext_options),
+    ('waveslim', '1.7.5', ext_options),
+    ('profileModel', '0.5-9', ext_options),
+    ('brglm', '0.5-9', ext_options),
+    ('deSolve', '1.13', ext_options),
+    ('tseriesChaos', '0.1-13', ext_options),
+    ('tseries', '0.10-35', ext_options),
+    ('neuRosim', '0.2-12', ext_options),
+    ('fastICA', '1.2-0', ext_options),
+    ('R.methodsS3', '1.7.1', ext_options),
+    ('R.oo', '1.20.0', ext_options),
+    ('gbm', '2.1.1', ext_options),
+    ('stringi', '1.0-1', ext_options),
+    ('magrittr', '1.5', ext_options),
+    ('stringr', '1.0.0', ext_options),
+    ('plyr', '1.8.3', ext_options),
+    ('reshape', '0.8.5', ext_options),
+    ('reshape2', '1.4.1', ext_options),
+    ('dichromat', '2.0-0', ext_options),
+    ('Formula', '1.2-1', ext_options),
+    ('cluster', '2.0.4', ext_options),
+    ('acepack', '1.3-3.3', ext_options),
+    ('munsell', '0.4.3', ext_options),
+    ('labeling', '0.3', ext_options),
+    ('scales', '0.4.0', ext_options),
+    ('fastcluster', '1.1.20', ext_options),
+    ('digest', '0.6.9', ext_options),
+    ('proto', '0.3-10', ext_options),
+    ('ggplot2', '2.1.0', ext_options),
+    ('chron', '2.3-47', ext_options),
+    ('data.table', '1.9.6', ext_options),
+    ('Hmisc', '3.17-4', ext_options),
+    ('maptools', '0.8-39', ext_options),
+    ('intervals', '0.15.1', ext_options),
+    ('xts', '0.10-2', ext_options),
+    ('rgeos', '0.3-19', ext_options),
+    ('spacetime', '1.1-5', ext_options),
+    ('FNN', '1.1', ext_options),
+    ('gstat', '1.1-3', ext_options),
+    ('deldir', '0.1-12', ext_options),
+    ('LearnBayes', '2.15', ext_options),
+    ('abind', '1.4-3', ext_options),
+    ('gtools', '3.5.0', ext_options),
+    ('gdata', '2.17.0', ext_options),
+    ('gmodels', '2.16.2', ext_options),
+    ('spdep', '0.6-4', ext_options),
+    ('splancs', '2.01-38', ext_options),
+    ('DCluster', '0.2-7', ext_options),
+    ('tensor', '1.5', ext_options),
+    ('polyclip', '1.5-6', ext_options),
+    ('goftest', '1.0-3', ext_options),
+    ('spatstat', '1.45-2', ext_options),
+    ('getopt', '1.20.0', ext_options),
+    ('optparse', '1.3.2', ext_options),
+    ('permute', '0.9-0', ext_options),
+    ('vegan', '2.3-5', ext_options),
+    ('spam', '1.3-0', ext_options),
+    ('RandomFieldsUtils', '0.1.0', ext_options),
+    ('RandomFields', '3.1.12', ext_options),
+    ('R2WinBUGS', '2.1-21', ext_options),
+    ('R2OpenBUGS', '3.2-3.1', ext_options),
+    ('akima', '0.5-12', ext_options),
+    ('DBI', '0.4-1', ext_options),
+    ('xtable', '1.8-2', ext_options),
+    ('RSQLite', '1.0.0', ext_options),
+    ('locfit', '1.5-9.1', ext_options),
+    ('lpSolve', '5.6.13', ext_options),
+    ('glmmML', '1.0', ext_options),
+    ('survey', '3.30-3', ext_options),
+    ('rlecuyer', '0.3-4', ext_options),
+    ('cubature', '1.1-2', ext_options),
+    ('np', '0.60-2', ext_options),
+    ('caTools', '1.17.1', ext_options),
+    ('gplots', '3.0.1', ext_options),
+    ('gsalib', '2.1', ext_options),
+    ('inline', '0.3.14', ext_options),
+    ('RcppArmadillo', '0.6.700.6.0', ext_options),
+    ('XML', '3.98-1.4', ext_options),
+    ('spgrass6', '0.8-9', ext_options),
+    ('backports', '1.0.2', ext_options), # for checkmate
+    ('checkmate', '1.7.4', ext_options),
+    ('BBmisc', '1.9', ext_options),
+    ('fail', '1.3', ext_options),
+    ('brew', '1.0-6', ext_options),
+    ('base64enc', '0.1-3', ext_options),
+    ('RNetCDF', '1.9-1', ext_options),
+    ('RODBC', '1.3-15', ext_options),
+    ('ROracle', '1.3-1', ext_options),
+    ('maps', '3.2.0', ext_options),
+    ('mapdata', '2.2-6', ext_options),
+    ('mapproj', '1.2-5', ext_options),
+    ('leaps', '3.0', ext_options),
+    ('fields', '9.0', ext_options),
+    ('udunits2', '0.13', dict(ext_options.items() + [('patches', ['Rudunits2-0.13_ud_functions.patch'])])),
+]
+
+moduleclass = 'lang'
+
