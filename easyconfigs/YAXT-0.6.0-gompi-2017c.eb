@@ -1,0 +1,27 @@
+easyblock = 'ConfigureMake'
+
+name = 'YAXT'
+version = '0.6.0'
+
+homepage = 'https://www.dkrz.de/redmine/projects/yaxt'
+description = """Yet Another eXchange Tool - Library that performs halo exchange with MPI for domain decomposed simulations."""
+
+toolchain = {'name': 'gompi', 'version': '2017c'}
+toolchainopts = {'usempi': True}
+
+source_urls = ['https://www.dkrz.de/redmine/attachments/download/488']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['bc4d8d8a6815fd616c0e119fe4f194dafab56583ea7f38f4431eef12cb192f43']
+
+# Enable large cell counts
+configopts = "--with-idxtype=long CC=mpicc FC=mpif90"
+
+# Some tests currently fail
+# runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['lib/libyaxt.a', 'lib/libyaxt.%s' % SHLIB_EXT, 'lib/libyaxt_c.a', 'lib/libyaxt_c.%s' % SHLIB_EXT],
+    'dirs': ['include'],
+}
+
+moduleclass = 'lib'
