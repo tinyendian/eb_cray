@@ -1,0 +1,34 @@
+easyblock = 'ConfigureMake'
+
+name = 'netCDF'
+version = '4.6.1'
+
+homepage = 'http://www.unidata.ucar.edu/software/netcdf/'
+description = """NetCDF (network Common Data Form) is a set of software libraries 
+ and machine-independent data formats that support the creation, access, and sharing of array-oriented 
+ scientific data."""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+toolchainopts = {'pic': True}
+
+source_urls = [
+    'ftp://ftp.unidata.ucar.edu/pub/netcdf/',
+    'ftp://ftp.unidata.ucar.edu/pub/netcdf/old',
+]
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['89c7957458740b763ae828c345240b8a1d29c2c1fed0f065f99b73181b0b2642']
+
+dependencies = [
+    ('hdf5_18/1.8.18', EXTERNAL_MODULE),
+    ('cURL', '7.56.1'),
+]
+
+runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['bin/nc-config', 'bin/nccopy', 'bin/ncdump', 'bin/ncgen', 'bin/ncgen3',
+              'lib/libnetcdf.a', 'lib/libnetcdf.%s' % SHLIB_EXT],
+    'dirs': ['include'],
+}
+
+moduleclass = 'data'

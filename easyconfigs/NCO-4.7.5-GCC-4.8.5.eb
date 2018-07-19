@@ -1,0 +1,38 @@
+easyblock = 'ConfigureMake'
+
+name = 'NCO'
+version = '4.7.5'
+
+homepage = "https://github.com/nco"
+description = """manipulates and analyzes data stored in netCDF-accessible formats, including DAP, HDF4, and HDF5"""
+
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
+
+source_urls = ['https://github.com/nco/nco/archive']
+sources = ['%(version)s.tar.gz']
+checksums = ['36f2132482a2eb9910ff9f760f0e61168aee874ad473a187cd8e5f7db2d2e617']
+
+builddependencies = [
+    ('ANTLR', '2.7.7'),
+]
+
+dependencies = [
+    ('netCDF', '4.6.1'),
+    ('GSL', '2.4'),
+    ('UDUNITS', '2.2.25'),
+]
+
+# Build runtime-optimised version, ensure that Cray libraries are found (Cray modules do not set LD_LIBRARY_PATH)
+configopts = '--enable-optimize-custom NETCDF_ROOT=$EBROOTNETCDF '
+configopts += 'LDFLAGS="-Wl,-rpath=$EBROOTNETCDF/lib -Wl,-rpath=$EBROOTHDF5/lib" '
+
+runtest = 'check'
+
+sanity_check_paths = {
+    'files': ['bin/nc%s' % x for x in ('ap2', 'atted', 'bo', 'diff', 'ea', 'ecat', 'es',
+                                       'flint', 'ks', 'pdq', 'ra', 'rcat', 'remap', 'rename', 'wa')] +
+             ['lib/libnco.a', 'lib/libnco.%s' % SHLIB_EXT, 'lib/libnco_c++.a', 'lib/libnco_c++.%s' % SHLIB_EXT],
+    'dirs': ['include'],
+}
+
+moduleclass = 'tools'
