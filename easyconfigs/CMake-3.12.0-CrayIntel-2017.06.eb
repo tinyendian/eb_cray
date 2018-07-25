@@ -13,7 +13,7 @@ source_urls = ['http://www.cmake.org/files/v%(version_major_minor)s']
 sources = [SOURCELOWER_TAR_GZ]
 checksums = ['d0781a90f6cdb9049d104ac16a150f9350b693498b9dea8a0331e799db6b9d69']
 
-preconfigopts = 'CXXFLAGS="-O2 -std=c++11"'
+configopts = 'CFLAGS="-O1" CXXFLAGS="-O2 -std=c++11"'
 sanity_check_paths = {
     'files': ["bin/%s" % x for x in ['cmake', 'ccmake', 'cpack', 'ctest']],
     'dirs': [],
