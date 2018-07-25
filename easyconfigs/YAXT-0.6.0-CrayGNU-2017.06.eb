@@ -6,7 +6,7 @@ version = '0.6.0'
 homepage = 'https://www.dkrz.de/redmine/projects/yaxt'
 description = """Yet Another eXchange Tool - Library that performs halo exchange with MPI for domain decomposed simulations."""
 
-toolchain = {'name': 'CrayIntel', 'version': '2017.06'}
+toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
 #toolchainopts = {'usempi': True}
 
 source_urls = ['https://www.dkrz.de/redmine/attachments/download/488']
