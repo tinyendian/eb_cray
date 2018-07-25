@@ -14,7 +14,7 @@ This version of VTK has rendering turned off -- users can link against this libr
 but they will not be able to render.
 """
 
-toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
+toolchain = {'name': 'CrayIntel', 'version': '2017.06'}
 
 source_urls = ['http://www.vtk.org/files/release/%(version_major_minor)s']
 sources = [
