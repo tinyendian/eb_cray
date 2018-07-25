@@ -25,9 +25,9 @@ dependencies = [
 ]
 
 preconfigopts = 'export CRAYPE_LINK_TYPE=dynamic && '
-configopts  = "-DCMAKE_BUILD_TYPE=Release -DVTK_Group_Rendering=OFF -DVTK_Group_Standalone=OFF "
-configopts += "-DModule_vtkCommonColor=ON -DModule_vtkCommonComputationalGeometry=ON "
-configopts += "-DModule_vtkCommonCore=ON "
+configopts  = "-DCMAKE_BUILD_TYPE=Release -DVTK_Group_Rendering=OFF -DVTK_Group_Standalone=ON "
+#configopts += "-DModule_vtkCommonColor=ON -DModule_vtkCommonComputationalGeometry=ON "
+#configopts += "-DModule_vtkCommonCore=ON "
 
 sanity_check_paths = {
     'files': ['bin/vtk%s-%%(version_major_minor)s' % x for x in ['EncodeString', 'HashSource']],
