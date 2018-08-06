@@ -7,7 +7,7 @@ homepage = 'http://pfunit.sourceforge.net/'
 description = """pFUnit is a unit testing framework enabling JUnit-like testing of serial 
 and MPI-parallel software written in Fortran."""
 
-toolchain = {'name': 'gompi', 'version': '2017c'}
+toolchain = {'name': 'CrayGNU', 'version': '2017.06'}
 
 source_urls = ['https://downloads.sourceforge.net/project/pfunit/Source']
 sources = [{
@@ -19,7 +19,7 @@ checksums = ['6f91f4502262d6251da8beab9255d91aca1e5133540a59fa1ce4625b3de292ab']
 # No configure step needed
 skipsteps = ['configure']
 
-prebuildopts = 'export F90_VENDOR=GNU; export F90=gfortran; export MPIF90=mpif90; '
+prebuildopts = 'export F90_VENDOR=GNU; export F90=ftn; export MPIF90=ftn; '
 buildopts = 'MPI=yes'
 installopts = 'INSTALL_DIR=%(installdir)s'
 
