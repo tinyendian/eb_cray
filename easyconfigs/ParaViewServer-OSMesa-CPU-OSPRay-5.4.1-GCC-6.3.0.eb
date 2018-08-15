@@ -56,6 +56,7 @@ configopts += '-DVTK_SMP_IMPLEMENTATION_TYPE=tbb '
 configopts += '-DPARAVIEW_ENABLE_CATALYST=ON '
 configopts += '-DPARAVIEW_USE_OSPRAY=ON '
 configopts += '-DOSPRAY_INSTALL_DIR=$EBROOTOSPRAY '
+configopts += '-DModule_vtkGeovisCore=ON '
 
 # Without internet connection turn off testing (uncomment the following line)
 # configopts += '-DBUILD_TESTING=OFF '
