@@ -6,7 +6,7 @@ version = '0.16.2'
 homepage = ""
 description = """ECMWF package to interact with ODB database. This module only sets up environment, for ODBServer installation refer to /home/bornemannjj/Projects/ODBServer-0.16.2_Install/worklog.txt"""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'GCC', 'version': '4.8.5'}
 
 # Nothing to be done here
 skipsteps = ['source', 'configure', 'build', 'test', 'install']
@@ -14,7 +14,7 @@ skipsteps = ['source', 'configure', 'build', 'test', 'install']
 # Extra paths
 allow_prepend_abs_path = True
 modextrapaths = {
-    'PATH': '/opt/niwa/um_sys_prelim/da_tools/ODBSERVER-0.16.2_CS_GCC/lib',
+    'PATH': '/opt/niwa/um_sys_prelim/da_tools/ODBSERVER-0.16.2_CS_GCC/bin',
     'LIBRARY_PATH': '/opt/niwa/um_sys_prelim/da_tools/ODBSERVER-0.16.2_CS_GCC/lib',
     'LD_LIBRARY_PATH': '/opt/niwa/um_sys_prelim/da_tools/ODBSERVER-0.16.2_CS_GCC/lib',
     'LD_RUN_PATH': '/opt/niwa/um_sys_prelim/da_tools/ODBSERVER-0.16.2_CS_GCC/lib',
@@ -24,7 +24,7 @@ modextrapaths = {
     'PYTHONPATH': '/opt/niwa/um_sys_prelim/da_tools/ODBSERVER-0.16.2_CS_GCC/lib/python2.7/site-packages',
 }
 
-# Needed by ROracle package
+# ODB setup
 modextravars = {
     'ODB_API_HOME': '/opt/niwa/um_sys_prelim/da_tools/ODBSERVER-0.16.2_CS_GCC',
     'ODBAPI_BASE': '/opt/niwa/um_sys_prelim/da_tools/ODBSERVER-0.16.2_CS_GCC',
