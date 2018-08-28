@@ -1,0 +1,40 @@
+easyblock = 'MakeCp'
+
+name = 'shumlib'
+version = '2018.06.1'
+
+homepage = ''
+description = """Shumlib is the collective name for a set of libraries which are used by the UM;
+the UK Met Office's Unified Model, that may be of use to external tools or applications
+where identical functionality is desired. The hope of the project is to enable developers
+to quickly and easily access parts of the UM code that are commonly duplicated elsewhere,
+at the same time benefiting from any improvements or optimisations that might be made in
+support of the UM itself."""
+
+toolchain = {'name': 'GCC', 'version': '6.3.0'}
+
+# You will need to check out shumlib and create a tarball manually
+source_urls = ['file://path/to/tarball']
+sources = ['shumlib-%(version)s.tar.gz']
+
+prebuildopts = "export LIBDIR_OUT=%(builddir)s/build_shumlib-%(version)s; export SHUM_OPENMP=true; "
+buildopts = "-f make/niwa-x86-gfortran-gcc.mk"
+parallel = 1
+
+# Linker seems to get tripped up
+# runtest = "-f make/niwa-x86-gfortran-gcc.mk test"
+
+files_to_copy = ['%(builddir)s/build_shumlib-%(version)s/*']
+
+libs = ['shum_byteswap', 'shum_data_conv', 'shum_fieldsfile_class',
+        'shum_latlon_eq_grids', 'shum_string_conv', 'shum_wgdos_packing',
+        'shum_constants', 'shum_fieldsfile', 'shum_horizontal_field_interp',
+        'shum_spiral_search', 'shum_thread_utils']
+
+sanity_check_paths = {
+    'files': ["lib/lib%s.%s" % (dynlib, SHLIB_EXT) for dynlib in libs] +
+             ["lib/lib%s.a" % staticlib for staticlib in libs],
+    'dirs': ['include'],
+}
+
+moduleclass = 'lib'

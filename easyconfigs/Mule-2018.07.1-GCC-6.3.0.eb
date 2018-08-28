@@ -1,0 +1,41 @@
+easyblock = 'PythonPackage'
+
+name = 'Mule'
+version = '2018.07.1'
+
+homepage = ''
+description = """Mule is an API written in Python which allows you to access and manipulate files produced by the UM (Unified Model, of the Met Office (UK))."""
+
+toolchain = {'name': 'GCC', 'version': '6.3.0'}
+
+# You will need to check out Mule and create a tarball manually
+source_urls = ['file://path/to/tarball']
+sources = ['mule-%(version)s.tar.gz']
+
+use_pip = False
+
+dependencies = [
+    ('shumlib', '2018.06.1'),
+    ('Anaconda2', '5.2.0'),
+]
+
+# Build and install um_packing module first
+prebuildopts = "cd um_packing; python setup.py build_ext --inplace -I$EBROOTSHUMLIB/include -L$EBROOTSHUMLIB/lib "
+prebuildopts += "--libraries=shum_wgdos_packing,shum_byteswap,shum_string_conv -R$EBROOTSHUMLIB/lib; "
+prebuildopts += "python setup.py build; "
+preinstallopts = "cd um_packing; "
+
+# Build and install mule module and um_utils module
+postinstallcmds = [
+    'cd mule; python setup.py build; python setup.py install --prefix=%(installdir)s',
+    'cd um_utils; python setup.py build; python setup.py install --prefix=%(installdir)s',
+]
+
+sanity_check_paths = {
+    'files': ['bin/mule-cumf', 'bin/mule-cutout', 'bin/mule-fixframe', 'bin/mule-pumf',
+              'bin/mule-select', 'bin/mule-summary', 'bin/mule-trim', 'bin/mule-unpack',
+              'bin/mule-version'],
+    'dirs': ['lib'],
+}
+
+moduleclass = 'geo'

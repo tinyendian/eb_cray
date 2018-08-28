@@ -1,0 +1,40 @@
+# author: Jillian Rowe <jillian.e.rowe@gmail.com>
+easyblock = 'EB_Anaconda'
+
+name = 'Anaconda2'
+version = '5.2.0'
+
+homepage = 'https://www.continuum.io/anaconda-overview'
+description = """Built to complement the rich, open source Python community,
+the Anaconda platform provides an enterprise-ready data analytics platform 
+that empowers companies to adopt a modern open data science analytics architecture.
+"""
+
+toolchain = {'name': 'GCC', 'version': '6.3.0'}
+
+source_urls = ['https://repo.continuum.io/archive/']
+sources = ['%(name)s-%(version)s-Linux-x86_64.sh']
+checksums = ['cb0d7a08b0e2cec4372033d3269979b4e72e2353ffd1444f57cb38bc9621219f']
+
+dependencies = [
+    ('OCI', '12.2', '', ('dummy', 'dummy')),
+]
+
+# install additional packages
+prep_env = "PATH=%(installdir)s/bin:$PATH "
+postinstallcmds = [prep_env + "conda install -f -p %(installdir)s -c conda-forge iris-grib==0.13.0", # Also installs IRIS, netCDF, proj, geos, cartopy etc.
+                   prep_env + "conda install -f -p %(installdir)s -c conda-forge biggus==0.15.0",
+                   prep_env + "conda install -f -p %(installdir)s -c conda-forge pyugrid==0.3.1",
+                   prep_env + "conda install -f -p %(installdir)s -c conda-forge mo_pack==0.2.0",
+                   prep_env + "conda install -f -p %(installdir)s -c conda-forge basemap==1.1.0",
+                   prep_env + "conda install -f -p %(installdir)s -c conda-forge ephem==3.7.6.0",
+                   prep_env + "conda install -f -p %(installdir)s -c conda-forge xarray==0.10.8",
+                   prep_env + "conda install -f -p %(installdir)s -c conda-forge pyresample==1.10.1",
+                   prep_env + "conda install -f -p %(installdir)s -c conda-forge cx_oracle==6.4.1",
+                   prep_env + "conda install -f -p %(installdir)s -c conda-forge opencv==3.4.1",
+                   prep_env + "conda install -f -p %(installdir)s -c conda-forge scikit-image==0.14.0",
+                   prep_env + "conda install -f -p %(installdir)s -c conda-forge nc-time-axis==1.1.0",
+                   prep_env + "pip install egenix-mx-base==3.2.9", # Not available via conda
+]
+
+moduleclass = 'lang'
