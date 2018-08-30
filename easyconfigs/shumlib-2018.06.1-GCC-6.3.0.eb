@@ -17,7 +17,7 @@ toolchain = {'name': 'GCC', 'version': '6.3.0'}
 source_urls = ['file://path/to/tarball']
 sources = ['shumlib-%(version)s.tar.gz']
 
-prebuildopts = "export LIBDIR_OUT=%(builddir)s/build_shumlib-%(version)s; export SHUM_OPENMP=true; "
+prebuildopts = "export LIBDIR_OUT=%(builddir)s/build_shumlib-%(version)s; export SHUM_OPENMP=false; "
 buildopts = "-f make/niwa-x86-gfortran-gcc.mk"
 parallel = 1
 

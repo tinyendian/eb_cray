@@ -21,7 +21,7 @@ dependencies = [
 
 # Build and install um_packing module first
 prebuildopts = "cd um_packing; python setup.py build_ext --inplace -I$EBROOTSHUMLIB/include -L$EBROOTSHUMLIB/lib "
-prebuildopts += "--libraries=shum_wgdos_packing,shum_byteswap,shum_string_conv -R$EBROOTSHUMLIB/lib; "
+prebuildopts += "-R$EBROOTSHUMLIB/lib; "
 prebuildopts += "python setup.py build; "
 preinstallopts = "cd um_packing; "
 
