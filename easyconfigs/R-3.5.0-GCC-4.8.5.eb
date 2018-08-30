@@ -223,6 +223,7 @@ exts_list = [
     ('leaps', '3.0', ext_options),
     ('fields', '9.0', ext_options),
     ('udunits2', '0.13', dict(ext_options.items() + [('patches', ['Rudunits2-0.13_ud_functions.patch'])])),
+    ('rjson', '0.2.20', ext_options),
 ]
 
 moduleclass = 'lang'
