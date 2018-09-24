@@ -31,6 +31,12 @@ configopts = '-DBUILD_SHARED_LIBS=OFF -DENABLE_PYTHON=OFF -DENABLE_JPG=OFF'
 # Tests run for a long time
 # runtest = 'check'
 
+# Cray compiler requires uppercase module names
+postinstallcmds = [
+    'ln -s %(installdir)s/include/eccodes.mod %(installdir)s/include/ECCODES.mod',
+    'ln -s %(installdir)s/include/GRIB_API.mod %(installdir)s/include/GRIB_API.mod'
+]
+
 # Check a few items
 sanity_check_paths = {
     'files':  ['bin/tigge_accumulations', 'bin/tigge_check', 'bin/tigge_name', 'bin/tigge_split'] +
