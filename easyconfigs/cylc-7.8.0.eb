@@ -1,0 +1,53 @@
+easyblock = 'MakeCp'
+
+name = 'cylc'
+version = '7.8.0'
+
+homepage = 'http://cylc.github.io/cylc'
+description = """Cylc is a workflow engine for cycling systems - it orchestrates complex
+distributed suites of interdependent cycling tasks that may continue indefinitely
+(Cylc dynamically generates ongoing workflows)."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+source_urls = ['https://github.com/cylc/cylc/archive']
+sources = ['%(version)s.tar.gz']
+checksums = ['c243cf0e7105c455ed10fb72193572926a55e6c003c034e887ee889b26328c95']
+
+files_to_copy = ['*']
+
+# Cylc uses a wrapper to choose between versions, which relies on these
+# env variables
+modextravars = {
+    'CYLC_VERSION': '%(version)s',
+}
+
+# Set location of Cylc wrapper
+cylc_wrapper_dir = '/opt/niwa/share_prelim/bin'
+
+# Prevent EasyBuild from prepending PATH variable and
+# adapt Cylc wrapper to EasyBuild conventions
+# NOTE: These commands expect the Cylc wrapper to be installed PRIOR to this EasyBuild install,
+#       see <cylc source>/INSTALL.md for further information!
+# IMPORTANT: Comment out the symlink command below to avoid upgrading the default Cylc version.
+postinstallcmds = [
+    'mv %(installdir)s/bin %(installdir)s/bin_',
+    # 'sed -i "s;CYLC_HOME_ROOT:-/opt;CYLC_HOME_ROOT:-%(installdir)s/..;" ' + cylc_wrapper_dir + '/cylc',
+    # 'sed -i "s;CYLC_HOME/bin/;CYLC_HOME/bin_/;" ' + cylc_wrapper_dir + '/cylc',
+    # This sets the default Cylc version using a symlink - comment out if you want to avoid upgrading the default!
+    # 'ln -s %(installdir)s %(installdir)s/../cylc',
+    # Check if VERSION file was created correctly (must only contain Cylc version number)
+    'grep -q "^%(version)s$" %(installdir)s/VERSION',
+    # Create symlink for gcylc
+    # 'ln -s ' + cylc_wrapper_dir + '/cylc ' + cylc_wrapper_dir + '/gcylc',
+    # Cylc configuration
+    'echo -e "process pool size = 4\n[suite host scanning]\nhosts = cylc01" > %(installdir)s/conf/global.rc',
+]
+
+# Check if Cylc and the Cylc wrapper exist
+sanity_check_paths = {
+    'files': ['bin_/cylc', cylc_wrapper_dir + '/cylc'],
+    'dirs': ['lib'],
+}
+
+moduleclass = 'geo'

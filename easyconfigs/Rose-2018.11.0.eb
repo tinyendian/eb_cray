@@ -1,0 +1,49 @@
+easyblock = 'Tarball'
+
+name = 'Rose'
+version = '2018.11.0'
+
+homepage = 'http://metomi.github.io/rose/doc/rose.html'
+description = "Rose: a framework for managing and running meteorological suites."
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+source_urls = ['https://github.com/metomi/rose/archive']
+sources = ['%(version)s.tar.gz']
+checksums = ['347c3f9fe01288d6ca4f2c45d3acfd792e3e1d16c1aff5fa3550b3942dad2c41']
+
+# Workaround for dead symlinks that crash the copying process
+keepsymlinks = True
+
+# Rose uses a wrapper to choose between versions, which relies on these
+# env variables
+modextravars = {
+    'ROSE_VERSION': '%(version)s',
+}
+
+# Set location of Rose wrapper
+rose_wrapper_dir = '/opt/niwa/share_prelim/bin'
+
+# Prevent EasyBuild from prepending PATH variable and
+# adapt Rose wrapper to EasyBuild conventions
+# NOTE: These commands expect the Rose wrapper to be installed PRIOR to this EasyBuild install,
+#       see <rose source>/usr/bin/rose for further information!
+postinstallcmds = [
+    'mv %(installdir)s/bin %(installdir)s/bin_',
+    'mv %(installdir)s/sbin %(installdir)s/sbin_',
+    # 'sed -i "s;ROSE_HOME_ROOT:-/opt;ROSE_HOME_ROOT:-%(installdir)s/..;" ' + rose_wrapper_dir + '/rose',
+    # 'sed -i "s;ROSE_HOME/bin/;ROSE_HOME/bin_/;" ' + rose_wrapper_dir + '/rose',
+    # This sets the default Rose version using a symlink - comment out if you want to avoid upgrading the default!
+    # 'ln -s %(installdir)s %(installdir)s/../rose',
+    # Create symlink for rosie
+    # 'ln -s ' + rose_wrapper_dir + '/rose ' + rose_wrapper_dir + '/rosie',
+    'ln -s /opt/niwa/um_sys_prelim/etc/rose/rose.conf_rose-%(version)s %(installdir)s/etc/rose.conf',
+]
+
+# Check if Rose and the Rose wrapper exist
+sanity_check_paths = {
+    'files': ['bin_/rose', rose_wrapper_dir + '/rose'],
+    'dirs': ['etc', 'lib'],
+}
+
+moduleclass = 'geo'
